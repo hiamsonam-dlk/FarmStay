@@ -1,0 +1,20 @@
+﻿@{
+    var ListItems = API.Areas.Admin.Models.CategoriesArticles.CategoriesArticlesService.GetList();
+}
+<div class="other-list" style="display:block">
+    <h2 class="mt-0">Other article categories</h2>
+    <ul>
+        @if (ListItems == null || ListItems.Count() == 0)
+        {
+            <li>No Other article categories!
+            </li>
+        }
+        else
+        {
+            for (int i = 0; i < ListItems.Count(); i++)
+            {
+                <li><a href="/EN/categories/@(ListItems[i].Alias)-@(ListItems[i].Id).html">@(ListItems[i].Ten)</a></li>
+            }
+        }
+    </ul>
+</div>

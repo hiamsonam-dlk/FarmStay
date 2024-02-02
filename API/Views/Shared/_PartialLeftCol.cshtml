@@ -1,0 +1,66 @@
+﻿
+@using API.Areas.Admin.Models.Articles
+@using API.Areas.Admin.Models.CategoriesArticles
+@using API.Areas.Admin.Models.Documents
+
+@{
+    var listBannerPo6 = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(6);
+    var listBannerPo8 = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(8);
+}
+
+
+
+<!--Left Menu-->
+<partial name="_PartialLeftMenu" />
+
+<div class="">
+    @*<div class="xsClone">*@
+
+
+
+        <!--Banner-->
+        @foreach (var item in listBannerPo8)
+        {
+            <div class="BannerItem">
+                <a href="@item.Link" target="@item.Target">
+                    <img src="@item.Image" alt="@item.Title" />
+                </a>
+            </div>
+        }
+        <!--Văn bản chỉ đạo điều hành-->
+        @*@{
+                SearchDocuments vbdto = new SearchDocuments();
+                vbdto.ItemsPerPage = 5;
+                var listVB = DocumentsService.GetListPagination(vbdto, "");
+            }*@
+
+
+
+        <!--Banner-->
+        @foreach (var item in listBannerPo6)
+        {
+            <div class="BannerItem">
+                <a href="@item.Link" target="@item.Target">
+                    <img src="@item.Image" alt="@item.Title" />
+                </a>
+            </div>
+        }
+
+
+
+
+        <!--<div class="box">
+            <div class="body" style="padding:10px 0">
+                <div class="tktc igateiframe">-->
+        <!--Thống kê vbb-->
+        <!--<iframe frameborder="0" src="http://thongkelienthong.daklak.gov.vn/summary/index.iws?unit=000.00.18.H15" style="height:250px; width:100%"></iframe>
+                </div>
+            </div>
+        </div>-->
+  
+
+
+
+
+
+    </div>

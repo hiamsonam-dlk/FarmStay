@@ -1,0 +1,66 @@
+﻿
+@using API.Areas.Admin.Models.Articles
+@using API.Areas.Admin.Models.CategoriesArticles
+@using API.Areas.Admin.Models.Documents
+
+@{
+    var listhot = API.Areas.Admin.Models.Articles.ArticlesService.GetListHot(1, 8);
+    List<SelectListItem> listLink = API.Areas.Admin.Models.Banners.BannersService.GetListItemsByCat(2,1,"EN");
+    var listBannerPo6 = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(6,1,"EN");
+}
+
+<!--Left Menu-->
+<partial name="_PartialLeftMenu" />
+
+
+<div class="xsClone">
+
+    <!--Văn bản chỉ đạo điều hành-->
+    @{
+        SearchDocuments vbdto = new SearchDocuments();
+        vbdto.ItemsPerPage = 5;
+        var listVB = DocumentsService.GetListPagination(vbdto, "");
+    }
+    <div class="box">
+        <div class="header">
+            <a href="#">
+                New legislation
+            </a>
+        </div>
+        <div class="body vbcd-box">
+            <ul>
+
+                @for (int m = 0; m < listVB.Count(); m++)
+                {
+                    <li>
+
+                        @listVB[m].Introtext
+
+                        @if (!string.IsNullOrEmpty(listVB[m].Link))
+                        {
+                            <a href="@listVB[m].Link" target="_blank"> <i class="fa fa-download" style="margin-right:4px; margin-left:10px;"></i> Download</a>
+                        }
+
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <!--Banner-->
+    @foreach (var item in listBannerPo6)
+    {
+        <div class="BannerItem">
+            <a href="@item.Link" target="@item.Target">
+                <img src="@item.Image" alt="@item.Title" />
+            </a>
+        </div>
+    }
+
+
+
+
+
+</div>
+
+

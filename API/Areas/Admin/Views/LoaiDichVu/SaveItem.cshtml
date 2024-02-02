@@ -1,0 +1,44 @@
+﻿@model API.Areas.Admin.Models.LoaiDichVu.LoaiDichVuModel
+@{
+    if (Model.Item.Id == 0)
+    {
+        ViewData["Title"] = "Thêm mới Danh Mục";
+    }
+    else
+    {
+        ViewData["Title"] = "Cập nhật Danh Mục";
+    }
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+<style>
+    .modal-content {
+        /* 100% = dialog height, 120px = header + footer */
+        height: 600px;
+        width: 875px;
+    }
+</style>
+<div class="card">
+    <div class="card-header">
+        <h4>@ViewData["Title"]</h4>
+    </div>
+    <div class="card-body">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <partial name="_PartialMsgInfoAdmin" />
+        <form asp-controller="@ControllerName" asp-action="SaveItem" enctype="multipart/form-data" method="post">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label asp-for="Item.TenLoaiDichVu" class="control-label">Tên</label>
+                        <input asp-for="Item.TenLoaiDichVu" class="form-control Changetitle namepr" />
+                        <span asp-validation-for="Item.TenLoaiDichVu" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary" name="SaveItem" value="Lưu" />
+            <a class="btn btn-danger" asp-controller="@ControllerName" asp-action="Index">Hủy</a>
+            <input type="hidden" class="form-control" asp-for="Item.Id">
+            <input type="hidden" class="form-control" asp-for="Item.Ids">
+
+        </form>
+    </div>
+</div>

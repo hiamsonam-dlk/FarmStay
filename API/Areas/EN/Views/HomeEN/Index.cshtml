@@ -1,0 +1,298 @@
+﻿@using API.Areas.Admin.Models.Ablums;
+@using API.Areas.Admin.Models.CategoriesAblums;
+@using API.Areas.Admin.Models.DocumentForms;
+@using Microsoft.Extensions.Configuration;
+@{
+
+    List<API.Areas.Admin.Models.CategoriesArticles.CategoriesArticles> ListCatFeaturedHome = API.Areas.Admin.Models.CategoriesArticles.CategoriesArticlesService.GetListFeaturedHome();
+    List<API.Areas.Admin.Models.Articles.Articles> ListArticleByCat = new List<API.Areas.Admin.Models.Articles.Articles>();
+    var listBannerPo3 = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(3);
+    var listBannerPo11 = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(11);
+    var img = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(16);
+    var ItemConfig = API.Areas.Admin.Models.SYSParams.SYSParamsService.GetItemConfigByHome();
+    ViewData["Description"] = ItemConfig.SEODescription;
+    ViewData["Keywords"] = ItemConfig.SEOKeyword;
+
+    ViewData["Images"] = @Startup.Domain + "/ttudkhcn/images/ogImage3.png?ver=" + DateTime.Now.ToString();
+    ViewData["Url"] = @Startup.Domain;
+
+    var numOfNewFeatured = ListCatFeaturedHome.Count();
+    var introduction = API.Areas.Admin.Models.Articles.ArticlesService.GetItem(4);
+    var listVideo = API.Areas.Admin.Models.Videos.VideosService.GetListFeatured();
+    var DCDUrl = @Startup.DCDUrl;
+}
+
+<section class="page-section hero" id="1" style="background-image:url(' @introduction.Images')">
+    <div class="bottom-overlay"></div>
+    <div class="container p-0 blur full-height position-relative">
+        <div class="row no-gutters d-flex justify-content-between position-absolute gioi-thieu-home">
+            <div class="col-lg-5 col-md-5 d-flex align-items-end align-items-md-start col-12 p-3 order-3 order-md-1 show-more">
+                <div>
+
+                    <div class="text-justify truncate-content-6 short-description" data-aos="fade-up">
+                        @Html.Raw(introduction.MoDau)
+                    </div>
+                    <div class="d-flex justify-content-center" data-aos="fade-up">
+                        @*<a class="btn btn-primary p-3 px-5 mt-3 " asp-controller="ArticlesEN" asp-action="Detail" asp-route-id="@introduction.Id" asp-route-alias="@introduction.Alias">Show more</a>*@
+                        <a class="btn btn-primary p-3 px-5 mt-3 " href="/EN/@(introduction.Alias)-@(introduction.Id).html">Show more</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 d-md-flex col-12 d-none  order-2" data-aos="fade-up">
+            </div>
+
+            <div class="col-md-4 col-12  p-3 text-center order-1 order-md-3" data-aos="fade-up">
+                <h1 class="intro-text slogan">The eternal memory<br /> of martyr heroes.</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section testimony-section page-section pb-0" id="2">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="row justify-content-center mb-1 mt-4">
+                    <div class="col-md-12 heading-section text-center mb-1" data-aos="fade-up">
+                        <span class="subheading">Explore</span>
+                        <h2 class="mb-2">
+                            <a href="@DCDUrl">Red address</a>
+                        </h2>
+                    </div>
+                </div>
+                <hr class="my-3" />
+
+                @* <div class="row" data-aos="fade-up">
+                <div class="col-12">
+                <img class="w-100" src="/TMDT/images/bg_1.jpg"/>
+
+                </div>
+                </div> *@
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid p-0">
+        <div class="row m-0" data-aos="fade-up">
+            <div class="col-12 p-0">
+                <a href="@DCDUrl">
+                    <img class="w-100" src="/TMDT/images/3d_tour_en.jpg" />
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section testimony-section page-section pb-5" id="3">
+    <div class="container">
+        @if (ListCatFeaturedHome != null && ListCatFeaturedHome.Count() > 0)
+        {
+            <div class="row">
+                @for (int i = 0; i < ListCatFeaturedHome.Count(); i++)
+                {
+
+                    ListArticleByCat = null;
+                    ListArticleByCat = API.Areas.Admin.Models.Articles.ArticlesService.GetListNew(ListCatFeaturedHome[i].Id, 5);
+
+                    <div class="col-lg-12">
+                        <div class="row justify-content-center mb-1 mt-4">
+                            <div class="col-md-12 heading-section text-center  mb-1" data-aos="fade-up">
+                                <span class="subheading">News</span>
+                                <h2 class="mb-2">
+                                    <a href="/EN/categories/@(ListCatFeaturedHome[i].Alias)-@(ListCatFeaturedHome[i].Id).html">@ListCatFeaturedHome[i].Ten </a>
+                                </h2>
+                            </div>
+                        </div>
+                        <hr class="my-3" />
+
+                        <div class="row" data-aos="fade-up">
+                            <div class="col-12">
+                                <ul id="Features-Slide-DTTT_@i" class="gallery">
+                                    @for (int m = 0; m < ListArticleByCat.Count(); m++)
+                                    {
+                                        <li>
+                                            <a href="/EN/@(ListArticleByCat[i].Alias)-@(ListArticleByCat[i].Id).html" title="@ListArticleByCat[m].Ten">
+                                                <div class="item h-100">
+                                                    <div class="testimony-wrap py-4 pb-5">
+                                                        <div class="mb-4 khungAnh">
+                                                            <img class="khungAnhCrop" src="@ListArticleByCat[m].Images" alt="@ListArticleByCat[m].Ten">
+                                                        </div>
+                                                        <div class="text pt-4">
+                                                            <p class="name truncate-header">
+                                                                @ListArticleByCat[m].Ten
+                                                            </p>
+                                                            <p class="mb-4 truncate-content">
+                                                                @ListArticleByCat[m].MoDau
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>
+
+
+<section class="page-section dslieusy" id="4">
+
+    <div class="container blur full-height">
+        <div class="overlay"></div>
+        <div class="row justify-content-center">
+            <div class="col-md-12 heading-section text-center  mt-5 mb-1" data-aos="fade-up">
+                <span class="subheading text-white">Martyrs</span>
+                <h2 class="mb-2">@*<a asp-controller="Albums" asp-action="Index">*@List of martyr@*</a>*@</h2>
+            </div>
+        </div>
+        <hr class="my-3" />
+        <div class="row no-gutters justify-content-center align-items-center " data-aos="fade-up">
+            <div class="col-lg-4 col-md-6 d-md-flex align-items-end col-12 d-flex justify-content-center">
+                <a href="/EN/danh-sach-liet-sy.html" class="btn btn-outline-primary p-md-2"><h3>Show more</h3></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="ftco-section services-section ftco-no-pt ftco-no-pb section-about-diff pb-5 page-section" id="5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 heading-section text-center  mt-5 mb-1" data-aos="fade-up">
+                <span class="subheading">Library</span>
+                <h2 class="mb-2"><a href="/EN/thu-vien-anh.html">Image gallery</a></h2>
+            </div>
+        </div>
+        <hr class="my-3" />
+        <div class="row d-flex justify-content-center">
+            @{
+                CategoriesAblumsModel data = new CategoriesAblumsModel() { };
+                data.ListItemsAlbums = AblumsService.GetListFeatured();
+                List<CategoriesAblums> ListCatAblum = new List<CategoriesAblums>();
+                ListCatAblum = CategoriesAblumsService.GetListFeatured();
+
+                for (int i = 0; i < ListCatAblum.Count(); i++)
+                {
+                    List<Ablums> tmp = new List<Ablums>();
+                    for (int j = 0; j < data.ListItemsAlbums.Count(); j++)
+                    {
+                        if (ListCatAblum[i].Id == data.ListItemsAlbums[j].CatId)
+                        {
+                            tmp.Add(data.ListItemsAlbums[j]);
+                        }
+                    }
+                    ListCatAblum[i].ListItemsAlbums = tmp;
+                }
+
+                data.ListItems = ListCatAblum;
+
+
+                <div class="container-image-gallery">
+                    <section id="photos">
+                        @for (int i = 0; i < data.ListItems.Count(); i++)
+                        {
+                            @if (data.ListItems[i].ListItemsAlbums != null && data.ListItems[i].ListItemsAlbums.Count() > 0)
+                            {
+                                <div class="card-image" data-aos="fade-up">
+                                    <a href="/EN/albums/@(data.ListItems[i].Alias)-@(data.ListItems[i].Id).html">
+                                        <img loading="lazy" class="card-img-top" src="@data.ListItems[i].Images" alt="@data.ListItems[i].Ten">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">
+                                                <strong>@data.ListItems[i].Ten</strong>
+                                                <br />
+                                                <span class="badge badge-secondary">@data.ListItems[i].ListItemsAlbums.Count() image(s)</span>
+                                            </h5>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        }
+                    </section>
+                </div>
+
+                // @for (int i = 0; i < data.ListItems.Count(); i++)
+                // {
+                //     @if (data.ListItems[i].ListItemsAlbums != null && data.ListItems[i].ListItemsAlbums.Count() > 0)
+                //     {
+                //         <div class="col-lg-4">
+
+                //             <div class="card h-100" data-aos="fade-up">
+                //                 <a href="/EN/albums/@(data.ListItems[i].Alias)-@(data.ListItems[i].Id).html">
+                //                     <img class="card-img-top" src="/Home/ResizeImage?url=@data.ListItems[i].Images&width=255&height=150" alt="@data.ListItems[i].Ten">
+
+                //                     <div class="card-body">
+
+                //                         <p class="card-title text-center" style="overflow:hidden; margin-bottom:5px">
+                //                             <strong style="font-size:17px; margin-top:5px; font-weight:normal;padding:5px 12px;">@data.ListItems[i].Ten</strong>
+                //                             <br />
+                //                             <span class="badge badge-secondary" style=" margin-top:5px; font-weight:normal;padding:5px 12px;">
+                //                                 @data.ListItems[i].ListItemsAlbums.Count() image(s)
+                //                             </span>
+                //                         </p>
+
+                //                     </div>
+                //                 </a>
+                //             </div>
+                //         </div>
+                //     }
+                // }
+            }
+
+        </div>
+    </div>
+</section>
+
+<div>
+    @if (TempData["MessageSuccess"] != null || TempData["MessageError"] != null)
+    {
+        <partial name="_PartialPopUp" />
+    }
+</div>
+
+<script>
+    for(var i = 0; i< @numOfNewFeatured; i++){
+        $('#Features-Slide-DTTT_' + i).lightSlider({
+        gallery: true,
+        item: 3,
+        slideMargin: 0,
+        speed: 800,
+        pause: 4000,
+        auto: true,
+        pager: false,
+        controls: true,
+        loop: true,
+        responsive: [
+            {
+                breakpoint: 1170,
+                settings: {
+                    item: 3,
+                    slideMove: 1,
+                    slideMargin: 6,
+                }
+            },
+            {
+                breakpoint: 980,
+                settings: {
+                    item: 2,
+                    slideMove: 1
+                }
+            },
+            {
+                breakpoint: 460,
+                settings: {
+                    item: 1,
+                    slideMove: 1
+                }
+            }
+        ]
+    });
+    }
+    
+</script>

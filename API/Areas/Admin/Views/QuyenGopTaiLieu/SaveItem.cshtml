@@ -1,0 +1,84 @@
+﻿@model API.Areas.Admin.Models.QuyenGopTaiLieu.QuyenGopTaiLieuModel
+@using Microsoft.AspNetCore.Http;
+@{
+    if (Model.Item.Id == 0)
+    {
+        ViewData["Title"] = "Thêm mới yêu cầu đặt xe";
+    }
+    else
+    {
+        ViewData["Title"] = "Chỉnh sửa Tài liệu được quyên góp";
+    }
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    string Str_Url = "/Admin/" + ControllerName + "/Index" + Context.Session.GetString("STR_Action_Link_" + ControllerName + "_" + Context.Request.Headers["UserName"]);
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-12 col-md-9">
+                <h4>@ViewData["Title"]</h4>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form asp-controller="@ControllerName" enctype="multipart/form-data" asp-action="UpdateStatusView" method="post">
+            @Html.ValidationSummary()
+
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.TenKhachHang">Họ tên <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" name="TenKhachHang" class="form-control Changetitle namepr" asp-for="Item.TenKhachHang" disabled>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.Status">Trạng thái <sup class="text-danger"> (*)</sup></label>
+                        <select asp-for="Item.Status" name="Status" class="form-control" asp-items="Model.ListItemsStatus"></select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Item.SoDT">Số điện thoại <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" name="DonViCongTac" class="form-control Changetitle namepr" asp-for="Item.SoDT" disabled>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Item.CamNghi">Cảm nghĩ <sup class="text-danger"> (*)</sup></label>
+                        <textarea name="CamNghi" class="form-control Changetitle namepr" asp-for="Item.CamNghi" disabled></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <label>Hình ảnh <sup class="text-danger"> (*)</sup></label>
+            <div class="row">
+                    @if (Model.Item.ListHinhAnh != null && Model.Item.ListHinhAnh.Count() > 0)
+                    {
+                        for (int j = 0; j < Model.Item.ListHinhAnh.Count(); j++)
+                        {
+                            <div class="col-md-3">
+                                @*<img src="@Model.Item.ListHinhAnh[j].URL">*@
+                                <a data-fancybox="gallery_@Model.Item.Id" href="@Model.Item.ListHinhAnh[j].URL" data-caption="Đài tưởng niệm Giao Bưu - thông tin liên lạc Tây Nguyên">
+                                    <img loading="lazy" class="card-img-top" src="/Home/ResizeImage?url=@Model.Item.ListHinhAnh[j].URL&width=255&height=150" alt="Đài tưởng niệm Giao Bưu - thông tin liên lạc Tây Nguyên">
+                                </a>
+
+                            </div>
+                        }
+
+                    }
+            </div>
+            
+            <input type="submit" class="btn btn-primary" name="SaveItem" value="Gửi yêu cầu" />
+            <a class="btn btn-danger" href="@Str_Url">Thoát</a>
+            <input type="hidden" name="Id" class="form-control" asp-for="Item.Id">
+            <input type="hidden" name="Ids" class="form-control" asp-for="Item.Ids">
+        </form>
+    </div>
+</div>
+
+<partial name="_PartialSearchForm" />

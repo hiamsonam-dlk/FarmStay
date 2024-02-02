@@ -1,0 +1,121 @@
+﻿@using API.Areas.Admin.Models.Booking;
+@using Microsoft.AspNetCore.Http
+@using Microsoft.Extensions.Options;
+@using reCAPTCHA.AspNetCore;
+@inject IOptions<RecaptchaSettings> RecaptchaSettings
+@{
+    string[] title;
+    var img = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(16);
+    BookingModel booking = new BookingModel();
+    booking.Item = new Booking();
+}
+
+@if (img != null && img.Count() > 0)
+{
+        <div class="container-fluid">
+            <div class="row mb-3">
+                <div class="col-12 px-0">
+
+                <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @for (int i = 0; i < img.Count(); i++)
+                        {
+                            <div class="carousel-item @(i==0?"active":"active")">
+                                @*<img src="@img[i].Image" class="d-block w-100" alt="@img[i].Title">*@
+
+                                @if (img[i].Title != null)
+                                {
+                                <div class="hero-wrap" style="background-image: url('@img[i].Image');" >
+                                    <div class="overlay"></div>
+                                    <div class="container">
+                                        <div class="row no-gutters slider-text justify-content-start align-items-center">
+                                            <div class="col-lg-3 col-md-6 ftco-animate d-md-flex d-none align-items-end">
+                                                <div class="text">
+                                                        <h1 class="mb-1 ftco-animate"><span>@img[i].Title</span></h1>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 col"></div>
+                                                <div class="col-lg-4 col-md-6 mt-0 d-flex justify-md-content-end justify-content-center">
+                                                    @*<form class="request-form ftco-animate" asp-controller="Booking" asp-action="SaveItem" method="post">
+                                                    <h2>Đặt xe</h2>
+                                                    <div class="form-group">
+                                                            <label for="from-place" class="label">Điểm xuất phát</label>
+                                                            <input type="text" class="form-control" placeholder="Nhập điểm xuất phát" id="from-place" name="DiemXuatPhat" asp-for="@booking.Item.DiemXuatPhat">
+                                                    </div>
+                                                    <div class="form-group">
+                                                            <label for="to-place" class="label">Điểm đến</label>
+                                                            <input type="text" class="form-control" placeholder="Nhập điểm đến" id="to-place" name="DiemDen" asp-for="@booking.Item.DiemDen">
+                                                    </div>
+                                                        <div class="form-group">
+                                                            <label for="from-place" class="label">Họ và tên</label>
+                                                            <input type="text" class="form-control" placeholder="Nhập họ và tên" id="cus-name" name="TenKhachHang" asp-for="@booking.Item.TenKhachHang">
+                                                        </div>
+                                                    <div class="d-flex">
+                                                        <div class="form-group mr-2">
+                                                                <label for="sodt" class="label">Số điện thoại</label>
+                                                                <input type="text" class="form-control" placeholder="" id="sodt" name="SoDT" asp-for="@booking.Item.SoDT">
+                                                                <input type="hidden" class="form-control" id="token_recaptcha" name="TokenRecaptcha">
+                                                        </div>
+                                                    </div>
+                                                        @Html.ValidationSummary()
+                                                    <div class="form-group">
+                                                            <input type="submit" class="btn btn-primary p5 btn-lg" name="SaveItem" value="Đặt xe" />
+                                                    </div>
+                                                </form>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                } else
+                                {
+                                    <div class="hero-wrap" style="background-image: url('@img[i].Image');">
+                                        <div class="overlay"></div>
+                                        <div class="container">
+                                            <div class="row no-gutters slider-text justify-content-start align-items-center">
+                                                <div class="col-lg-4 col-md-6 ftco-animate d-md-flex d-none align-items-end">
+                                                    <div class="text">
+                                                        <h1 class="mb-1"><span>@img[i].Title</span></h1>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 col"></div>
+                                                <div class="col-lg-6 col-md-6 mt-0 d-flex justify-md-content-end justify-content-center">
+                                                    @*<form class="request-form ftco-animate" asp-controller="Booking" asp-action="SaveItem" method="post">
+                                                        <h2>Đặt xe</h2>
+                                                        <div class="form-group">
+                                                            <label for="from-place" class="label">Điểm xuất phát</label>
+                                                            <input type="text" class="form-control" placeholder="Nhập điểm xuất phát" id="from-place" name="DiemXuatPhat" asp-for="@booking.Item.DiemXuatPhat">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="to-place" class="label">Điểm đến</label>
+                                                            <input type="text" class="form-control" placeholder="Nhập điểm đến" id="to-place" name="DiemDen" asp-for="@booking.Item.DiemDen">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="from-place" class="label">Họ và tên</label>
+                                                            <input type="text" class="form-control" placeholder="Nhập họ và tên" id="cus-name" name="TenKhachHang" asp-for="@booking.Item.TenKhachHang">
+                                                        </div>
+                                                        <div class="d-flex">
+                                                            <div class="form-group mr-2">
+                                                                <label for="sodt" class="label">Số điện thoại</label>
+                                                                <input type="text" class="form-control" placeholder="" id="sodt" name="SoDT" asp-for="@booking.Item.SoDT">
+                                                                <input type="hidden" class="form-control" id="token_recaptcha" name="TokenRecaptcha">
+                                                            </div>
+                                                        </div>
+                                                        @Html.ValidationSummary()
+                                                        <div class="form-group">
+                                                            <input type="submit" class="btn btn-primary p5 btn-lg" name="SaveItem" value="Đặt xe" />
+                                                        </div>
+                                                    </form>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+}
+

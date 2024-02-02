@@ -1,0 +1,128 @@
+﻿@model API.Areas.Admin.Models.DocumentForms.DocumentFormsModel
+@{
+
+    ViewData["Title"] = Model.Item.Title;
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    var rootsite=@Startup.Domain.ToString();
+}
+
+
+
+
+
+<div class="navigation nlist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline  ">
+                    <li>
+                        <a href="/">Trang chủ</a> <i class="fa fa-angle-right"></i>
+                        <a asp-controller="DocumentForms" asp-action="Index">Tạp chí Chư Yang Sin</a> <i class="fa fa-angle-right"></i>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container ContentDiv">
+    <div class="row">
+
+        <div class="col-lg-9 col-md-12">
+            <div class="PageDetail">
+                <div class="ContentArticle">
+                    <div class="detailBTTP">
+                        <img src="@Model.Item.Images" />
+                        <h1 class="Title">@(Model.Item.Title)</h1>
+                        <p class="text-muted icon">
+                            <span class="date"><i class="far fa-clock mr-1"></i>  @Model.Item.IssuedDateShow</span>
+                        </p>
+                        <div class="clearfix">
+
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.Item.Introtext))
+                    {
+                        <p>@Model.Item.Introtext</p>
+                    }
+
+                    @if (!string.IsNullOrEmpty(Model.Item.EmbedLink) && Model.Item.EmbedLink.Contains("iframe "))
+                    {
+                        <div class="bttpEmbed">
+                            @Html.Raw(Model.Item.EmbedLink)
+                        </div>
+                    }
+                    else
+                    {
+                        @if (Model.Item.Link != null)
+                        {
+
+
+                            string ex = API.Models.ManagerFiles.ManagerFilesService.GetExtension(Model.Item.Link);
+
+                            if (ex == ".pdf")
+                            {
+
+                                <div>
+                                    <iframe id="pdf-js-viewer" src="/viewer.html?file=TapChi/@(Model.Item.Link)" title="webviewer" frameborder="0" width="100%" height="800px"></iframe>
+                                </div>
+                                @*<iframe src="~/bantintuphap@(Model.Item.Link)" width="100%" height="800px"></iframe>*@
+
+                            }
+
+
+
+                        }
+                    }
+
+                </div>
+
+
+
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-12">
+            <div class="greyDiv searchDiv mb-3">
+                <form asp-controller="@ControllerName" asp-action="Index" method="GET">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label asp-for="SearchData.Keyword">Từ khóa</label>
+                                <input type="text" class="form-control" asp-for="SearchData.Keyword" name="Keyword">
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <div>
+                                    <input type="submit" class="btn btn-primary" name="Search" value="Tìm kiếm" />
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div>
+                <ul class="listYear">
+                    <li>
+                        <a asp-controller="DocumentForms" asp-action="Index"><i class="fas fa-book mr-1"></i>Tất cả bản tin </a>
+                    </li>
+                    @for (int i = DateTime.Now.Year; i >= 2010; i--)
+                    {
+                    <li>
+                        <a asp-controller="DocumentForms" asp-action="Index" asp-route-year="@i"> <i class="fas fa-book mr-1"></i> Năm @i</a>
+                    </li>
+
+                    }
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>

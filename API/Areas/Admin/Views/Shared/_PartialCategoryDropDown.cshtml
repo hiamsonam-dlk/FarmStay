@@ -1,0 +1,32 @@
+﻿@model int
+@using Microsoft.AspNetCore.Http;
+@using API.Areas.Admin.Models.CategoriesArticles;
+@{
+    string LangId = "VI";
+    int IDUSER = int.Parse(Context.Request.Headers["Id"]);
+    LangId = Context.Session.GetString("LangId");
+    var ListMenu = CategoriesArticlesService.GetListItemsDropDown(0, LangId, IDUSER);
+}
+
+
+
+
+
+@*<ul>
+    @foreach (var item in ListMenu)
+    {
+
+        if (item.CountChild > 0)
+        {
+            <li>
+                @item.Title
+                @await Html.PartialAsync("_PartialCategoryDropDownChild", item.Id)
+            </li>
+
+        }
+        else
+        {
+            <li id="@item.Id">@item.Title</li>
+        }
+    }
+</ul>*@

@@ -1,0 +1,72 @@
+﻿@using API.Areas.Admin.Models.Menus;
+@using Microsoft.AspNetCore.Http
+@{
+    int IdCoQuan = 1;
+    if (Context.Session.GetString("IdCoQuan") != null && Context.Session.GetString("IdCoQuan") != "")
+    {
+        IdCoQuan = int.Parse(Context.Session.GetString("IdCoQuan"));
+    }
+    var ListMenu = MenusService.GetListByParrent(0, IdCoQuan, 2);
+    string css_class = "";
+
+    string currCat = "";
+    if (ViewData["currCat"] == null)
+    {
+        //currCat = ViewData["currCat"].ToString();
+    }
+}
+
+
+<div class="lmenu">
+    <ul class="leftmenu">
+        @foreach (var item in ListMenu)
+        {
+
+            <li class="lli @(item.CatId.ToString()==currCat?"active":"")">
+                <a class="@(item.ChildCount>0?"closemn":"") @css_class" href="@(item.Link)" target="@(!string.IsNullOrEmpty(item.Target)?item.Target:"")">
+                    @(item.Title)
+                    @if (item.ChildCount > 0)
+                    {
+                        <i class="caret fa fa-caret-up"></i>
+                    }
+                </a>
+                @if (item.ChildCount > 0)
+                {
+
+                    <ul class="childmenu">
+                        @foreach (var child in item.ListMenus)
+                        {
+
+                            <li class="@(child.ChildCount>0?"dropdown":"") @(child.CatId.ToString()==currCat?"subactive":"")">
+                                <a href="@(child.Link)" target="@(!string.IsNullOrEmpty(child.Target)?child.Target:"")">
+                                    @child.Title
+
+                                    @if (child.ChildCount > 0)
+                                    {
+                                        <i class="fa fa-caret-left"></i>
+                                    }
+                                </a>
+
+                                @if (child.ChildCount > 0)
+                                {
+                                    <ul class="GrandChildmenu">
+                                        @foreach (var grandChild in child.ListMenus)
+                                        {
+
+                                            <li class="@(grandChild.ChildCount>0?"dropdown":"") @(grandChild.CatId.ToString()==currCat?"subactive":"")">
+                                                <a href="@(grandChild.Link)" target="@(!string.IsNullOrEmpty(grandChild.Target)?grandChild.Target:"")">@grandChild.Title</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+
+                            </li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+    </ul>
+</div>
+
+

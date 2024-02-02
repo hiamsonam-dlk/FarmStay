@@ -1,0 +1,85 @@
+﻿@model API.Areas.Admin.Models.CategoriesAblums.CategoriesAblumsModel
+@{
+    var ItemConfig = API.Areas.Admin.Models.SYSParams.SYSParamsService.GetItemConfigByHome();
+    ViewData["Description"] = ItemConfig.SEODescription;
+    ViewData["Keywords"] = ItemConfig.SEOKeyword;
+    ViewData["Images"] = @Startup.Domain + "/ttudkhcn/images/ogImage3.png?ver=" + DateTime.Now.ToString();
+    ViewData["Url"] = @Startup.Domain;
+}
+
+<div class="hero-wrap" style="height:50vh; background-position: bottom;">
+    <div class="container">
+        <div class="row no-gutters slider-text justify-content-center align-items-center" style="height: 50vh">
+            <div class="col-12 d-flex align-items-end justify-content-center" data-aos="fade-up">
+      
+
+                <div class="text navigation nlist">
+                    <h2 class="text-center text-white">THƯ VIỆN ẢNH</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="navigation nlist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline ">
+                    <li>
+                        <a href="/">Trang chủ</a> <i class="fa fa-angle-right"></i>
+                        Thư viện ảnh
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container ContentDiv">
+    <div class="row my-5">
+        <div class="container-image-gallery">
+            <section id="photos">
+                @for (int i = 0; i < Model.ListItems.Count(); i++)
+                {
+                    @if (Model.ListItems[i].ListItemsAlbums != null && Model.ListItems[i].ListItemsAlbums.Count() > 0)
+                    {
+                        <div class="card-image" data-aos="fade-up">
+                            <a href="/albums/@(Model.ListItems[i].Alias)-@(Model.ListItems[i].Id).html">
+                                <img loading="lazy" class="card-img-top" src="@Model.ListItems[i].Images" alt="@Model.ListItems[i].Title">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center"><strong>@Model.ListItems[i].Title</strong>    
+                                    <br />
+                                    <span class="badge badge-secondary">@Model.ListItems[i].ListItemsAlbums.Count() ảnh</span></h5>
+
+                                    @* <h5 class="card-title text-center">@Model.ListItems[i].Title</h5>
+                                    <span class="badge badge-secondary text-center">@Model.ListItems[i].ListItemsAlbums.Count() ảnh</span> *@
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }
+            </section>
+        </div>
+
+        @* @for (int i = 0; i < Model.ListItems.Count(); i++)
+        {
+            @if (Model.ListItems[i].ListItemsAlbums != null && Model.ListItems[i].ListItemsAlbums.Count() > 0)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="card" data-aos="fade-up">
+                        <a href="/albums/@(Model.ListItems[i].Alias)-@(Model.ListItems[i].Id).html">
+                            <img loading="lazy" class="card-img-top" src="@Model.ListItems[i].Images" alt="@Model.ListItems[i].Title">
+                            <div class="card-body">
+                                <p class="card-title text-center" style="height:60px; overflow:hidden; margin-bottom:5px"><strong>@Model.ListItems[i].Title</strong>    <br /><span class="badge badge-secondary" style="font-size:11px; margin-top:5px; font-weight:normal;padding:5px 12px;">@Model.ListItems[i].ListItemsAlbums.Count() ảnh</span></p>
+                            </div>
+                        </a>
+                           
+                    </div>
+                </div>
+            }
+        } *@
+    </div>
+</div>

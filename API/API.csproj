@@ -1,0 +1,1122 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+	<PropertyGroup>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
+	
+  <ItemGroup>
+    <Compile Remove="wwwroot\**" />
+    <Compile Remove="wwwroot\uploads\data\Images\1989\**" />
+    <Content Remove="wwwroot\**" />
+    <Content Remove="wwwroot\uploads\data\Images\1989\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <EmbeddedResource Remove="wwwroot\uploads\data\Images\1989\**" />
+    <None Remove="wwwroot\**" />
+    <None Remove="wwwroot\uploads\data\Images\1989\**" />
+    <TypeScriptCompile Remove="wwwroot\lib\**" />
+    <TypeScriptCompile Remove="wwwroot\uploads\data\Images\1989\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\RoxyFilemanController - Copy.cs" />
+    <Compile Remove="Controllers\RoxyFilemanController1.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Admin\Views\Shared\_PartialCategoryDropDown.cshtml" />
+    <Content Remove="Areas\Admin\Views\Shared\_PartialCategoryDropDownChild.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\CMS\Content\Banners\z4509232582539_ca076b49dc5f9e8d4d824e9a4b5fe86e.jpg" />
+    <Content Include="wwwroot\CMS\Content\Banners\z4509242394905_336b6041d4b91c89f8c4ff81cca6c899.jpg" />
+    <Content Include="wwwroot\CMS\Content\Banners\z4509244627753_bb9509089ea56ee573cd0fb8702ec09d.jpg" />
+    <Content Include="wwwroot\CMS\Content\en.jpg" />
+    <Content Include="wwwroot\CMS\Content\TaiLieu\bienlai.jpg" />
+    <Content Include="wwwroot\CMS\Content\TaiLieu\laymakh.jpg" />
+    <Content Include="wwwroot\CMS\Content\TaiLieu\tinnhan.jpg" />
+    <Content Include="wwwroot\CMS\Content\vi.png" />
+    <Content Include="wwwroot\favicon.ico" />
+    <Content Include="wwwroot\fonts\font.css" />
+    <Content Include="wwwroot\fonts\fonts.css" />
+    <Content Include="wwwroot\fonts\MyriadPro-Bold.otf" />
+    <Content Include="wwwroot\fonts\MyriadPro-Bold.ttf" />
+    <Content Include="wwwroot\fonts\MyriadPro-Bold.woff" />
+    <Content Include="wwwroot\fonts\MyriadPro-BoldCond.eot" />
+    <Content Include="wwwroot\fonts\MyriadPro-BoldCond.ttf" />
+    <Content Include="wwwroot\fonts\MyriadPro-BoldCond.woff" />
+    <Content Include="wwwroot\fonts\MyriadPro-Cond.eot" />
+    <Content Include="wwwroot\fonts\MyriadPro-Cond.ttf" />
+    <Content Include="wwwroot\fonts\MyriadPro-Cond.woff" />
+    <Content Include="wwwroot\fonts\MyriadPro-Regular.eot" />
+    <Content Include="wwwroot\fonts\MyriadPro-Regular.otf" />
+    <Content Include="wwwroot\fonts\MyriadPro-Regular.ttf" />
+    <Content Include="wwwroot\fonts\MyriadPro-Regular.woff" />
+    <Content Include="wwwroot\fonts\MyriadPro-Semibold.eot" />
+    <Content Include="wwwroot\fonts\MyriadPro-Semibold.otf" />
+    <Content Include="wwwroot\fonts\MyriadPro-Semibold.ttf" />
+    <Content Include="wwwroot\fonts\MyriadPro-Semibold.woff" />
+    <Content Include="wwwroot\fonts\UTM Avo Bold.eot" />
+    <Content Include="wwwroot\fonts\UTMAvoBold.ttf" />
+    <Content Include="wwwroot\fonts\UTMAvoBold.woff" />
+    <Content Include="wwwroot\pdfjs\web\images\loading-icon.gif" />
+    <Content Include="wwwroot\pdfjs\web\images\shadow.png" />
+    <Content Include="wwwroot\pdfjs\web\viewer.css" />
+    <Content Include="wwwroot\pdfjs\web\viewer.html" />
+    <Content Include="wwwroot\TMDT\css\ajax-loader.gif" />
+    <Content Include="wwwroot\TMDT\css\animate.css" />
+    <Content Include="wwwroot\TMDT\css\aos.css" />
+    <Content Include="wwwroot\TMDT\css\bootstrap-datepicker.css" />
+    <Content Include="wwwroot\TMDT\css\bootstrap.min.css" />
+    <Content Include="wwwroot\TMDT\css\bootstrap\bootstrap-grid.css" />
+    <Content Include="wwwroot\TMDT\css\bootstrap\bootstrap-reboot.css" />
+    <Content Include="wwwroot\TMDT\css\css\bootstrap-reboot.css" />
+    <Content Include="wwwroot\TMDT\css\css\mixins\_text-hide.css" />
+    <Content Include="wwwroot\TMDT\css\flaticon.css" />
+    <Content Include="wwwroot\TMDT\css\icomoon.css" />
+    <Content Include="wwwroot\TMDT\css\ionicons.min.css" />
+    <Content Include="wwwroot\TMDT\css\jquery.timepicker.css" />
+    <Content Include="wwwroot\TMDT\css\magnific-popup.css" />
+    <Content Include="wwwroot\TMDT\css\open-iconic-bootstrap.min.css" />
+    <Content Include="wwwroot\TMDT\css\owl.carousel.min.css" />
+    <Content Include="wwwroot\TMDT\css\owl.theme.default.min.css" />
+    <Content Include="wwwroot\TMDT\css\style.css" />
+    <Content Include="wwwroot\TMDT\fonts\flaticon\backup.txt" />
+    <Content Include="wwwroot\TMDT\fonts\flaticon\font\flaticon.css" />
+    <Content Include="wwwroot\TMDT\fonts\flaticon\font\Flaticon.eot" />
+    <Content Include="wwwroot\TMDT\fonts\flaticon\font\flaticon.html" />
+    <Content Include="wwwroot\TMDT\fonts\flaticon\font\Flaticon.ttf" />
+    <Content Include="wwwroot\TMDT\fonts\flaticon\font\Flaticon.woff" />
+    <Content Include="wwwroot\TMDT\fonts\icomoon\icomoon.eot" />
+    <Content Include="wwwroot\TMDT\fonts\icomoon\icomoon.ttf" />
+    <Content Include="wwwroot\TMDT\fonts\icomoon\icomoon.woff" />
+    <Content Include="wwwroot\TMDT\fonts\ionicons\css\ionicons.min.css" />
+    <Content Include="wwwroot\TMDT\fonts\ionicons\fonts\ionicons.eot" />
+    <Content Include="wwwroot\TMDT\fonts\ionicons\fonts\ionicons.ttf" />
+    <Content Include="wwwroot\TMDT\fonts\ionicons\fonts\ionicons.woff" />
+    <Content Include="wwwroot\TMDT\fonts\open-iconic\open-iconic.eot" />
+    <Content Include="wwwroot\TMDT\fonts\open-iconic\open-iconic.otf" />
+    <Content Include="wwwroot\TMDT\fonts\open-iconic\open-iconic.ttf" />
+    <Content Include="wwwroot\TMDT\fonts\open-iconic\open-iconic.woff" />
+    <Content Include="wwwroot\TMDT\images\3d_tour_en.jpg" />
+    <Content Include="wwwroot\TMDT\images\3d_tour.jpg" />
+    <Content Include="wwwroot\TMDT\images\about.jpg" />
+    <Content Include="wwwroot\TMDT\images\bg_1.jpg" />
+    <Content Include="wwwroot\TMDT\images\bg_2.jpg" />
+    <Content Include="wwwroot\TMDT\images\biada.jpg" />
+    <Content Include="wwwroot\TMDT\images\car-1.jpg" />
+    <Content Include="wwwroot\TMDT\images\car-10.jpg" />
+    <Content Include="wwwroot\TMDT\images\car-11.jpg" />
+    <Content Include="wwwroot\TMDT\images\car-12.jpg" />
+    <Content Include="wwwroot\TMDT\images\car-2.jpg" />
+    <Content Include="wwwroot\TMDT\images\car-3.jpg" />
+    <Content Include="wwwroot\TMDT\images\car-4.jpg" />
+    <Content Include="wwwroot\TMDT\images\car-5.jpg" />
+    <Content Include="wwwroot\TMDT\images\car-6.jpg" />
+    <Content Include="wwwroot\TMDT\images\car-7.jpg" />
+    <Content Include="wwwroot\TMDT\images\car-8.jpg" />
+    <Content Include="wwwroot\TMDT\images\car-9.jpg" />
+    <Content Include="wwwroot\TMDT\images\cutted-logo-en.png" />
+    <Content Include="wwwroot\TMDT\images\cutted-logo.png" />
+    <Content Include="wwwroot\TMDT\images\ds-ls.jpg" />
+    <Content Include="wwwroot\TMDT\images\icon-user.png" />
+    <Content Include="wwwroot\TMDT\images\icon.png" />
+    <Content Include="wwwroot\TMDT\images\image_1.jpg" />
+    <Content Include="wwwroot\TMDT\images\image_2.jpg" />
+    <Content Include="wwwroot\TMDT\images\image_3.jpg" />
+    <Content Include="wwwroot\TMDT\images\image_4.jpg" />
+    <Content Include="wwwroot\TMDT\images\image_5.jpg" />
+    <Content Include="wwwroot\TMDT\images\image_6.jpg" />
+    <Content Include="wwwroot\TMDT\images\Index.jpg" />
+    <Content Include="wwwroot\TMDT\images\loc.png" />
+    <Content Include="wwwroot\TMDT\images\logo.png" />
+    <Content Include="wwwroot\TMDT\images\person_1.jpg" />
+    <Content Include="wwwroot\TMDT\images\person_2.jpg" />
+    <Content Include="wwwroot\TMDT\images\person_3.jpg" />
+    <Content Include="wwwroot\TMDT\images\person_4.jpg" />
+    <Content Include="wwwroot\TMDT\images\wrench.png" />
+    <Content Include="wwwroot\ttudkhcn\css\phoneringing.css" />
+    <Content Include="wwwroot\ttudkhcn\css\site.css" />
+    <Content Include="wwwroot\ttudkhcn\favicon.ico" />
+    <Content Include="wwwroot\ttudkhcn\images\bct.png" />
+    <Content Include="wwwroot\ttudkhcn\images\bg-article.png" />
+    <Content Include="wwwroot\ttudkhcn\images\bgcontent1.jpg" />
+    <Content Include="wwwroot\ttudkhcn\images\bgi.png" />
+    <Content Include="wwwroot\ttudkhcn\images\bgi2.png" />
+    <Content Include="wwwroot\ttudkhcn\images\bg_row_tintuc.jpg" />
+    <Content Include="wwwroot\ttudkhcn\images\Customer-Support-Icon.jpg" />
+    <Content Include="wwwroot\ttudkhcn\images\favicon.ico" />
+    <Content Include="wwwroot\ttudkhcn\images\favicon.png" />
+    <Content Include="wwwroot\ttudkhcn\images\footer-bg.jpg" />
+    <Content Include="wwwroot\ttudkhcn\images\header-bg.png" />
+    <Content Include="wwwroot\ttudkhcn\images\Header.png" />
+    <Content Include="wwwroot\ttudkhcn\images\hoavan.png" />
+    <Content Include="wwwroot\ttudkhcn\images\huanchuong.png" />
+    <Content Include="wwwroot\ttudkhcn\images\icon.png" />
+    <Content Include="wwwroot\ttudkhcn\images\ogImage3.png" />
+    <Content Include="wwwroot\ttudkhcn\images\logo-sm.png" />
+    <Content Include="wwwroot\ttudkhcn\images\logo.png" />
+    <Content Include="wwwroot\ttudkhcn\images\phone.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="4.5.2.1" />
+    <PackageReference Include="Hashids.net" Version="1.2.2" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.7" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.31.0" />
+    <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+    <PackageReference Include="Moment.js" Version="2.17.0" />
+    <PackageReference Include="NuGet.VisualStudio" Version="5.0.0" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.70" />
+    <PackageReference Include="reCAPTCHA.AspNetCore" Version="2.1.3" />
+    <PackageReference Include="RestSharp" Version="108.0.2" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0006" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.31.0" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.8.*" />
+    <PackageReference Include="System.ServiceModel.Federation" Version="4.8.*" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.8.*" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.8.*" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.8.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\EN\Data\" />
+    <Folder Include="wwwroot\CMS\Content\FromUser\ViengTham\" />
+    <Folder Include="wwwroot\CMS\Content\Audios\" />
+    <Folder Include="wwwroot\Thumbs\" />
+    <Folder Include="wwwroot\TapChi\" />
+    <Folder Include="wwwroot\uploads\data\Images\" />
+    <Folder Include="wwwroot\uploads\data\Videos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Admin\Views\Account\ChangePassword.cshtml" />
+    <None Include="Areas\Admin\Views\Account\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Account\Info.cshtml" />
+    <None Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <None Include="Areas\Admin\Views\Articles\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Articles\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\Articles\ViewLog.cshtml" />
+    <None Include="Areas\Admin\Views\BannersCategories\Index.cshtml" />
+    <None Include="Areas\Admin\Views\BannersCategories\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\Banners\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Banners\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\CategoriesAblums\Index.cshtml" />
+    <None Include="Areas\Admin\Views\CategoriesAblums\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\CategoriesArticles\Index.cshtml" />
+    <None Include="Areas\Admin\Views\CategoriesArticles\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\Contacts\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Contacts\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\DMChucVu\Index.cshtml" />
+    <None Include="Areas\Admin\Views\DMChucVu\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\DMCoQuan\Index.cshtml" />
+    <None Include="Areas\Admin\Views\DMCoQuan\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\DMLoaiCoQuan\Index.cshtml" />
+    <None Include="Areas\Admin\Views\DMLoaiCoQuan\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\DMPhuongXa\Index.cshtml" />
+    <None Include="Areas\Admin\Views\DMQuanHuyen\Index.cshtml" />
+    <None Include="Areas\Admin\Views\DMQuanHuyen\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\DMTinhThanh\Index.cshtml" />
+    <None Include="Areas\Admin\Views\DMTinhThanh\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\DocumentsField\Index.cshtml" />
+    <None Include="Areas\Admin\Views\DocumentsField\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\DocumentsType\Index.cshtml" />
+    <None Include="Areas\Admin\Views\DocumentsType\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\Documents\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Documents\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Home\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\Home\SYSConfig.cshtml" />
+    <None Include="Areas\Admin\Views\ImportDBOld\Index.cshtml" />
+    <None Include="Areas\Admin\Views\ImportDBOld\UpdateAlias.cshtml" />
+    <None Include="Areas\Admin\Views\Menus\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Menus\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\NewsLetter\Index.cshtml" />
+    <None Include="Areas\Admin\Views\NewsLetter\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_layoutAdmin.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_LayoutLogin.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_PartialCategoryDropDownChild.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_PartialMsgInfoAdmin.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_PartialNavbar.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_PartialCategoryDropDown.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_PartialPagination.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_PartialSidebar.cshtml" />
+    <None Include="Areas\Admin\Views\SurveyAnswer\Index.cshtml" />
+    <None Include="Areas\Admin\Views\SurveyQuestion\Index.cshtml" />
+    <None Include="Areas\Admin\Views\SurveyQuestion\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\Survey\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Survey\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\USGroups\Index.cshtml" />
+    <None Include="Areas\Admin\Views\USGroups\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\USMenu\Index.cshtml" />
+    <None Include="Areas\Admin\Views\USMenu\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\USUsers\Index.cshtml" />
+    <None Include="Areas\Admin\Views\USUsers\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\Videos\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Videos\SaveItem.cshtml" />
+    <None Include="Areas\Admin\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\CMS\Content\TaiLieu\Cv den 66 - 08 cua UBND tinh ve viec quy dinh gia ban nuoc sinh hoat tren dia ban tinh Dak Lak.pdf" />
+    <None Include="wwwroot\CMS\Content\TaiLieu\Cv di 97 ve viec dieu chinh gia ban nuoc sach cua Cty CP Cap nuoc Dak Lak.pdf" />
+    <None Include="wwwroot\fonts\MyriadPro-Bold.svg" />
+    <None Include="wwwroot\fonts\MyriadPro-BoldCond.svg" />
+    <None Include="wwwroot\fonts\MyriadPro-BoldCond.woff2" />
+    <None Include="wwwroot\fonts\MyriadPro-Cond.svg" />
+    <None Include="wwwroot\fonts\MyriadPro-Cond.woff2" />
+    <None Include="wwwroot\fonts\MyriadPro-Regular.svg" />
+    <None Include="wwwroot\fonts\MyriadPro-Semibold.svg" />
+    <None Include="wwwroot\fonts\UTM Avo Bold.woff2" />
+    <None Include="wwwroot\fonts\UTMAvoBold.svg" />
+    <None Include="wwwroot\js\admin-site.js" />
+    <None Include="wwwroot\js\jquery.base64.min.js" />
+    <None Include="wwwroot\js\jquery.binarytransport.js" />
+    <None Include="wwwroot\js\jquery.prettyPhoto.js" />
+    <None Include="wwwroot\js\moment-with-locales.js" />
+    <None Include="wwwroot\js\moment-with-locales.min.js" />
+    <None Include="wwwroot\js\moment.js" />
+    <None Include="wwwroot\js\moment.min.js" />
+    <None Include="wwwroot\js\numscroller-1.0.js" />
+    <None Include="wwwroot\js\owl.carousel.min.js" />
+    <None Include="wwwroot\js\popper.min.js" />
+    <None Include="wwwroot\js\sb-admin.min.js" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\site.min.js" />
+    <None Include="wwwroot\js\tempusdominus-bootstrap-4.min.js" />
+    <None Include="wwwroot\js\wow.min.js" />
+    <None Include="wwwroot\kyso.pdf" />
+    <None Include="wwwroot\pdfjs\build\pdf.js" />
+    <None Include="wwwroot\pdfjs\build\pdf.js.map" />
+    <None Include="wwwroot\pdfjs\build\pdf.worker.js" />
+    <None Include="wwwroot\pdfjs\build\pdf.worker.js.map" />
+    <None Include="wwwroot\pdfjs\LICENSE" />
+    <None Include="wwwroot\pdfjs\web\cmaps\78-EUC-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\78-EUC-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\78-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\78-RKSJ-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\78-RKSJ-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\78-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\78ms-RKSJ-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\78ms-RKSJ-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\83pv-RKSJ-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\90ms-RKSJ-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\90ms-RKSJ-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\90msp-RKSJ-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\90msp-RKSJ-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\90pv-RKSJ-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\90pv-RKSJ-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Add-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Add-RKSJ-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Add-RKSJ-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Add-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-CNS1-0.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-CNS1-1.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-CNS1-2.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-CNS1-3.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-CNS1-4.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-CNS1-5.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-CNS1-6.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-CNS1-UCS2.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-GB1-0.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-GB1-1.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-GB1-2.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-GB1-3.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-GB1-4.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-GB1-5.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-GB1-UCS2.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-Japan1-0.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-Japan1-1.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-Japan1-2.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-Japan1-3.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-Japan1-4.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-Japan1-5.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-Japan1-6.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-Japan1-UCS2.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-Korea1-0.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-Korea1-1.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-Korea1-2.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Adobe-Korea1-UCS2.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\B5-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\B5-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\B5pc-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\B5pc-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\CNS-EUC-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\CNS-EUC-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\CNS1-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\CNS1-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\CNS2-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\CNS2-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\ETen-B5-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\ETen-B5-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\ETenms-B5-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\ETenms-B5-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\ETHK-B5-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\ETHK-B5-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\EUC-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\EUC-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Ext-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Ext-RKSJ-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Ext-RKSJ-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Ext-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GB-EUC-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GB-EUC-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GB-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GB-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GBK-EUC-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GBK-EUC-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GBK2K-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GBK2K-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GBKp-EUC-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GBKp-EUC-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GBpc-EUC-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GBpc-EUC-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GBT-EUC-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GBT-EUC-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GBT-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GBT-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GBTpc-EUC-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\GBTpc-EUC-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Hankaku.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Hiragana.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\HKdla-B5-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\HKdla-B5-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\HKdlb-B5-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\HKdlb-B5-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\HKgccs-B5-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\HKgccs-B5-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\HKm314-B5-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\HKm314-B5-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\HKm471-B5-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\HKm471-B5-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\HKscs-B5-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\HKscs-B5-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Katakana.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\KSC-EUC-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\KSC-EUC-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\KSC-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\KSC-Johab-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\KSC-Johab-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\KSC-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\KSCms-UHC-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\KSCms-UHC-HW-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\KSCms-UHC-HW-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\KSCms-UHC-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\KSCpc-EUC-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\KSCpc-EUC-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\LICENSE" />
+    <None Include="wwwroot\pdfjs\web\cmaps\NWP-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\NWP-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\RKSJ-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\RKSJ-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\Roman.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniCNS-UCS2-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniCNS-UCS2-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniCNS-UTF16-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniCNS-UTF16-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniCNS-UTF32-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniCNS-UTF32-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniCNS-UTF8-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniCNS-UTF8-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniGB-UCS2-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniGB-UCS2-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniGB-UTF16-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniGB-UTF16-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniGB-UTF32-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniGB-UTF32-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniGB-UTF8-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniGB-UTF8-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJIS-UCS2-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJIS-UCS2-HW-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJIS-UCS2-HW-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJIS-UCS2-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJIS-UTF16-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJIS-UTF16-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJIS-UTF32-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJIS-UTF32-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJIS-UTF8-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJIS-UTF8-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJIS2004-UTF16-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJIS2004-UTF16-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJIS2004-UTF32-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJIS2004-UTF32-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJIS2004-UTF8-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJIS2004-UTF8-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJISPro-UCS2-HW-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJISPro-UCS2-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJISPro-UTF8-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJISX0213-UTF32-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJISX0213-UTF32-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJISX02132004-UTF32-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniJISX02132004-UTF32-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniKS-UCS2-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniKS-UCS2-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniKS-UTF16-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniKS-UTF16-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniKS-UTF32-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniKS-UTF32-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniKS-UTF8-H.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\UniKS-UTF8-V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\V.bcmap" />
+    <None Include="wwwroot\pdfjs\web\cmaps\WP-Symbol.bcmap" />
+    <None Include="wwwroot\pdfjs\web\compressed.tracemonkey-pldi-09.pdf" />
+    <None Include="wwwroot\pdfjs\web\debugger.js" />
+    <None Include="wwwroot\pdfjs\web\images\annotation-check.svg" />
+    <None Include="wwwroot\pdfjs\web\images\annotation-comment.svg" />
+    <None Include="wwwroot\pdfjs\web\images\annotation-help.svg" />
+    <None Include="wwwroot\pdfjs\web\images\annotation-insert.svg" />
+    <None Include="wwwroot\pdfjs\web\images\annotation-key.svg" />
+    <None Include="wwwroot\pdfjs\web\images\annotation-newparagraph.svg" />
+    <None Include="wwwroot\pdfjs\web\images\annotation-noicon.svg" />
+    <None Include="wwwroot\pdfjs\web\images\annotation-note.svg" />
+    <None Include="wwwroot\pdfjs\web\images\annotation-paragraph.svg" />
+    <None Include="wwwroot\pdfjs\web\images\findbarButton-next-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\findbarButton-next.svg" />
+    <None Include="wwwroot\pdfjs\web\images\findbarButton-previous-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\findbarButton-previous.svg" />
+    <None Include="wwwroot\pdfjs\web\images\grab.cur" />
+    <None Include="wwwroot\pdfjs\web\images\grabbing.cur" />
+    <None Include="wwwroot\pdfjs\web\images\loading-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\loading.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-documentProperties-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-documentProperties.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-firstPage-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-firstPage.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-handTool-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-handTool.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-lastPage-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-lastPage.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-rotateCcw-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-rotateCcw.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-rotateCw-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-rotateCw.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-scrollHorizontal-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-scrollHorizontal.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-scrollVertical-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-scrollVertical.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-scrollWrapped-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-scrollWrapped.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-selectTool-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-selectTool.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-spreadEven-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-spreadEven.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-spreadNone-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-spreadNone.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-spreadOdd-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\secondaryToolbarButton-spreadOdd.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-bookmark-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-bookmark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-download-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-download.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-menuArrow-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-menuArrow.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-openFile-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-openFile.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-pageDown-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-pageDown.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-pageUp-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-pageUp.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-presentationMode-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-presentationMode.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-print-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-print.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-search-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-search.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-secondaryToolbarToggle-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-secondaryToolbarToggle.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-sidebarToggle-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-sidebarToggle.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-viewAttachments-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-viewAttachments.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-viewOutline-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-viewOutline.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-viewThumbnail-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-viewThumbnail.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-zoomIn-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-zoomIn.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-zoomOut-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\toolbarButton-zoomOut.svg" />
+    <None Include="wwwroot\pdfjs\web\images\treeitem-collapsed-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\treeitem-collapsed.svg" />
+    <None Include="wwwroot\pdfjs\web\images\treeitem-expanded-dark.svg" />
+    <None Include="wwwroot\pdfjs\web\images\treeitem-expanded.svg" />
+    <None Include="wwwroot\pdfjs\web\locale\ach\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\af\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\an\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ar\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ast\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\az\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\be\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\bg\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\bn\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\bo\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\brx\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\br\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\bs\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\cak\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ca\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ckb\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\cs\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\cy\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\da\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\de\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\dsb\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\el\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\en-CA\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\en-GB\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\en-US\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\eo\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\es-AR\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\es-CL\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\es-ES\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\es-MX\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\et\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\eu\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\fa\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ff\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\fi\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\fr\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\fy-NL\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ga-IE\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\gd\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\gl\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\gn\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\gu-IN\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\he\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\hi-IN\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\hr\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\hsb\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\hu\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\hy-AM\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\hye\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ia\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\id\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\is\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\it\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ja\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\kab\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ka\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\kk\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\km\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\kn\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ko\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\lij\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\locale.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\lo\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ltg\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\lt\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\lv\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\meh\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\mk\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\mr\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ms\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\my\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\nb-NO\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ne-NP\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\nl\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\nn-NO\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\oc\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\pa-IN\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\pl\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\pt-BR\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\pt-PT\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\rm\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ro\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ru\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\scn\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\si\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\sk\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\sl\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\son\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\sq\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\sr\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\sv-SE\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\szl\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ta\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\te\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\th\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\tl\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\trs\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\tr\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\uk\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\ur\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\uz\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\vi\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\wo\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\xh\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\zh-CN\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\locale\zh-TW\viewer.properties" />
+    <None Include="wwwroot\pdfjs\web\viewer.js" />
+    <None Include="wwwroot\pdfjs\web\viewer.js.map" />
+    <None Include="wwwroot\TMDT\css\.DS_Store" />
+    <None Include="wwwroot\TMDT\css\bootstrap\.DS_Store" />
+    <None Include="wwwroot\TMDT\css\css\.DS_Store" />
+    <None Include="wwwroot\TMDT\fonts\.DS_Store" />
+    <None Include="wwwroot\TMDT\fonts\flaticon\.DS_Store" />
+    <None Include="wwwroot\TMDT\fonts\flaticon\font\Flaticon.svg" />
+    <None Include="wwwroot\TMDT\fonts\flaticon\font\Flaticon.woff2" />
+    <None Include="wwwroot\TMDT\fonts\flaticon\font\_flaticon.scss" />
+    <None Include="wwwroot\TMDT\fonts\flaticon\license\license.pdf" />
+    <None Include="wwwroot\TMDT\fonts\icomoon\icomoon.svg" />
+    <None Include="wwwroot\TMDT\fonts\ionicons\css\_ionicons.scss" />
+    <None Include="wwwroot\TMDT\fonts\ionicons\fonts\.DS_Store" />
+    <None Include="wwwroot\TMDT\fonts\ionicons\fonts\ionicons.svg" />
+    <None Include="wwwroot\TMDT\fonts\ionicons\fonts\ionicons.woff2" />
+    <None Include="wwwroot\TMDT\fonts\open-iconic\open-iconic.svg" />
+    <None Include="wwwroot\TMDT\images\.DS_Store" />
+    <None Include="wwwroot\TMDT\js\.DS_Store" />
+    <None Include="wwwroot\TMDT\js\aos.js" />
+    <None Include="wwwroot\TMDT\js\bootstrap-datepicker.js" />
+    <None Include="wwwroot\TMDT\js\bootstrap.min.js" />
+    <None Include="wwwroot\TMDT\js\google-map.js" />
+    <None Include="wwwroot\TMDT\js\jquery-3.2.1.min.js" />
+    <None Include="wwwroot\TMDT\js\jquery-migrate-3.0.1.min.js" />
+    <None Include="wwwroot\TMDT\js\jquery.animateNumber.min.js" />
+    <None Include="wwwroot\TMDT\js\jquery.easing.1.3.js" />
+    <None Include="wwwroot\TMDT\js\jquery.magnific-popup.min.js" />
+    <None Include="wwwroot\TMDT\js\jquery.min.js" />
+    <None Include="wwwroot\TMDT\js\jquery.stellar.min.js" />
+    <None Include="wwwroot\TMDT\js\jquery.timepicker.min.js" />
+    <None Include="wwwroot\TMDT\js\jquery.waypoints.min.js" />
+    <None Include="wwwroot\TMDT\js\main.js" />
+    <None Include="wwwroot\TMDT\js\owl.carousel.min.js" />
+    <None Include="wwwroot\TMDT\js\popper.min.js" />
+    <None Include="wwwroot\TMDT\js\range.js" />
+    <None Include="wwwroot\TMDT\js\scrollax.min.js" />
+    <None Include="wwwroot\TMDT\scss\.DS_Store" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\.DS_Store" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\bootstrap-grid.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\bootstrap-reboot.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\bootstrap.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_alert.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_background-variant.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_badge.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_border-radius.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_box-shadow.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_breakpoints.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_buttons.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_caret.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_clearfix.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_float.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_forms.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_gradients.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_grid-framework.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_grid.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_hover.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_image.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_list-group.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_lists.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_nav-divider.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_pagination.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_reset-text.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_resize.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_screen-reader.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_size.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_table-row.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_text-emphasis.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_text-hide.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_text-truncate.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_transition.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\mixins\_visibility.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\utilities\_align.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\utilities\_background.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\utilities\_borders.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\utilities\_clearfix.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\utilities\_display.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\utilities\_embed.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\utilities\_flex.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\utilities\_float.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\utilities\_overflow.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\utilities\_position.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\utilities\_screenreaders.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\utilities\_shadows.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\utilities\_sizing.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\utilities\_spacing.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\utilities\_text.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\utilities\_visibility.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_alert.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_badge.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_breadcrumb.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_button-group.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_buttons.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_card.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_carousel.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_close.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_code.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_custom-forms.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_dropdown.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_forms.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_functions.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_grid.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_images.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_input-group.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_jumbotron.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_list-group.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_media.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_mixins.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_modal.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_nav.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_navbar.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_pagination.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_popover.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_print.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_progress.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_reboot.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_root.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_spinners.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_tables.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_toasts.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_tooltip.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_transitions.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_type.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_utilities.scss" />
+    <None Include="wwwroot\TMDT\scss\bootstrap\_variables.scss" />
+    <None Include="wwwroot\TMDT\scss\style.scss" />
+    <None Include="wwwroot\ttudkhcn\js\booking.js" />
+    <None Include="wwwroot\ttudkhcn\scss\.DS_Store" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\.DS_Store" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\bootstrap-grid.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\bootstrap-reboot.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\bootstrap.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_alert.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_background-variant.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_badge.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_border-radius.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_box-shadow.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_breakpoints.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_buttons.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_caret.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_clearfix.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_float.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_forms.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_gradients.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_grid-framework.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_grid.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_hover.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_image.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_list-group.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_lists.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_nav-divider.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_pagination.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_reset-text.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_resize.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_screen-reader.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_size.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_table-row.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_text-emphasis.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_text-hide.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_text-truncate.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_transition.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\mixins\_visibility.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\utilities\_align.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\utilities\_background.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\utilities\_borders.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\utilities\_clearfix.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\utilities\_display.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\utilities\_embed.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\utilities\_flex.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\utilities\_float.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\utilities\_overflow.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\utilities\_position.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\utilities\_screenreaders.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\utilities\_shadows.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\utilities\_sizing.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\utilities\_spacing.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\utilities\_text.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\utilities\_visibility.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_alert.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_badge.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_breadcrumb.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_button-group.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_buttons.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_card.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_carousel.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_close.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_code.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_custom-forms.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_dropdown.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_forms.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_functions.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_grid.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_images.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_input-group.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_jumbotron.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_list-group.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_media.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_mixins.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_modal.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_nav.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_navbar.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_pagination.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_popover.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_print.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_progress.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_reboot.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_root.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_spinners.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_tables.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_toasts.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_tooltip.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_transitions.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_type.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_utilities.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\bootstrap\_variables.scss" />
+    <None Include="wwwroot\ttudkhcn\scss\site.scss" />
+    <None Include="wwwroot\ttudkhcn\js\notification.js" />
+    <None Include="wwwroot\ttudkhcn\js\pick_image.js" />
+    <None Include="wwwroot\ttudkhcn\js\question_template.js" />
+    <None Include="wwwroot\ttudkhcn\js\site.js" />
+    <None Include="wwwroot\ttudkhcn\js\tra_cuu_hoa_don.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Admin\Views\CategoriesDocumentsLaw\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\CategoriesDocumentsLaw\SaveItem.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\CategoriesDocuments\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\CategoriesDocuments\SaveItem.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\DocumentsLaw\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\DocumentsLaw\SaveItem.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\PAKN\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\PAKN\SaveItem.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\GuiTinBai\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\GuiTinBai\SaveItem.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\Questions\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\Questions\SaveItem.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\DocumentForms\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\DocumentForms\SaveItem.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\DocumentRefers\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\DocumentRefers\SaveItem.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\DocumentRefersCategories\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\DocumentRefersCategories\SaveItem.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\Products\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\Products\SaveItem.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\ProductsCategories\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\ProductsCategories\SaveItem.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\Shared\_PartialPagination - Copy.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\AlbumsEN\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\ArticlesEN\Detail.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\ArticlesEN\GetByCat.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\ArticlesEN\GetListChildCat.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\ArticlesEN\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\HomeEN\About.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\HomeEN\Contact.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\HomeEN\Import.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\HomeEN\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\HomeEN\Index2.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\HomeEN\Privacy.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\HomeEN\Search.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\HomeEN\SiteMap.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_CookieConsentPartial.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_Layout.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialAblums.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialFooter.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialHeaderContent.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialHotArticles.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialLeftCol.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialLeftMenu.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialMenu.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialMenuChild.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialMsgInfo.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialNewArticles.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialNewsFeatured.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialNotification.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialPagination.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialRelativeArticles.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialRelativeNews.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialRightCol.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialSlideshows.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_PartialVideo.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\Views\Shared\_ValidationScriptsPartial.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\_ViewImports.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\EN\_ViewStart.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\DocumentsLaw\Detail.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\DocumentsLaw\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\PAKN\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\GuiTinBai\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Questions\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Questions\List.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\DocumentRefers\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Home\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_PartialBauCu.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_PartialHotProducts.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_PartialLeftMenu.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_PartialNotification.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_PartialLeftCol.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_PartialVideo.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_PartialRightCol.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+</Project>

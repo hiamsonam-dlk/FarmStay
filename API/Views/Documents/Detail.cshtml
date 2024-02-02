@@ -1,0 +1,172 @@
+﻿@model API.Areas.Admin.Models.Documents.DocumentsModel
+@{
+
+    ViewData["Title"] = "Văn bản "+Model.Item.Code;
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+
+}
+
+<div class="navigation nlist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline  ">
+                    <li>
+                        <a href="/">Trang chủ</a> <i class="fa fa-angle-right"></i>
+                                                  <a asp-controller="Documents" asp-action="Index" asp-route-id="@Model.Item.CatId">@Model.Item.CatTitle</a> <i class="fa fa-angle-right"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container ContentDiv">
+    <div class="row">
+        <div class="col-12">
+            <div class="PageDetail">
+                <table class="table table-bordered">
+
+                    @if (Model.Category.Type == 1)
+                    {
+                        <tr>
+                            <td width="200px"><strong>Số / ký hiệu</strong></td>
+                            <td>
+                                @Model.Item.Code
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nội dung trích yếu</strong></td>
+                            <td>
+                                @Model.Item.Introtext
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ngày ban hành</strong></td>
+                            <td>
+                                @Model.Item.IssuedDateShow
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ngày hiệu lực</strong></td>
+                            <td>
+                                @Model.Item.EffectiveDateShow
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hình thức văn bản</strong></td>
+                            <td>
+                                @Model.Item.TypeTitle
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cơ quan ban hành</strong></td>
+                            <td>
+                                @Model.Item.LevelTitle
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cấp ban hành</strong></td>
+                            <td>
+                                @Model.Item.OrganizationName
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Người ký</strong></td>
+                            <td>
+                                @Model.Item.OrganizationName
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hiệu lực</strong></td>
+                            <td>
+                                @Model.Item.ExpriedStatus
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td width="200px"><strong>Tên tài liệu</strong></td>
+                            <td>
+                                @Model.Item.Title
+                            </td>
+                        </tr>
+                    }
+
+
+                    <tr>
+                        <td><strong>Danh mục</strong></td>
+                        <td>
+                            @Model.Item.CatTitle
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nội dung</strong></td>
+                        <td>
+                            @Html.Raw(Model.Item.FullText)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>File đính kèm:</strong></td>
+                        <td>
+
+                            @*<a href="@Model.Item.Link">Download</a>*@
+                            @if (Model.Item.ListFile != null && Model.Item.ListFile.Count() > 0)
+                            {
+                                for (int j = 0; j < Model.Item.ListFile.Count(); j++)
+                                {
+                                    string path = Model.Item.ListFile[j].FilePath.ToString();
+                                    int pos = path.LastIndexOf("/") + 1;
+
+                                    <a class="lblFileName badge badge-primary" id="lblFileName_@j" style="padding:7px 25px;color:#fff;font-size:12px;font-weight:normal" href="@Model.Item.ListFile[j].FilePath" target="_blank">
+                                        @path.Substring(pos, path.Length - pos)
+
+                                    </a>
+
+                                }
+                            }
+
+
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+        <div class="col-12">
+            @if (Model.Item.ListFile != null && Model.Item.ListFile.Count() > 0)
+            {
+                for (int j = 0; j < Model.Item.ListFile.Count(); j++)
+                {
+
+
+                    string ex = API.Models.ManagerFiles.ManagerFilesService.GetExtension(Model.Item.ListFile[j].FilePath.ToString());
+
+
+                    if (ex == ".pdf")
+                    {
+                        @*<div class="mb-5">
+                            <iframe src="@Model.Item.ListFile[j].FilePath.ToString()" width="100%" height="800px"></iframe>
+                        </div>*@
+
+                        <div class="mb-5">
+                            <iframe id="pdf-js-viewer" src="/pdfjs/web/viewer.html?file=@Model.Item.ListFile[j].FilePath.ToString()" title="webviewer" frameborder="0" width="100%" height="800px"></iframe>
+                        </div>
+                    }
+
+
+
+                }
+            }
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+

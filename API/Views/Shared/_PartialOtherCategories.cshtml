@@ -1,0 +1,19 @@
+﻿@{
+    var ListItems = API.Areas.Admin.Models.CategoriesArticles.CategoriesArticlesService.GetList();
+}
+<div class="other-list" style="display:block">
+    <h2 class="mt-0">Các thể loại tin tức khác</h2>
+    <ul>
+        @if (ListItems == null || ListItems.Count() == 0)
+        {
+            <li>Không có thể loại khác</li>
+        }
+        else
+        {
+            for (int i = 0; i < ListItems.Count(); i++)
+            {
+                <li><a asp-controller="Articles" asp-action="GetByCat" asp-route-id="@ListItems[i].Id" asp-route-alias="@ListItems[i].Alias">@(ListItems[i].Title)</a></li>
+            }
+        }
+    </ul>
+</div>

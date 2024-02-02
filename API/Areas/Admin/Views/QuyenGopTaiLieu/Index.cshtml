@@ -1,0 +1,220 @@
+﻿@model API.Areas.Admin.Models.QuyenGopTaiLieu.QuyenGopTaiLieuModel;
+@using Microsoft.AspNetCore.Http
+
+@{
+    Layout = "_layoutAdmin";
+    ViewData["Title"] = "Quản lý danh sách cảm nghĩ";
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    int IdCoQuan = int.Parse(Context.Session.GetString("IdCoQuan"));
+    int IdGroup = int.Parse(Context.Session.GetString("IdGroup"));
+    string TenCoQuan = Context.Session.GetString("TenCoQuan");
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <h4>
+                    <i class="fas fa-table"></i> @ViewData["Title"]
+
+                </h4>
+            </div>
+            <div class="col-lg-6 col-12 text-left text-lg-right">
+                <span class="">
+                    Tổng dòng: <strong>
+                        @if (Model.ListItems != null && Model.ListItems.Count() > 0)
+                        {
+                            <span>@Model.ListItems[0].TotalRows</span>
+                        }
+                        else
+                        {
+                            <span>0</span>
+                        }
+                    </strong>
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-body">
+        <partial name="_PartialMsgInfoAdmin" />
+        <form asp-controller="@ControllerName" asp-action="Index" method="get">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="show-group-all show-group-@IdGroup">Từ khóa</label>
+                        <input asp-for="SearchData.Keyword" name="Keyword" placeholder="Tìm kiếm" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="show-group-all show-group-@IdGroup">&nbsp;&nbsp;</label>
+                        <button type="submit" class="btn btn-primary btn-xs" name="btn" value="search">Tìm Kiếm</button>
+                        @*<button type="submit" class="btn btn-success btn-xs" name="btn" value="excel">Xuất excel</button>*@
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label>Trạng Thái</label>
+                        <select asp-for="SearchData.Status" name="Status" class="form-control" asp-items="Model.ListItemsStatus"></select>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label>Từ Ngày</label>
+                        <div class="input-group date" id="ShowStartDate" data-target-input="nearest">
+                            <input asp-for="SearchData.ShowStartDate" name="ShowStartDate" type="text" class="form-control datetimepicker-input" data-target="#ShowStartDate" id="ShowShowStartDate" />
+                            <div class="input-group-append" data-target="#ShowStartDate" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label>Đến Ngày</label>
+                        <div class="input-group date" id="ShowEndDate" data-target-input="nearest">
+                            <input asp-for="SearchData.ShowEndDate" name="ShowEndDate" type="text" class="form-control datetimepicker-input" data-target="#ShowEndDate" id="ShowShowEndDate" />
+                            <div class="input-group-append" data-target="#ShowEndDate" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="TableDiv">
+                    <table id="myTable" class="table table-bordered table-striped table-hover myTable">
+                        <thead>
+                            <tr>
+                                <th width="50px" class="text-center">ID</th>
+                                <th>Tên</th>
+                                <th>Số điện thoại</th>
+                                <th width="500px">Cảm nghĩ</th>
+                                <th>Ngày gửi</th>
+                                <th>Trạng thái</th>
+                                <th width="130px" class="btn-contain">
+                                @* <a asp-controller="@ControllerName" asp-action="SaveItem" class="btn btn-primary">THÊM MỚI</a> *@
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (Model.ListItems == null || Model.ListItems.Count() == 0)
+                            {
+                                <tr>
+                                    <td colspan="10" class="text-center">
+                                        <label *ngIf="flagListitems==2">Không có dữ liệu!</label>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                for (int i = 0; i < Model.ListItems.Count(); i++)
+                                {
+                                    <tr>
+                                        <td width="50px" class="text-center">@Model.ListItems[i].Id</td>
+                                        <td>@Model.ListItems[i].TenKhachHang</td>
+                                        <td>@Model.ListItems[i].DonViCongTac</td>
+                                        <td>@Model.ListItems[i].CamNghi</td>
+                                        <td>@Model.ListItems[i].CreatedAt</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <select asp-for="@Model.ListItems[i].Status" onchange="UpdateStatus('@Model.ListItems[i].Id',this.value)" name="Status" class="form-control" asp-items="Model.ListItemsStatus"></select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <ul class="list-inline action">
+                                                <li class="list-inline-item"><a asp-controller="@ControllerName" asp-action="SaveItem" asp-route-id="@Model.ListItems[i].Ids"><i class="fa fa-edit"></i>Sửa</a></li>
+
+                                                <li class="list-inline-item"><a data-toggle="modal" data-target="#DeleteModal" data-ids="@Model.ListItems[i].Ids"><i class="fa fa-trash"></i>Xóa</a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <form asp-controller="@ControllerName" asp-action="DeleteItem" id="AjaxDeleteForm"></form>
+            </div>
+            <div class="col-lg-12">
+                @await Html.PartialAsync("_PartialPagination", Model.Pagination)
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="DetailCNCS" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="article-title">Cập nhật trạng thái</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="CloseModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="article-content"><div class="text-center" id="msgResult"></div></div>
+            </div>
+            <div class="modal-footer " id="footer-detail-article">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="CloseModal()">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/moment.js"></script>
+    <script src="~/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.base64.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.binarytransport.js"></script>
+    <script type="text/javascript">
+
+        function CloseModal() {
+            $("#msgResult").text();
+            $("#DetailCNCS").modal('hide');
+        }
+
+        function UpdateStatus(Id, Status) {
+            $.ajax({
+                url: "/Admin/QuyenGopTaiLieu/UpdateStatus?Id=" + Id + "&Status=" + Status,
+                method: 'GET',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    $("#msgResult").text(result.msg);
+                    $("#DetailCNCS").modal('show');
+                }
+            });
+        };
+
+        $(function () {
+            $('#ShowStartDate').datetimepicker({
+                format: 'DD/MM/YYYY',
+
+            });
+            $('#ShowEndDate').datetimepicker({
+                format: 'DD/MM/YYYY',
+            });
+
+
+            $('#myTable').basictable({
+                breakpoint: 980
+            });
+
+        });
+    </script>
+
+}

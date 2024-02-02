@@ -1,0 +1,384 @@
+﻿@*@model API.Areas.Admin.Models.CategoriesAblums.CategoriesAblumsModel
+@{
+    if (Model.Item.Id == 0)
+    {
+        ViewData["Title"] = "Thêm mới Ablum Ảnh";
+    }
+    else
+    {
+        ViewData["Title"] = "Cập nhật Ablum Ảnh";
+    }
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    string strClass = "";
+}
+<link rel="stylesheet" href="~/lib/tinymce/css/tinymce.css" />
+<div class="card">
+    <div class="card-header">
+        <h4>@ViewData["Title"]</h4>
+    </div>
+    <div class="card-body">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <form asp-controller="@ControllerName" enctype="multipart/form-data" asp-action="SaveItem" method="post">
+            <div id="imageList"></div>
+            <div class="row">
+                <div class="col-8">
+                    <div class="form-group">
+                        <label asp-for="Item.Title">Tên <sup class="text-danger"> (*)</sup></label>
+                        <input id="txtTen" type="text" class="form-control Changetitle namepr" asp-for="Item.Title" name="Title">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="Item.Alias">Alias <sup class="text-danger"> (*)</sup></label>
+                        <input id="txtAlias" class="form-control slug" type="text" asp-for="Item.Alias" name="Alias">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="form-group">
+                        <label asp-for="Item.Description">Mô tả</label>
+                        <input id="txtDes" asp-for="Item.Description" name="Description" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="control-label">&nbsp;</label>
+                    <div class="form-group">
+
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input asp-for="Item.Featured" name="Featured" class="custom-control-input" />
+                            <label class="custom-control-label" asp-for="Item.Featured">Nổi bật</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input asp-for="Item.Status" name="Status" class="custom-control-input" />
+                            <label class="custom-control-label" asp-for="Item.Status">Trạng Thái</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group images-main">
+                        <label>Hình đại diện</label>
+                        <img src="@Model.Item.Images" class="Item_Images_Article_Preview" style="max-height:200px;">
+                        <input type="hidden" name="Images" id="Item_Images_Article" class="form-control" asp-for="Item.Images">
+                        <a onclick="ShowManagerFile('Item_Images_Article')" class="btn btn-primary">Chọn hình (510px*330px)</a>
+                        <a onclick="ViewImageArtile('Item_Images_Article')"> <i class="fas fa-eye"></i> Xem ảnh</a>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="row" style="margin-bottom: 15px;">
+                <div class="col-lg-12">
+                    <button type="submit" class="btn btn-primary" name="SaveItem" value="Lưu">
+                        <i class="fas fa-save"></i> Lưu lại
+                    </button>
+                    <a class="btn btn-danger" asp-controller="@ControllerName" asp-action="Index"><i class="fas fa-backward"></i> Hủy</a>
+                    <input id="txtId" type="hidden" class="form-control" asp-for="Item.Id" name="Id">
+                    <input id="txtIds" type="hidden" class="form-control" asp-for="Item.Ids" name="Ids">
+                    <input id="ParentId" type="hidden" class="form-control" asp-for="Item.ParentId" name="ParentId">
+                </div>
+            </div>
+
+
+            <table id="tbAlbums" role="presentation" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th width="150px">File</th>
+                        <th width="150px">Hình</th>
+                        <th>Tiêu đề</th>
+                        <th width="150px">STT</th>
+                        <th width="100px"><span class="btn btn-primary" onclick="AddItemAlbums()">Thêm</span></th>
+                    </tr>
+                </thead>
+                <tbody class="files">
+                    @if (Model.ListItemsAlbums != null && Model.ListItemsAlbums.Count() > 0)
+                    {
+                        <input type="hidden" id="maxfile" value="@(Model.ListItemsAlbums.Count() - 1)">
+                        for (int j = 0; j < Model.ListItemsAlbums.Count(); j++)
+                        {
+                            strClass = "FileName_" + j + " _Preview";
+                            <tr>
+                                <td>
+                                    <a onclick="ShowManagerFile('FileName_@j')" type="button" class="btn btn-primary">Chọn File</a>
+                                </td>
+                                <td>
+                                    <img height="64px" width="64px" class="@strClass" id="strClass" src="@Model.ListItemsAlbums[j].Images">
+                                    <input type="hidden" id="FileName_@j" name="ListItemsAlbums[@j].Images" asp-for="ListItemsAlbums[j].Images">
+                                </td>
+                                <td>
+                                    <input onchange="UpdateDataItemAlbums(@j,1,event)" name="ListItemsAlbums[@j].Title" class="form-control" placeholder="Tiêu Đề" asp-for="ListItemsAlbums[j].Title">
+                                </td>
+                                <td>
+                                    <input type="number" onchange="UpdateDataItemAlbums(@j,2,event)" name="ListItemsAlbums[@j].Ordering" class="form-control" asp-for="ListItemsAlbums[@j].Ordering">
+                                </td>
+                                <td>
+                                    <span class="btn btn-danger" onclick="DeleteItemAlbums(@j)">Xóa</span> <input type="hidden" name="ListItemsAlbums[@j].Status" asp-for="ListItemsAlbums[@j].Status">
+
+                                    <input type="hidden" name="ListItemsAlbums[@j].Id" asp-for="ListItemsAlbums[@j].Id">
+                                    <input type="hidden" name="ListItemsAlbums[@j].Deleted" asp-for="ListItemsAlbums[@j].Deleted">
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <input type="hidden" id="maxfile" value="-1">
+                    }
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+
+
+
+<partial name="_PartialTinymce" />
+
+@section Scripts{
+    <script src='~/lib/_tinymce/tinymce.min.js' referrerpolicy="origin"></script>
+    <script src='~/lib/_tinymce/js/tinymce_config.js' referrerpolicy="origin"></script>
+    <script src='~/lib/_tinymce/js/ablums.js' referrerpolicy="origin"></script>
+
+}*@
+
+
+
+@model API.Areas.Admin.Models.CategoriesAblums.CategoriesAblumsModel
+@{
+    if (Model.Item.Id == 0)
+    {
+        ViewData["Title"] = "Thêm mới Ablum Ảnh";
+    }
+    else
+    {
+        ViewData["Title"] = "Cập nhật Ablum Ảnh";
+    }
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>@ViewData["Title"]</h4>
+    </div>
+    <div class="card-body">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <form asp-controller="@ControllerName" enctype="multipart/form-data" asp-action="SaveItem" method="post">
+            <div id="imageList"></div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="Item.Title">Tên <sup class="text-danger"> (*)</sup></label>
+                        <input id="txtTen" type="text" class="form-control Changetitle namepr" asp-for="Item.Title" name="Title">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="Item.Alias">Alias <sup class="text-danger"> (*)</sup></label>
+                        <input id="txtAlias" class="form-control slug" type="text" asp-for="Item.Alias" name="Alias">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="Item.Ten">Tên (EN)<sup class="text-danger"> (*)</sup></label>
+                        <input id="txtTenEN" type="text" class="form-control Changetitle namepr" asp-for="Item.Ten" name="Ten">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Item.ParentId">Danh mục cha <sup class="text-danger"> (*)</sup></label>
+                        <select asp-for="Item.ParentId" class="form-control" name="ParentId" asp-items="Model.ListItemsParents"></select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="control-label">Trạng thái</label>
+                    <div class="form-group">
+
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input asp-for="Item.Featured" name="Featured" class="custom-control-input" />
+                            <label class="custom-control-label" asp-for="Item.Featured">Nổi bật</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input asp-for="Item.Status" name="Status" class="custom-control-input" />
+                            <label class="custom-control-label" asp-for="Item.Status">Trạng Thái</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Hình đại diện</label>
+                        <br />
+                        <img src="@Model.Item.Images" id="customRoxyImage" style="height:50px;">
+
+                        <input type="hidden" name="Images" id="Item_Images" class="form-control" asp-for="Item.Images">
+                        <a href="javascript:openCustomRoxy()" type="button" class="btn btn-primary">Chọn hình</a>
+                        <div id="roxyCustomPanel" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content content-set-image">
+                                    <iframe src="/lib/fileman/index.html?integration=custom&langCode=vi" style="width:100%;height:100%" frameborder="0"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Item.Description">Mô tả</label>
+
+                        <input asp-for="Item.Description" name="Description" class="form-control" />
+                    </div>
+                </div>
+
+            </div>
+           
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Item.MoTa">Mô tả (EN)</label>
+
+                        <input asp-for="Item.MoTa" name="MoTa" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom: 15px;">
+                <div class="col-lg-12">
+                    <input type="submit" class="btn btn-primary" name="SaveItem" value="Lưu" />
+                    <a class="btn btn-danger" asp-controller="@ControllerName" asp-action="Index">Hủy</a>
+                    <input id="txtId" type="hidden" class="form-control" asp-for="Item.Id" name="Id">
+                    <input id="txtIds" type="hidden" class="form-control" asp-for="Item.Ids" name="Ids">
+                </div>
+            </div>
+
+
+            <table id="tbAlbums" role="presentation" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th width="150px">File</th>
+                        <th width="150px">Hình</th>
+                        <th>Tiêu đề</th>
+                        <th width="150px">STT</th>
+                        <th width="100px"><span class="btn btn-primary" onclick="AddItemAlbums()">Thêm</span></th>
+                    </tr>
+                </thead>
+                <tbody class="files"></tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+
+<div id="roxyCustomPanel2" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content content-set-image">
+            <iframe id="ifrm2" src="" style="width:100%;height:100%" frameborder="0"></iframe>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+    <script src="~/lib/ckeditor/adapters/jquery.js"></script>
+
+    <script>
+        function openCustomRoxy() {
+            $('#roxyCustomPanel').modal('show');
+        }
+        function closeCustomRoxy() {
+            $('#roxyCustomPanel').modal('hide');
+        }
+
+        var ListItemsAlbums = [];
+        // File đính kèm
+
+        $(document).ready(function () {
+            console.log("289");
+            ListItemsAlbums = @Html.Raw(Json.Serialize(Model.ListItemsAlbums));
+            BuildHtmlItemAlbums();
+        });
+
+        function openCustomRoxy2(id) {
+            var roxyFileman2 = '/lib/fileman/index.html?integration=custom_3&langCode=vi&txtFieldId=' + id;
+            $('#ifrm2').attr('src', roxyFileman2)
+            $('#roxyCustomPanel2').modal('show');
+        }
+
+        function closeCustomRoxy2() {
+            $('#roxyCustomPanel2').modal('hide');
+            //
+            if (ListItemsAlbums != null && ListItemsAlbums.length > 0) {
+                var str_id_tmp = "";
+                for (var i = 0; i < ListItemsAlbums.length; i++) {
+                    str_id_tmp = "#Link_Albums_" + i.toString();
+                    ListItemsAlbums[i].Images = $(str_id_tmp).val();
+
+                }
+            }
+        }
+
+        function AddItemAlbums() {
+
+            var Item = { title: '', ordering:1,deleted:false, status: true,id:0,ids:'',catId:0,images:'/Images/no-image-album.png' };
+            if (ListItemsAlbums == null) {
+                ListItemsAlbums = [];
+            }
+            ListItemsAlbums.push(Item);
+            BuildHtmlItemAlbums();
+
+        }
+
+        function DeleteItemAlbums(i) {
+            console.log("325");
+            ListItemsAlbums[i].status = false;
+            ListItemsAlbums[i].deleted = true;
+            BuildHtmlItemAlbums();
+        }
+
+        function UpdateDataItemAlbums(i, n, event) {
+            console.log(event.target.value);
+            if (n == 1) {// Title
+                ListItemsAlbums[i].Title = event.target.value;
+            } else if (n == 2) {
+                ListItemsAlbums[i].Ordering = event.target.value;
+            }
+        }
+
+        function BuildHtmlItemAlbums() {
+            //console.log(ListItemsAlbums);
+            $("#tbAlbums tbody").empty();
+            if (ListItemsAlbums != null && ListItemsAlbums.length > 0) {
+                console.log("line 344 ",ListItemsAlbums);
+                for (var i = 0; i < ListItemsAlbums.length; i++) {
+                    var row = '<tr>';
+                    if (ListItemsAlbums[i].Deleted == true || ListItemsAlbums[i].deleted == true) {
+                        row = '<tr style="display:none">';
+                    }
+                    row = row + '<td><a href="javascript:openCustomRoxy2(' + i + ')" type="button" class="btn btn-primary">Chọn File</a></td>';
+                    row = row + '<td class="text-center">' + "<img height='64px' id='Album_Img_" + i + "' src='" + ListItemsAlbums[i].images + "' />" + ' <input type="hidden" id="Link_Albums_' + i + '" name="ListItemsAlbums[' + i + '].Images" value="' + ListItemsAlbums[i].images + '"/></td>';
+                    //row = row + '<td class="text-center">' + "<label>" + ListItemsAlbums[i].images + "</label>" + ' <input type="hidden" id="Link_Albums_' + i + '" name="ListItemsAlbums[' + i + '].Images" value="' + ListItemsAlbums[i].images + '"/></td>';
+
+                    row = row + '<td><input onchange="UpdateDataItemAlbums(' + i + ',1,event)" name="ListItemsAlbums[' + i + '].Title" class="form-control" placeholder="Tiêu Đề" value="' + ListItemsAlbums[i].title + '" /></td>';
+                    row = row + '<td><input type="number" onchange="UpdateDataItemAlbums(' + i + ',2,event)" name="ListItemsAlbums[' + i + '].Ordering"  class="form-control"  value="' + ListItemsAlbums[i].ordering + '"/></td>';
+                    row = row + '<td><span class="btn btn-danger" onclick="DeleteItemAlbums(' + i + ')">Xóa</span> <input type="hidden" name="ListItemsAlbums[' + i + '].Status" value="' + ListItemsAlbums[i].status + '"/> <input type="hidden" name="ListItemsAlbums[' + i + '].Id" value="' + ListItemsAlbums[i].id + '"/>';
+                    row = row + '<input type="hidden" name="ListItemsAlbums[' + i + '].Deleted" value="' + ListItemsAlbums[i].deleted + '"/>';
+                    row = row + '</td>';
+                    row = row + '</tr>';
+                    console.log("delete ", ListItemsAlbums[i].deleted);
+                    $("#tbAlbums tbody").append(row);
+                }
+            }
+        }
+    </script>
+}

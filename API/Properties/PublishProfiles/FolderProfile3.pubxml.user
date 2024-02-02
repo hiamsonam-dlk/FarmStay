@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Thanh Quang\Desktop\LienDoanLaoDongTinh\Source\Publish</_PublishTargetUrl>
+    <History>False|2023-07-15T09:21:26.1710393Z;True|2022-08-30T11:09:14.7917072+07:00;True|2022-08-30T10:44:38.5046273+07:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

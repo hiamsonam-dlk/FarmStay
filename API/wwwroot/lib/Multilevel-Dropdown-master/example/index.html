@@ -1,0 +1,67 @@
+<html>
+<head>
+    <title>Multilevel Dropdown</title>
+
+    <link rel="stylesheet" type="text/css" href="../css/multilevel-dropdown.css"/>
+
+    <style>
+        body {
+            font-family: Helvetica, 'Arial', sans-serif;
+        }
+
+        body * {
+            font-family: Helvetica, 'Arial', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<ul data-multilevel-dropdown data-dropdown-value="3"  class="my-dropdown" >
+	
+    <li data-value="1">Val1</li>
+    <ul data-label="Group1">
+        <li data-value="2">Val2</li>
+        <li data-value="3">Val3</li>
+    </ul>
+
+    <li data-value="4">Val4</li>
+
+    <ul data-label="Group2">
+        <li data-value="5">Val5</li>
+
+        <ul data-label="Group3">
+            <li data-value="6">Val6</li>
+            <li data-value="7">Val7</li>
+        </ul>
+    </ul>
+
+    <li data-value="8">Val8</li>
+</ul>
+
+<div class="placeholder"></div>
+
+
+<script type="text/javascript" src="http://sotuphap.vnptdaklak.vn/lib/jquery/dist/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../multilevel-dropdown.js"></script>
+
+<script>
+    $('[data-multilevel-dropdown]').on('change', function (event) {
+        console.log($(this).val());
+    });
+	
+
+    $('.my-dropdown').multilevelDropdown({        
+        labels:{
+                reset: '--Chọn danh mục--',
+                placeholder: '--Chọn danh mục--'
+            }
+    });
+
+ 
+
+  
+</script>
+</body>
+</html>

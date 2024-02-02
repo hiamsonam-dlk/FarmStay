@@ -1,0 +1,179 @@
+﻿@model API.Areas.Admin.Models.CategoriesAblums.CategoriesAblumsModel
+@{
+    var ItemConfig = API.Areas.Admin.Models.SYSParams.SYSParamsService.GetItemConfigByHome();
+    ViewData["Description"] = ItemConfig.SEODescription;
+    ViewData["Keywords"] = ItemConfig.SEOKeyword;
+    ViewData["Images"] = @Startup.Domain + "/ttudkhcn/images/ogImage3.png?ver=" + DateTime.Now.ToString();
+    ViewData["Url"] = @Startup.Domain;
+}
+
+<div class="hero-wrap" style="height:50vh; background-position: bottom;">
+    <div class="container">
+        <div class="row no-gutters slider-text justify-content-center align-items-center" style="height: 50vh">
+            <div class="col-12 d-flex align-items-end justify-content-center" data-aos="fade-up">
+
+
+                <div class="text navigation nlist">
+                    <h2 class="text-center text-white">Image gallery</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="navigation nlist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline ">
+                    <li>
+                        <a href="/EN">Home</a> <i class="fa fa-angle-right"></i>
+                        Image gallery
+                        <i class="fa fa-angle-right"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container ContentDiv">
+    <div class="row my-5">
+
+        <div class="container-image-gallery">
+            <section id="photos">
+                @for (int i = 0; i < Model.ListItems.Count(); i++)
+                {
+                    @if (Model.ListItems[i].ListItemsAlbums != null && Model.ListItems[i].ListItemsAlbums.Count() > 0)
+                    {
+                        <div class="card-image" data-aos="fade-up">
+                            <a href="/EN/albums/@(Model.ListItems[i].Alias)-@(Model.ListItems[i].Id).html">
+                                <img loading="lazy" class="card-img-top" src="@Model.ListItems[i].Images" alt="@Model.ListItems[i].Ten">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">
+                                        <strong>@Model.ListItems[i].Ten</strong>
+                                        <br />
+                                        <span class="badge badge-secondary">@Model.ListItems[i].ListItemsAlbums.Count() image(s)</span>
+                                    </h5>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }
+            </section>
+        </div>
+
+        @* @for (int i = 0; i < Model.ListItems.Count(); i++)
+        {
+            @if (Model.ListItems[i].ListItemsAlbums != null && Model.ListItems[i].ListItemsAlbums.Count() > 0)
+            {
+                if (Model.ListItems[i].ParentId == 0)
+                {
+                    <div class="col-lg-4 col-md-6">
+
+                        <div class="card h-100" data-aos="fade-up">
+                            <a href="/EN/albums/@(Model.ListItems[i].Alias)-@(Model.ListItems[i].Id).html">
+                                <img loading="lazy" class="card-img-top" src="/Home/ResizeImage?url=@Model.ListItems[i].Images&width=255&height=150" alt="@Model.ListItems[i].Ten">
+
+                                <div class="card-body">
+
+                                    <p class="card-title text-center" style="overflow:hidden; margin-bottom:5px">
+                                        <strong style="font-size:17px; margin-top:5px; font-weight:normal;padding:5px 12px;">@Model.ListItems[i].Ten</strong>
+                                        <br />
+                                        <span class="badge badge-secondary" style=" margin-top:5px; font-weight:normal;padding:5px 12px;">
+                                            @Model.ListItems[i].ListItemsAlbums.Count() image(s)
+                                        </span>
+                                    </p>
+
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+            }
+        } *@
+    </div>
+</div>
+
+
+
+@section Scripts{
+
+
+
+}
+
+
+
+@*@model API.Areas.Admin.Models.CategoriesAblums.CategoriesAblumsModel
+@{
+    ViewData["Title"] = "Library";
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+
+<div class="navigation nlist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline ">
+                    <li>
+                        <a href="/EN">Home</a> <i class="fa fa-angle-right"></i>
+                        Library
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container ContentDiv">
+    <div class="row">
+        @for (int i = 0; i < Model.ListItems.Count(); i++)
+        {
+
+            @if (Model.ListItems[i].ListItemsAlbums != null && Model.ListItems[i].ListItemsAlbums.Count() > 0)
+            {
+                <div class="col-lg-3">
+
+                    <div class="card" style="width: 18rem;">
+
+                        <a data-fancybox="gallery_@Model.ListItems[i].Id" href="@Model.ListItems[i].Images" data-caption="@Model.ListItems[i].Title">
+                            <img class="card-img-top" src="/Home/ResizeImage?url=@Model.ListItems[i].Images&width=255&height=150" alt="@Model.ListItems[i].Title">
+                        </a>
+                        @if (Model.ListItems[i].ListItemsAlbums.Count() > 1)
+                        {
+                            for (int j = 1; j < Model.ListItems[i].ListItemsAlbums.Count(); j++)
+                            {
+
+                                <a data-fancybox="gallery_@Model.ListItems[i].Id" href="@Model.ListItems[i].ListItemsAlbums[j].Images" data-caption="@Model.ListItems[i].ListItemsAlbums[j].Title" style="display:none">
+                                    <img src="@Model.ListItems[i].ListItemsAlbums[j].Images">
+                                </a>
+                            }
+                        }
+
+                        <div class="card-body">
+                            <p class="card-title text-center" style="height:45px; overflow:hidden; margin-bottom:5px"><strong>@Model.ListItems[i].Title</strong>    <br/><span class="badge badge-secondary" style="font-size:11px; margin-top:5px; font-weight:normal;padding:5px 12px;">@Model.ListItems[i].ListItemsAlbums.Count() ảnh</span></p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            }
+
+        }
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+}*@

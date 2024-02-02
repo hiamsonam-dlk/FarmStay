@@ -1,0 +1,173 @@
+﻿@model API.Areas.Admin.Models.DocumentsLaw.DocumentsLawModel
+@{
+
+    ViewData["Title"] = "Tài liệu";
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+
+}
+<link rel="stylesheet" href="~/css/tempusdominus-bootstrap-4.css" />
+<div class="navigation nlist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline  ">
+                    <li>
+                        <a href="/">Trang chủ</a> <i class="fa fa-angle-right"></i>
+                        <a href="#">@ViewData["Title"]</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container ContentDiv">
+    <div class="row">
+        <div class="col-12">
+            <div class="PageDetail">
+
+                <div class="greyDiv searchDiv mb-3">
+                    <form asp-controller="@ControllerName" asp-action="Index" method="GET">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-3 col-xs-12">
+                                <div class="form-group">
+                                    <label asp-for="SearchData.Keyword">Từ khóa </label>
+                                    <input type="text" class="form-control" asp-for="SearchData.Keyword" name="Keyword">
+                                </div>
+                            </div>
+                            @*<div class="col-lg-4 col-md-3 col-xs-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label>Ngày ban hành </label>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="input-group date" id="ShowStartDate" data-target-input="nearest">
+                                            <input placeholder="Từ ngày" asp-for="SearchData.ShowStartDate" name="ShowStartDate" type="text" class="form-control datetimepicker-input" data-target="#ShowStartDate" id="ShowShowStartDate" />
+                                            <div class="input-group-append" data-target="#ShowStartDate" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="input-group date" id="ShowEndDate" data-target-input="nearest">
+                                            <input placeholder="Đến ngày" asp-for="SearchData.ShowEndDate" name="ShowEndDate" type="text" class="form-control datetimepicker-input" data-target="#ShowEndDate" id="ShowShowEndDate" />
+                                            <div class="input-group-append" data-target="#ShowEndDate" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>*@
+                            @*<div class="col-lg-3 col-md-3 col-xs-12">
+                                    <div class="form-group">
+                                        <label asp-for="SearchData.FieldId">Lĩnh Vực </label>
+                                        <select asp-for="SearchData.FieldId" name="FieldId" class="form-control" asp-items="Model.ListDocumentsLawField"></select>
+                                    </div>
+                                </div>*@
+                            <div class="col-lg-4 col-md-3 col-xs-12">
+                                <div class="form-group">
+                                    <label asp-for="SearchData.TypeId">Loại tài liệu</label>
+                                    <select asp-for="SearchData.TypeId" name="TypeId" class="form-control" asp-items="Model.ListDocumentsType"></select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-4 col-md-3 col-xs-12">
+                                <div class="form-group">       
+                                    <label for="SearchData_TypeId">&nbsp; </label> <br />
+                                        <input type="submit" class="btn btn-primary" name="Search" value="Tìm tài liệu" />                                  
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+
+
+
+                    </form>
+                </div>
+
+
+                <table class="table table-bordered myTable" style="margin-top: 15px;">
+                    <thead>
+                        <tr>
+                            <th width="50px" class="text-center">STT</th>
+                            <th width="180px">Tiêu đề</th>
+                            <th width="150px">Loại văn bản</th>
+                            <th width="150px" class="text-center">Ngày ban hành</th>                          
+                            <th width="100px"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.ListItems == null || Model.ListItems.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="5">Không có văn bản nào</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            for (int i = 0; i < Model.ListItems.Count(); i++)
+                            {
+                                <tr>
+                                    <td class="text-center">@(i + 1)</td>
+                                    <td>
+                                            <a asp-controller="DocumentsLaw" asp-action="Detail" asp-route-id="@Model.ListItems[i].Id" asp-route-alias="@Model.ListItems[i].Alias">
+                                                @Model.ListItems[i].Title
+                                            </a>
+                                    </td>
+                                    <td>
+
+                                        @Model.ListItems[i].TypeTitle
+
+                                    </td>
+
+
+                                    <td class="text-center">@Model.ListItems[i].IssuedDate.ToString("dd/MM/yyyy")</td>
+                                 
+                                    <td class="text-center">
+
+
+                                        <a asp-controller="DocumentsLaw" asp-action="Detail" asp-route-id="@Model.ListItems[i].Id" asp-route-alias="@Model.ListItems[i].Alias" class="mr-3">
+                                            <i class="fas fa-search" style="margin-right:2px"></i>   Chi tiết
+                                        </a>
+
+
+
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    @await Html.PartialAsync("_PartialPagination", Model.Pagination)
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script src="~/js/moment.js"></script>
+    <script src="~/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.base64.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.binarytransport.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#ShowStartDate').datetimepicker({ format: 'DD/MM/YYYY', });
+            $('#ShowEndDate').datetimepicker({ format: 'DD/MM/YYYY', });
+        });
+    </script>
+
+}

@@ -1,0 +1,106 @@
+﻿@model API.Areas.Admin.Models.DuThaoVanBan.DuThaoVanBanModel
+@using Newtonsoft.Json;
+@using API.Areas.Admin.Models.DuThaoVanBan;
+@using API.Models;
+@{
+
+    ViewData["Title"] = "Văn bản dự thảo";
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+
+
+<div class="navigation nlist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline  ">
+                    <li>
+                        <a href="/">Trang chủ</a>
+                        <i class="fa fa-angle-right"></i>
+
+                        <a asp-controller="DuThaoVanBan" asp-action="List">Văn bản chờ lấy ý kiến</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="PageDetail" style="padding-top:30px">
+
+
+        <div class="alert alert-primary draft_justify">
+            Hiện nay, Liên đoàn Lao động tỉnh Đắk Lắk đang xây dựng một số Dự thảo Văn bản quy phạm pháp luật. Liên đoàn Lao động tỉnh Đắk Lắk xin giới thiệu toàn văn nội dung các Dự thảo Văn bản quy phạm pháp luật dưới đây để lấy ý kiến đóng góp rộng rãi của các cơ quan, tổ chức, doanh nghiệp và đông đảo người dân trong và ngoài nước.<br>
+            Mời bạn đọc nhấn vào các Dự thảo Văn bản quy phạm pháp luật dưới đây để tham gia góp ý.
+        </div>
+
+        <partial name="_PartialMsgInfo" />
+
+        <table class="table table-bordered myTable" style="margin-top: 15px;">
+            <thead>
+                <tr>
+                    <th width="50px">STT</th>
+                    <th>Tiêu đề văn bản</th>
+                    <th>Hạn góp ý</th>
+                    <th width="150px" class="text-center">Góp ý</th>
+                    <th width="100px" class="text-center">Chi tiết</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.ListItems == null || Model.ListItems.Count() == 0)
+                {
+                    <tr>
+                        <td colspan="5" class="text-center">Không có văn bản nào</td>
+                    </tr>
+                }
+                else
+                {
+                    for (int i = 0; i < Model.ListItems.Count(); i++)
+                    {
+
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>
+                                @Model.ListItems[i].Title
+                        </td>
+                        <td>@Model.ListItems[i].ExpiresDate.ToString("dd/MM/yyyy")</td>
+                        <td class="text-center">
+                            @if (Model.ListItems[i].ExpiresDate > DateTime.Now)
+                            {
+                                <a asp-controller="@ControllerName" asp-action="DuThaoVanBanGopY" asp-route-Id="@Model.ListItems[i].Id" asp-route-Ids="@Model.ListItems[i].Ids" class="btn btn-success" > <i class="fas fa-comment"></i>Tham gia góp Ý</a>
+                            }
+                            else
+                            {
+                                <h5><span class="badge badge-secondary">  Đã hết hạn góp ý</span></h5>
+                             
+                            }
+
+
+                        </td>
+                        <td class="text-center">
+                            @*<a href="@Model.ListItems[i].Link" target="_blank"> <i class="icofont-download"></i> Chi tiết</a>*@
+
+                            <a asp-controller="DuThaoVanBan" asp-action="Detail" asp-route-id="@Model.ListItems[i].Id" asp-route-alias="@StringUtilities.ToNameRewrite(@Model.ListItems[i].Title)" class="mr-3">
+                             Chi tiết
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+            }
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @await Html.PartialAsync("_PartialPagination", Model.Pagination)
+        </div>
+
+    </div>
+</div>
+
+

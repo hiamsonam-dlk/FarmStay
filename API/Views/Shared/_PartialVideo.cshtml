@@ -1,0 +1,70 @@
+﻿@using API.Areas.Admin.Models.Videos;
+@{
+
+    var listVideo = VideosService.GetListFeatured();
+}
+
+
+<!--Video-->
+<div class="box">
+    <div class="header">
+        <a asp-controller="Videos" asp-action="Index" title="Video">
+            Video
+        </a>
+    </div>
+    <div class="body white">
+        <div id="VideoBox" class="carousel slide" data-ride="carousel">
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+                @for (int i = 0; i < listVideo.Count(); i++)
+                {
+                    <div class="carousel-item @(i==0?"active":"")">
+                        <div class="VideoItem videolink" val="@listVideo[i].Link">
+                            <div class="khungAnh">
+                                <a class="khungAnhCrop" title="@listVideo[i].Title">
+                                    <img src="/Home/ResizeImage?url=@listVideo[i].Image&width=500" alt="@listVideo[i].Title">
+                                </a>
+                            </div>
+
+                            <p class="title">
+                                <a title="@listVideo[i].Title">
+                                    @API.Models.StringUtilities.Truncate(@listVideo[i].Title, 100)
+                                </a>
+                            </p>
+                        </div>
+
+                    </div>
+
+                }
+
+            </div>
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev control" href="#VideoBox" data-slide="prev">
+                <i class="far fa-arrow-alt-circle-left"></i>
+            </a>
+            <a class="carousel-control-next control" href="#VideoBox" data-slide="next">
+                <i class="far fa-arrow-alt-circle-right"></i>
+            </a>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog" style="z-index:9999">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="VideoWrapper modal-video">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,109 @@
+﻿@model API.Areas.Admin.Models.DMTinhThanh.DMTinhThanhModel
+@{
+    ViewData["Title"] = "DANH SÁCH LIỆT SỸ NGÀNH GIAO BƯU, THÔNG TIN LIÊN LẠC TÂY NGUYÊN";
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    var ItemConfig = API.Areas.Admin.Models.SYSParams.SYSParamsService.GetItemConfigByHome();
+    ViewData["Description"] = ItemConfig.SEODescription;
+    ViewData["Keywords"] = ItemConfig.SEOKeyword;
+    ViewData["Images"] = @Startup.Domain + "/ttudkhcn/images/ogImage3.png?ver=" + DateTime.Now.ToString();
+    ViewData["Url"] = @Startup.Domain;
+}
+
+<div class="danh-sach-liet-sy hero-wrap" style="height:75vh; background-position: bottom;">
+    <div class="container">
+        <div class="row no-gutters slider-text justify-content-center align-items-center" style="height: 75vh">
+            <div class="col-12 d-flex justify-content-center" data-aos="fade-up">
+        <div class="text navigation nlist">
+                    <h2 class="text-center text-white">DANH SÁCH LIỆT SỸ NGÀNH GIAO BƯU, THÔNG TIN LIÊN LẠC TÂY NGUYÊN</h2>
+        </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="navigation nlist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline">
+                    <li>
+                        <a href="/">Trang chủ</a>
+                            <i class="icon-angle-right"></i>
+
+                        else
+                        {
+                            <i class="icon-angle-right"></i>
+                            @Model.Item.Title
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+<div class="danh-sach-liet-sy-bg">
+    <div class="container">
+        <div class="row no-gutters align-items-center" data-aos="fade-up">
+            <ul class="nav nav-pills my-3 d-flex justify-content-center" id="pills-tab" role="tablist">
+                @for (int i = 0; i < Model.ListItems.Count(); i++)
+                {
+                    @if (Model.ListItems != null && Model.ListItems.Count() > 0)
+                    {
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link @(i==0?"active":"")" id="pills-@i-tab" data-bs-toggle="pill" data-bs-target="#pills-@i" type="button" role="tab" aria-controls="pills-@i" aria-selected="@(i==0?"true":"")">@Model.ListItems[i].Ten</button>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+
+
+        <div class="row">
+            <div class="tab-content" id="pills-tabContent" data-aos="fade-up">
+                @for (int i = 0; i < Model.ListItems.Count(); i++)
+                {
+                    @if (Model.ListItems[i].ListLietSy.Count() > 1)
+                    {
+
+                        <div class="tab-pane fade @(i==0?"show active":"")" id="pills-@i" role="tabpanel" aria-labelledby="pills-@i-tab" tabindex="0">
+                            <table class="table table-bordered border-primary table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Tên liệt sỹ</th>
+                                        <th scope="col">Năm sinh</th>
+                                        <th scope="col">Quê quán</th>
+                                        <th scope="col">Chức vụ</th>
+                                        <th scope="col">Năm hy sinh</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.ListItems[i].ListLietSy.Count() > 1)
+                                    {
+
+                                        @for (int j = 0; j < Model.ListItems[i].ListLietSy.Count(); j++)
+                                        {
+                                            <tr>
+                                                <td class="text-center">@(j + 1)</td>
+                                                <td>@(Model.ListItems[i].ListLietSy[j].Name)</td>
+                                                <td class="text-center">@(Model.ListItems[i].ListLietSy[j].NamSinh)</td>
+                                                <td>@(Model.ListItems[i].ListLietSy[j].QueQuan)</td>
+                                                <td>@(Model.ListItems[i].ListLietSy[j].ChucVu)</td>
+                                                <td class="text-center">@(Model.ListItems[i].ListLietSy[j].NamMat)</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+

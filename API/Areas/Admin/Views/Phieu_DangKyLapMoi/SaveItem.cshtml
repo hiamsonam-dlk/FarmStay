@@ -1,0 +1,202 @@
+﻿@model API.Areas.Admin.Models.Phieu_DangKyLapMoi.Phieu_DangKyLapMoiModel
+@using Microsoft.AspNetCore.Http;
+@{
+    if (Model.Item.Id == 0)
+    {
+        ViewData["Title"] = "Thêm mới yêu cầu đăng ký lắp mới";
+    }
+    else
+    {
+        ViewData["Title"] = "Cập nhật yêu cầu đăng ký lắp mới";
+    }
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    string Str_Url = "/Admin/" + ControllerName + "/Index" + Context.Session.GetString("STR_Action_Link_" + ControllerName + "_" + Context.Request.Headers["UserName"]);
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h4>@ViewData["Title"]</h4>
+        </div>
+        <div class="card-body">
+            @*<div asp-validation-summary="All" class="text-danger"></div>*@
+            <form asp-controller="@ControllerName" enctype="multipart/form-data" asp-action="SaveItem" method="post">
+                @Html.ValidationSummary()
+                <div class="row">
+                    <div class="col-lg-8 col-md-6 col-xs-12">
+                        <div class="form-group">
+                            <label asp-for="Item.TenKH">Tên <sup class="text-danger"> (*)</sup></label>
+                            <input type="text" name="TenKH" class="form-control Changetitle namepr" asp-for="Item.TenKH">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-xs-12">
+                        <div class="form-group">
+                            <label asp-for="Item.SoDT">Số điện thoại <sup class="text-danger"> (*)</sup></label>
+                            <input type="text" name="SoDT" class="form-control Changetitle namepr" asp-for="Item.SoDT">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-row align-items-center">
+                            <div class="col-md-3 col-12">
+                                <label asp-for="@Model.Item.IdQuanHuyen">TP/huyện/thị xã <sup class="text-danger"> (*)</sup></label>
+                                <select asp-for="@Model.Item.IdQuanHuyen" name="IdQuanHuyen" class="form-control" asp-items="@Model.ListItemsQuanHuyen" id="SelectIdQuanHuyen"></select>
+                            </div>
+                            <div class="col-md-3 col-12">
+                                <label asp-for="@Model.Item.IdPhuongXa">Phường/xã <sup class="text-danger"> (*)</sup></label>
+                                <select asp-for="@Model.Item.IdPhuongXa" name="IdPhuongXa" class="form-control" asp-items="@Model.ListItemsPhuongXa" id="SelectIdPhuongXa">
+                                    <option value="0">-- Chọn phường/xã --</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="@Model.Item.DiaChi">Địa chỉ <sup class="text-danger"> (*)</sup></label>
+                                    <input type="text" name="DiaChi" class="form-control Changetitle namepr" asp-for="@Model.Item.DiaChi">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Item.MucDichSuDung">Mục đích sử dụng<sup class="text-danger"> (*)</sup></label>
+                            <select asp-for="Item.MucDichSuDung" name="MucDichSuDung" class="form-control" asp-items="Model.ListItemsMucDichSuDung"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">Hình CCCD/CMND mặt trước</legend>
+                            <div class="form-group images-main">
+                                <div class="borderStroke">
+                                    @if (Model.Item.HinhAnhCCCDtr == null)
+                                    {
+                                        <img for="CCCDtr" id="previewCCCDtr" src="#" class="hidden" style="height: 100%; width: 100%; object-fit: contain; z-index:-1 " />
+                                        <label id="btnAddCCCDtr" for="CCCDtr" class="custom-file-upload py-auto">
+                                            <i class="fa fa-plus-circle fa-5x my-auto"></i>
+                                        </label>
+                                        <input type="file" asp-for="Item.ImageCCCDtr" name="ImageCCCD" class="FileName" id="CCCD" value="@Model.Item.HinhAnhCCCDtr">
+                                        <input type="hidden" asp-for="Item.HinhAnhCCCDtr" name="HinhAnhCCCDtr" class="FileName" id="CCCDtr">
+                                    }
+                                    else
+                                    {
+                                        <img for="CCCDtr" id="previewCCCDtr" src="@Model.Item.HinhAnhCCCDtr" style="height: 100%; width: 100%; object-fit: contain; z-index:-1 " />
+                                        <input type="file" asp-for="Item.ImageCCCDtr" name="ImageCCCD" class="FileName" id="CCCD" value="@Model.Item.HinhAnhCCCDtr">
+                                        <input type="hidden" asp-for="Item.HinhAnhCCCDtr" name="HinhAnhCCCDtr" class="FileName" id="CCCDtr">
+                                    }
+                                    
+                                </div>
+                                @*<label id="chonHinhCCCDtrKhac" for="CCCD" class="@(Model.Item.HinhAnhCCCDtr != null ? "" : "hidden")">Chọn hình khác</label>*@
+                                @*<span class="lblFileName" id="lblFileName_1">@Model.Item.HinhAnhCCCD</span>*@
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">Hình CCCD/CMND mặt sau</legend>
+                            <div class="form-group images-main">
+                                <div class="borderStroke">
+                                    @if (@Model.Item.HinhAnhCCCDsa == null)
+                                    {
+                                        <img for="CCCDsa" id="previewCCCDsa" src="@Model.Item.HinhAnhCCCDsa" class="hidden" style="height: 100%; width: 100%; object-fit: contain; z-index:-1 " />
+                                        <label id="btnAddCCCDsa" for="CCCDsa" class="custom-file-upload py-auto">
+                                            <i class="fa fa-plus-circle fa-5x my-auto"></i>
+                                        </label>
+                                        <input type="file" asp-for="Item.ImageCCCDsa" name="ImageCCCDsa" class="FileName" id="CCCDsa" value="@Model.Item.HinhAnhCCCDsa">
+                                        <input type="hidden" asp-for="Item.HinhAnhCCCDsa" name="HinhAnhCCCDsa" class="FileName" id="CCCDsa">
+                                    }
+                                    else
+                                    {
+                                        <img for="CCCDsa" id="previewCCCDsa" src="@Model.Item.HinhAnhCCCDsa" style="height: 100%; width: 100%; object-fit: contain; z-index:-1 " />
+                                        <input type="file" asp-for="Item.ImageCCCDsa" name="ImageCCCDsa" class="FileName" id="CCCDsa" value="@Model.Item.HinhAnhCCCDsa">
+                                        <input type="hidden" asp-for="Item.HinhAnhCCCDsa" name="HinhAnhCCCDsa" class="FileName" id="CCCDsa">
+                                    }
+                                </div>
+                                @*<label id="chonHinhCCCDsaKhac" for="CCCDsa" class="@(Model.Item.HinhAnhCCCDsa != null ? "" : "hidden")">Chọn hình khác</label>*@
+                                @*<span class="lblFileName" id="lblFileName_1">@Model.Item.HinhAnhQSDD</span>*@
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">Giấy chứng nhận quyền sử dụng đất mặt trước</legend>
+                            <div class="form-group images-main">
+                                <div class="borderStroke">
+                                    @if (@Model.Item.HinhAnhQSDDtr == null)
+                                    {
+                                        <img for="QSDDtr" id="previewQSDDtr" src="@Model.Item.HinhAnhQSDDtr" class="hidden" style="height: 100%; width: 100%; object-fit: contain; z-index:-1 " />
+                                        <label id="btnAddQSDDtr" for="QSDDtr" class="custom-file-upload py-auto">
+                                            <i class="fa fa-plus-circle fa-5x my-auto"></i>
+                                        </label>
+                                        <input type="file" asp-for="Item.ImageQSDDtr" name="ImageQSDDtr" class="FileName" id="QSDDtr" value="@Model.Item.HinhAnhQSDDtr">
+                                        <input type="hidden" asp-for="Item.HinhAnhQSDDtr" name="HinhAnhQSDDtr" class="FileName" id="QSDDtr">
+                                    }
+                                    else
+                                    {
+                                        <img for="QSDDtr" id="previewQSDDtr" src="@Model.Item.HinhAnhQSDDtr" style="height: 100%; width: 100%; object-fit: contain; z-index:-1 " />
+                                        <input type="file" asp-for="Item.ImageQSDDtr" name="ImageQSDDtr" class="FileName" id="QSDDtr" value="@Model.Item.HinhAnhQSDDtr">
+                                        <input type="hidden" asp-for="Item.HinhAnhQSDDtr" name="HinhAnhQSDDtr" class="FileName" id="QSDDtr">
+                                    }
+                                </div>
+                                @*<label id="chonHinhQSDDKhac" for="QSDD" class="@(Model.Item.HinhAnhQSDD != null ? "" : "hidden")">Chọn hình khác</label>*@
+                                @*<span class="lblFileName" id="lblFileName_1">@Model.Item.HinhAnhQSDD</span>*@
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">Giấy chứng nhận quyền sử dụng đất mặt sau</legend>
+                            <div class="form-group images-main">
+                                <div class="borderStroke">
+                                    @if (@Model.Item.HinhAnhQSDDsa == null)
+                                    {
+                                        <img for="QSDDsa" id="previewQSDDsa" src="@Model.Item.HinhAnhQSDDsa" class="hidden" style="height: 100%; width: 100%; object-fit: contain; z-index:-1 " />
+                                        <label id="btnAddQSDDsa" for="QSDDsa" class="custom-file-upload py-auto">
+                                            <i class="fa fa-plus-circle fa-5x my-auto"></i>
+                                        </label>
+                                        <input type="file" asp-for="Item.ImageQSDDsa" name="ImageQSDDsa" class="FileName" id="QSDDsa" value="@Model.Item.HinhAnhQSDDsa">
+                                        <input type="hidden" asp-for="Item.HinhAnhQSDDsa" name="HinhAnhQSDDsa" class="FileName" id="QSDDsa">
+                                    }
+                                    else
+                                    {
+                                        <img for="QSDDsa" id="previewQSDDsa" src="@Model.Item.HinhAnhQSDDsa" style="height: 100%; width: 100%; object-fit: contain; z-index:-1 " />
+                                        <input type="file" asp-for="Item.ImageQSDDsa" name="ImageQSDD" class="FileName" id="QSDDsa" value="@Model.Item.HinhAnhQSDDsa">
+                                        <input type="hidden" asp-for="Item.HinhAnhQSDDsa" name="HinhAnhQSDDsa" class="FileName" id="QSDDsa">
+                                    }
+                                </div>
+                                @*<label id="chonHinhQSDDKhac" for="QSDD" class="@(Model.Item.HinhAnhQSDD != null ? "" : "hidden")">Chọn hình khác</label>*@
+                                @*<span class="lblFileName" id="lblFileName_1">@Model.Item.HinhAnhQSDD</span>*@
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label asp-for="Item.NhanVienKhaoSat">Chỉ định nhân viên khảo sát <sup class="text-danger"> (*)</sup></label>
+                            <input type="text" name="NhanVienKhaoSat" class="form-control Changetitle namepr" asp-for="Item.NhanVienKhaoSat">
+                        </div>
+                    </div>
+                </div>
+
+                <input type="submit" class="btn btn-primary" name="SaveItem" value="Cập nhật" />
+                <a class="btn btn-danger" href="@Str_Url">Thoát</a>
+                <input type="hidden" name="Id" class="form-control" asp-for="Item.Id">
+                <input type="hidden" name="Ids" class="form-control" asp-for="Item.Ids">
+            </form>
+        </div>
+    </div>
+
+</div>

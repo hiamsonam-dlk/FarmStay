@@ -1,0 +1,69 @@
+﻿@model API.Areas.Admin.Models.Phieu_DiDoiNangHa.Phieu_DiDoiNangHaModel
+@using Microsoft.AspNetCore.Http;
+@{
+    if (Model.Item.Id == 0)
+    {
+        ViewData["Title"] = "Thêm mới Bài viết";
+    }
+    else
+    {
+        ViewData["Title"] = "Cập nhật yêu cầu di dời / nâng hạ";
+    }
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    string Str_Url = "/Admin/" + ControllerName + "/Index" + Context.Session.GetString("STR_Action_Link_" + ControllerName + "_" + Context.Request.Headers["UserName"]);
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>@ViewData["Title"]</h4>
+    </div>
+    <div class="card-body">
+        @*<div asp-validation-summary="All" class="text-danger"></div>*@
+        <form asp-controller="@ControllerName" enctype="multipart/form-data" asp-action="SaveItem" method="post">
+            @Html.ValidationSummary()
+            <div class="row">
+                <div class="col-lg-8 col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label asp-for="Item.TenKH">Tên <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" name="TenKH" class="form-control Changetitle namepr" asp-for="Item.TenKH">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label asp-for="Item.SoDT">Số điện thoại <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" name="SoDT" class="form-control Changetitle namepr" asp-for="Item.SoDT">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.DiaChi">Địa chỉ <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" name="DiaChi" class="form-control Changetitle namepr" asp-for="Item.DiaChi">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="@Model.Item.IdTacVu">Chọn tác vụ</label>
+                        <select asp-for="@Model.Item.IdTacVu" name="IdTacVu" class="form-control" asp-items="@Model.ListTacVuDiDoi"></select>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Item.NoiDungYeuCau">Nội dung yêu cầu <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" name="NoiDungYeuCau" class="form-control Changetitle namepr" asp-for="Item.NoiDungYeuCau">
+                    </div>
+                </div>
+            </div>
+
+            @*<input type="submit" class="btn btn-primary" name="SaveItem" value="Gửi yêu cầu" />*@
+            <a class="btn btn-danger" href="@Str_Url">Thoát</a>
+            <input type="hidden" name="Id" class="form-control" asp-for="Item.Id">
+            <input type="hidden" name="Ids" class="form-control" asp-for="Item.Ids">
+        </form>
+    </div>
+</div>

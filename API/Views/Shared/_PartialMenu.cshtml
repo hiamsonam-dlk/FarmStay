@@ -1,0 +1,188 @@
+﻿@using API.Areas.Admin.Models.Menus;
+@using API.Controllers;
+@using Newtonsoft.Json;
+@using Microsoft.AspNetCore.Http
+@{
+    int IdCoQuan = 1;
+    if (Context.Session.GetString("IdCoQuan") != null && Context.Session.GetString("IdCoQuan") != "") {
+        IdCoQuan = int.Parse(Context.Session.GetString("IdCoQuan"));
+    }
+    var css_class = "";
+    var ListMenu = MenusService.GetListByParrent(0, IdCoQuan, 0);
+    var ItemConfig = API.Areas.Admin.Models.SYSParams.SYSParamsService.GetItemConfigByHome();
+    string tencq = Context.Session.GetString("TenCoQuan");
+}
+
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light fixed-top" id="ftco-navbar">
+ 
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/TMDT/images/icon.png" class="d-inline-block align-text-top">
+            <img src="/TMDT/images/cutted-logo.png" class="ml-md-3 d-md-inline-block align-text-top d-none">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/"> <i class="fa fa-home"></i></a></li>
+                @for (int i = 0; i < ListMenu.Count(); i++)
+                {
+                    if (i == 0)
+                    {
+                        css_class = "first";
+                    }
+                    else if (i == (ListMenu.Count() - 1))
+                    {
+                        css_class = "last";
+                    }
+                    else
+                    {
+                        css_class = "";
+                    }
+                    if (ListMenu[i].ChildCount > 0)
+                    {
+                        @await Html.PartialAsync("_PartialMenuChild", ListMenu[i])
+                        ;
+                    }
+                    else
+                    {
+                        if (ListMenu[i].Link != null)
+                        {
+                            <li class="nav-item"><a class="nav-link" href="@(ListMenu[i].Link)"> <i class="@(ListMenu[i].Icon)"></i> 
+                                    @{
+                                        if (ListMenu[i].Title.Contains("/"))
+                                        {
+                                                        <span>@ListMenu[i].Title.Split("/")[0]<br />@ListMenu[i].Title.Split("/")[1]</span>
+                                        } else
+                                        {
+                                                        @ListMenu[i].Title
+                                        }
+                                    }
+                                </a>
+                            </li>
+                        }
+                        @* else if (ListMenu[i].ArticleId != 0)
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Articles" asp-action="Detail" asp-route-id="@ListMenu[i].ArticleId" asp-route-alias="@ListMenu[i].Alias"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Title) </a></li>
+                        }
+                        else if (ListMenu[i].CatId != 0)
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Articles" asp-action="GetByCat" asp-route-id="@ListMenu[i].CatId" asp-route-alias="@ListMenu[i].Alias"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Title)</a></li>
+                        } *@
+                        else
+                        {
+                            @* <li class="nav-item"><a class="nav-link" href="#"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Title)</a></li> *@
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="@(ListMenu[i].Icon)"></i>
+                                    @{
+                                        if (ListMenu[i].Title.Contains("/"))
+                                        {
+                                                        <span>@ListMenu[i].Title.Split("/")[0]<br />/ @ListMenu[i].Title.Split("/")[1]</span>
+                                        }
+                                        else
+                                        {
+                                                        @ListMenu[i].Title
+                                        }
+                                    }
+                                </a>
+                            </li>
+                        }
+                    }
+                }
+                <li class="nav-item"><a class="nav-link" href="/EN"><img src="/CMS/Content/en.jpg" style="height:25px; width: auto" /></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<script>
+    /// When you click everywhere in the document
+    $(document).click(function (event) {
+
+        /// If *navbar-collapse* is not among targets of event
+            if (!$(event.target).is('.navbar-collapse *')) {
+
+                /// Collapse every *navbar-collapse*
+                $('.navbar-collapse').collapse('hide');
+            }
+    });
+
+    $(document).scroll(function (event) {
+
+        /// If *navbar-collapse* is not among targets of event
+        if (!$(event.target).is('.navbar-collapse *')) {
+
+            /// Collapse every *navbar-collapse*
+            $('.navbar-collapse').collapse('hide');
+        }
+    });
+</script>
+
+@* <div class="topnav" id="myTopnav">
+    <div class="container">
+        <a class="" href="/">
+            <img src="/TMDT/images/icon.png" class="d-inline-block align-text-top">
+            <img src="/TMDT/images/cutted-logo.png" class="ml-3 d-md-inline-block align-text-top d-none">
+        </a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="/"> <i class="fa fa-home"></i></a></li>
+            @for (int i = 0; i < ListMenu.Count(); i++)
+            {
+                if (i == 0)
+                {
+                    css_class = "first";
+                }
+                else if (i == (ListMenu.Count() - 1))
+                {
+                    css_class = "last";
+                }
+                else
+                {
+                    css_class = "";
+                }
+                if (ListMenu[i].ChildCount > 0)
+                {
+                    @await Html.PartialAsync("_PartialMenuChild", ListMenu[i])
+                    ;
+                }
+                else
+                {
+                    if (ListMenu[i].Link != null)
+                    {
+                        <li class="nav-item"><a class="nav-link" href="@(ListMenu[i].Link)"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Title) </a></li>
+                    }
+                    else if (ListMenu[i].ArticleId != 0)
+                    {
+                        <li class="nav-item"><a class="nav-link" asp-controller="Articles" asp-action="Detail" asp-route-id="@ListMenu[i].ArticleId" asp-route-alias="@ListMenu[i].Alias"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Title) </a></li>
+                    }
+                    else if (ListMenu[i].CatId != 0)
+                    {
+                        <li class="nav-item"><a class="nav-link" asp-controller="Articles" asp-action="GetByCat" asp-route-id="@ListMenu[i].CatId" asp-route-alias="@ListMenu[i].Alias"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Title)</a></li>
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a class="nav-link" href="#"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Title)</a></li>
+                    }
+                }
+            }
+            <li class="nav-item"><a class="nav-link" href="/EN"><img src="/CMS/Content/en.jpg" style="height:25px; width: auto" /></a></li>
+        </ul>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+</div>
+
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script> *@

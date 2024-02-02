@@ -1,0 +1,97 @@
+﻿@{
+    var listBannerPo7 = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(7);
+    var data = API.Areas.Admin.Models.BannersCategories.BannersCategoriesService.GetItem(7);
+    var ten = data.Title;
+}
+
+<div class="col-12">
+
+    <div class="category-list">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="cat-item lyo1">
+                    <div class="header">
+                        <h4>@ten</h4>
+                    </div>
+                    <div class="body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <ul id="Features-Slide-DTTT" class="gallery">
+                                    @foreach (var item in listBannerPo7)
+                                    {
+                                        <li class="px-5">
+                                            <a href="@item.Link">
+                                                <img src="@item.Image" alt="@item.Title">
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+                        @*<div class="row">
+                            @if (listBannerPo7 != null && listBannerPo7.Count() > 0)
+                            {
+                                <div id="slide">
+                                    <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+                                        @for (int i = 0; i < listBannerPo7.Count(); i++)
+                                        {
+                                            <li>
+                                                <a href="@listBannerPo7[i].Link">
+                                                    <img src="@listBannerPo7[i].Image" alt="@listBannerPo7[i].Title">
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    $('#Features-Slide-DTTT').lightSlider({
+        gallery: true,
+        item: 3,
+        slideMargin: 0,
+        speed: 800,
+        pause: 4000,
+        auto: true,
+        pager: false,
+        controls: true,
+        loop: true,
+        responsive: [
+            {
+                breakpoint: 1170,
+                settings: {
+                    item: 3,
+                    slideMove: 1,
+                    slideMargin: 6,
+                }
+            },
+            {
+                breakpoint: 980,
+                settings: {
+                    item: 2,
+                    slideMove: 1
+                }
+            },
+            {
+                breakpoint: 460,
+                settings: {
+                    item: 1,
+                    slideMove: 1
+                }
+            }
+        ]
+    });
+</script>

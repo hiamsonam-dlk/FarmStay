@@ -1,0 +1,212 @@
+﻿@model API.Areas.Admin.Models.USGroups.USGroupsModel
+@{
+    Layout = "_layoutAdmin";
+    ViewData["Title"] = "Quyền Hạn";
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4><i class="fas fa-table"></i> Danh mục Quyền Hạn</h4>
+    </div>
+    <div class="card-body">
+      
+        <div id="idmsg" role="alert"></div>
+        <div class="row">
+            <div class="col-lg-4">
+
+                <table id="myTable" class="table table-bordered table-striped table-hover ">
+                    <thead>
+                        <tr>
+                            <th width="50px" class="text-center">STT</th>
+                            <th>Tên</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model.ListItems == null || Model.ListItems.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <div *ngIf="flagListitems==1" class="lds-dual-ring"></div>
+                                    <label *ngIf="flagListitems==2">Không có dữ liệu!</label>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            for (int i = 0; i < Model.ListItems.Count(); i++)
+                            {
+                                <tr id="@Model.ListItems[i].Id" style="cursor:pointer;">
+                                    <td width="50px" class="text-center">@(i + 1)</td>
+                                    <td style="position:relative;">
+                                        <span>@Model.ListItems[i].Title</span>
+                                        <a asp-controller="USGroups" asp-action="SaveItem" asp-route-Id="@Model.ListItems[i].Ids"  style="position:absolute; top:7px; right:10px" ><i class="fa fa-edit"></i> Sửa</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+
+                </table>
+                <a asp-controller="USGroups" asp-action="SaveItem" class="btn btn-primary mt-2">Thêm nhóm người dùng</a>
+
+                <form asp-controller="@ControllerName" asp-action="DeleteItem" id="AjaxDeleteForm"></form>
+            </div>
+            <div class="col-lg-8">
+                <partial name="_PartialMsgInfoAdmin" />
+                <div id="GroupForm">
+                    <input type="hidden" id="GroupId" />
+                    <table id="dsChucNang" class="table table-bordered table-striped table-hover ">
+                        <thead>
+                            <tr>
+                                <th width="50px" class="text-center">
+                                    <input id="ChooseAll" type="checkbox" name="Id" class="" />
+                                </th>
+                                <th>Chức năng</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @for (int i = 0; i < Model.ListItemsMenu.Count(); i++)
+                            {
+                                <tr>
+                                    <td width="50px" class="text-center">
+                                        <input name="ListMenu" type="checkbox" class="MenuId" value="@Model.ListItemsMenu[i].Id" IdParent="@Model.ListItemsMenu[i].IdParent" />
+                                    </td>
+                                    <td><span class="@(@Model.ListItemsMenu[i].IdParent==0?"text-primary":"")">@Model.ListItemsMenu[i].Title</span></td>
+
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table> 
+                    <input type="submit" id="UpdateRole" class="btn btn-warning" value="CẬP NHẬT PHÂN QUYỀN" style="display:none" />
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+  
+    input[type='checkbox'] {
+       width:18px;
+       height:18px;
+       cursor:pointer;
+    }
+
+    #dsChucNang tr:hover{
+        cursor:pointer;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ChooseAll").click(function () {
+            var check = $(this).is(":checked")
+            $("#dsChucNang tbody").find('input[type="checkbox"]').prop('checked', check);
+        })
+        $("#dsChucNang tbody tr td:nth-child(2)").click(function () {
+              $(this).parent().find('input[type="checkbox"]').trigger("click");
+        })
+
+        $("#dsChucNang tbody tr input[type='checkbox']").click(function () {
+            //$(this).find('input[type="checkbox"]').trigger("click");
+            var check = $(this).is(":checked");
+            var myId = $(this).val();
+            var myParent = $(this).attr("IdParent");
+
+            //Check all child
+            $('#dsChucNang tbody  input[type="checkbox"]').each(function () {
+                var IdParent = $(this).attr("IdParent");
+                if (IdParent == myId)
+                $(this).prop('checked', check);
+            }); 
+
+             //Check Parent
+            $('#dsChucNang tbody  input[type="checkbox"]').each(function () {
+                var Id = $(this).val();
+                if (Id == myParent && check == true)
+                    $(this).prop('checked', check);
+            }); 
+        })
+
+         //Get Detail Group
+
+            $('#myTable').on('click', 'tbody tr', function (event) {
+            $(this).addClass('table-primary').siblings().removeClass('table-primary');
+            $("#idmsg").text("").removeClass("alert alert-dismissible fade show alert-success");
+            IdNhomQuyen = $(this)[0].id;
+            $("#GroupForm #GroupId").val(IdNhomQuyen);
+                load_dsChucNang(IdNhomQuyen);
+                $("#UpdateRole").show();
+        }); 
+
+        $("#UpdateRole").click(function () {
+            var Id = $("#GroupForm #GroupId").val();
+            var ListId = [];
+            $('#dsChucNang tbody  input[type="checkbox"]').each(function () {
+                var check = $(this).is(":checked");
+                if (check)
+                    ListId.push($(this).val());
+
+              
+            }); 
+
+            return $.ajax({
+                type: "POST",
+                url: "/Admin/USGroups/UpdateRole",
+                data: JSON.stringify({
+                    Id: Id, ListMenu: ListId
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    window.location.reload();
+                },
+                error: function () {
+                    window.location.reload();
+                }
+            });
+
+        })
+
+
+    })
+
+    function load_dsChucNang(Id) {
+        return $.ajax({
+            type: "POST",
+            url: "/Admin/USGroups/GetRole",
+            data: JSON.stringify({
+                Id: Id
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                if (msg.length > 0) {
+                    $("#dsChucNang tbody").find('input[type="checkbox"]').prop('checked', false);
+                    $('#dsChucNang tbody input[type="checkbox"]').each(function () {
+                        var Id = $(this).val();
+                        console.log(Id);
+                        for (var i = 0; i < msg.length;i++) {
+                            if (msg[i] == Id) 
+                                $(this).prop('checked', true);
+                        }
+                    });
+
+                
+                }               
+            }
+        });
+    }
+
+
+
+</script>

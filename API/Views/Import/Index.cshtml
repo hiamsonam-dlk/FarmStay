@@ -1,0 +1,57 @@
+﻿@model API.Areas.Admin.Models.Import.ImportModel
+@using API.Areas.Admin.Models.CategoriesArticles
+@{
+    ViewData["Title"] = "Index";
+ Layout = "~/Views/Shared/_Layout.cshtml";
+ string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+ var ListItemsDanhMuc = CategoriesArticlesService.GetListItems(true);
+}
+
+
+<div class="container">
+    <form asp-controller="@ControllerName" asp-action="Index" method="get">
+        <div class="row mt-5">
+            <div class="col-12">
+                <h2>Import</h2>
+            </div>
+           
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label class="show-group-all">Danh mục</label>
+                    <select asp-for="SearchData.CatId" name="CatId" class="form-control" asp-items="ListItemsDanhMuc"></select>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label class="show-group-all">Link</label>
+                    <input asp-for="SearchData.Link" name="Link" placeholder="Tìm kiếm" class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label class="show-group-all">Doit</label>
+                    <div>
+                        <button type="submit" class="btn btn-primary btn-xs" name="btn" value="search">Import dữ liệu</button>
+                    </div>
+           
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <div>
+        @foreach(var item in Model.ListItems)
+            {
+                <div class="col-12">
+                    <h4>@item.Title</h4>
+                    <p>@item.PublishUpShow</p>
+                    <p>@item.IntroText</p>
+                    @*<div>@Html.Raw(item.FullText)</div>*@
+                </div>
+            }
+    </div>
+</div>
+

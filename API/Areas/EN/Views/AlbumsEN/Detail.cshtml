@@ -1,0 +1,126 @@
+﻿@model API.Areas.Admin.Models.CategoriesAblums.CategoriesAblumsModel;
+@{
+    var ItemConfig = API.Areas.Admin.Models.SYSParams.SYSParamsService.GetItemConfigByHome();
+    ViewData["Description"] = ItemConfig.SEODescription;
+    ViewData["Keywords"] = ItemConfig.SEOKeyword;
+    ViewData["Images"] = @Startup.Domain + "/ttudkhcn/images/ogImage3.png?ver=" + DateTime.Now.ToString();
+    ViewData["Url"] = @Startup.Domain;
+    var imgurl = "";
+    if (Model.Item.Images != null)
+    {
+        imgurl = Model.Item.Images;
+    }
+    else
+    {
+        imgurl = "/TMDT/images/bg_1.jpg";
+    }
+}
+<div class="hero-wrap" style="background-image: url('@imgurl'); height:75vh; background-position: center;">
+    <div class="container">
+        <div class="row no-gutters slider-text justify-content-center align-items-center" style="height: 75vh">
+            <div class="col-12  d-flex justify-content-center">
+                <div class="text navigation nlist">
+                    <h2 class="text-center text-white">@Model.Item.Ten</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="navigation nlist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline  ">
+                    <li>
+                        <a href="/">Home</a>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="/EN/thu-vien-anh.html">Image gallery</a>
+                        <i class="fa fa-angle-right"></i> @Model.Item.Ten
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row PageDetail PageDetail">
+
+        <div class="col-12">
+
+            @* <div class="tree ">
+                <ul>
+                    <li>
+                        <span>
+                            <a style="color:#000; text-decoration:none;" data-toggle="collapse" href="#Web" aria-expanded="true" aria-controls="Web">
+                                <i class="collapsed"><i class="fas fa-folder"></i></i>
+                                <i class="expanded"><i class="far fa-folder-open"></i></i> @Model.Item.Ten
+                            </a>
+                        </span>
+
+                        <div id="Web" class="collapse show">
+                            @{
+                                var listMenu = Model.ListItemsAlbums;
+                            }
+
+                            <ul>
+                                @if (Model.Item.ChildCount > 0)
+                                {
+                                    @await Html.PartialAsync("_PartialAblumsNew", Model.Item)
+                                    ;
+                                }
+                                else
+                                {
+                                    <li>
+                                        <div class="row mb-1">
+                                            @foreach (var item in listMenu)
+                                            {
+                                                <div class="col-12 col-md-4 col-lg-3 col-sm-6">
+                                                    <div class="card" data-aos="fade-up">
+                                                        <a data-fancybox="gallery_@Model.Item.Id" href="@item.Images" data-caption="@item.Ten">
+                                                            <img loading="lazy" class="card-img-top" src="/Home/ResizeImage?url=@item.Images&width=255&height=150" alt="@item.Ten">
+                                                        </a>
+                                                        <div class="card-body">
+                                                            <p class="card-title text-center"><strong>@item.Ten</strong></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div> *@
+
+            <div class="row mb-1">
+                <div class="container-image-gallery">
+                    <section id="photos">
+                        @if (Model.ListItemsAlbums != null && Model.ListItemsAlbums.Count() > 0)
+                        {
+                            @for (int i = 0; i < Model.ListItemsAlbums.Count(); i++)
+                            {
+                                <div class="card-image">
+                                    <a data-fancybox="gallery_@Model.Item.Id" href="@Model.ListItemsAlbums[i].Images" data-caption="@Model.ListItemsAlbums[i].Ten">
+                                        <img loading="lazy" class="card-img-top" src="@Model.ListItemsAlbums[i].Images" alt="@Model.ListItemsAlbums[i].Ten">
+                                    </a>
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">
+                                            <strong>@if (!string.IsNullOrEmpty(Model.ListItemsAlbums[i].Ten)) { @Model.ListItemsAlbums[i].Ten } else { @Model.Item.Ten }</strong>
+                                        </h5>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </section>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

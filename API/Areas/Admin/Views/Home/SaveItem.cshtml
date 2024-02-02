@@ -1,0 +1,238 @@
+﻿@model API.Areas.Admin.Models.SYSParams.SYSConfigModel
+@{
+    ViewData["Title"] = "Cập nhật Cấu Hình";
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Cập nhật Cấu Hình</h4>
+    </div>
+    <div class="card-body">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <partial name="_PartialMsgInfoAdmin" />
+        <form asp-controller="@ControllerName" asp-action="SaveItem" method="post">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.WebsiteName">Tên web <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" class="form-control" asp-for="Item.WebsiteName" name="WebsiteName">
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.CompanyName">Tên <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" class="form-control" asp-for="Item.CompanyName" name="CompanyName">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.WebsiteNameEN">Tên web (EN)<sup class="text-danger"> (*)</sup></label>
+                        <input type="text" class="form-control" asp-for="Item.WebsiteNameEN" name="WebsiteNameEN">
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.CompanyNameEN">Tên (EN)<sup class="text-danger"> (*)</sup></label>
+                        <input type="text" class="form-control" asp-for="Item.CompanyNameEN" name="CompanyNameEN">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Item.Slogan">Slogan <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" class="form-control" asp-for="Item.Slogan" name="Slogan">
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.Address">Địa Chỉ </label>
+                        <input type="text" class="form-control" asp-for="Item.Address" name="Address">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Item.SloganEN">Slogan EN<sup class="text-danger"> (*)</sup></label>
+                        <input type="text" class="form-control" asp-for="Item.SloganEN" name="SloganEN">
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.AddressEN">Địa Chỉ EN</label>
+                        <input type="text" class="form-control" asp-for="Item.AddressEN" name="AddressEN">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.Phone">Điện Thoại</label>
+                        <input type="text" class="form-control" asp-for="Item.Phone" name="Phone">
+                    </div>
+                </div>
+                <div class="col-md-4 col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.Hotline">Hotline</label>
+                        <input type="text" class="form-control" asp-for="Item.Hotline" name="Hotline">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.Email">Email </label>
+                        <input type="text" class="form-control" asp-for="Item.Email" name="Email">
+                    </div>
+                </div>
+                <div class="col-md-3 col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.Facebook">Facebook</label>
+                        <input type="text" class="form-control" asp-for="Item.Facebook" name="Facebook">
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.Youtube">Youtube </label>
+                        <input type="text" class="form-control" asp-for="Item.Youtube" name="Youtube">
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.Twitter">Twitter </label>
+                        <input type="text" class="form-control" asp-for="Item.Twitter" name="Twitter">
+                    </div>
+                </div>
+            </div>
+         
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.Map">Google Map</label>
+                        <textarea asp-for="Item.Map" name="Map" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.GoogleAnalytics">Google Analytics</label>
+                        <textarea asp-for="Item.GoogleAnalytics" name="GoogleAnalytics" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.MessengerPlugin">Messenger Plugin</label>
+                        <textarea asp-for="Item.MessengerPlugin" name="MessengerPlugin" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.MetadataCV.SmartVoiceTokenID">SmartVoiceTokenID</label>
+                        <textarea asp-for="Item.MetadataCV.SmartVoiceTokenID" name="MetadataCV.SmartVoiceTokenID" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.MetadataCV.SmartVoiceAccessToken">SmartVoiceAccessToken</label>
+                        <textarea asp-for="Item.MetadataCV.SmartVoiceAccessToken" name="MetadataCV.SmartVoiceAccessToken" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.MetadataCV.SmartVoiceTokenKey">SmartVoiceTokenKey</label>
+                        <textarea asp-for="Item.MetadataCV.SmartVoiceTokenKey" name="MetadataCV.SmartVoiceTokenKey" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.Footer">Footer</label>
+                        <textarea asp-for="Item.Footer" name="Footer" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.FooterEN">Footer (EN)</label>
+                        <textarea asp-for="Item.FooterEN" name="FooterEN" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.Contact">Liên Hệ</label>
+                        <textarea asp-for="Item.Contact" name="Contact" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-primary" name="SaveItem" value="Lưu" />
+            <a class="btn btn-info" asp-controller="@ControllerName" asp-action="Index">Quay Lại</a>
+
+
+        </form>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+    <script src="~/lib/ckeditor/adapters/jquery.js"></script>
+    <script>
+
+        var roxyFileman = '/lib/fileman/index.html';
+        $(function () {
+            CKEDITOR.replace('Footer', {
+                filebrowserBrowseUrl: roxyFileman,
+                filebrowserImageBrowseUrl: roxyFileman + '?type=image',
+                removeDialogTabs: 'link:upload;image:upload'
+            });
+
+            CKEDITOR.replace('FooterEN', {
+                filebrowserBrowseUrl: roxyFileman,
+                filebrowserImageBrowseUrl: roxyFileman + '?type=image',
+                removeDialogTabs: 'link:upload;image:upload'
+            });
+
+        });
+
+        $(function () {
+            CKEDITOR.replace('Contact', {
+                filebrowserBrowseUrl: roxyFileman,
+                filebrowserImageBrowseUrl: roxyFileman + '?type=image',
+                removeDialogTabs: 'link:upload;image:upload'
+            });
+        });
+    </script>
+    <script>
+        function openCustomRoxy() {
+
+            $('#roxyCustomPanel').modal('show');
+        }
+        function closeCustomRoxy() {
+            $('#roxyCustomPanel').modal('hide');
+        }
+    </script>
+}

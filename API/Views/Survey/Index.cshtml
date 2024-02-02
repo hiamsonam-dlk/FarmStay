@@ -1,0 +1,63 @@
+﻿@model API.Areas.Admin.Models.Survey.SurveyModel
+@using Newtonsoft.Json;
+@{
+
+    ViewData["Title"] = "Khảo sát ";
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+
+
+
+<div class="navigation nlist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline  ">
+                    <li>
+                        <a href="/">Trang chủ</a>
+                        <i class="fa fa-angle-right"></i>
+
+                        <a asp-controller="Survey" asp-action="Index">Khảo sát</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="PageDetail" style="padding-top:30px">
+
+
+
+        <partial name="_PartialMsgInfo" />
+          <div class="row">
+              <div class="col-12">
+                  @foreach (var item in Model.ListItems)
+                  {
+                  <div class="survey-Item">
+                      <p class="title">
+                          <strong>  @item.Title</strong>                        
+                      </p>
+                      <p class="ovv">
+                          @item.Description
+                      </p>
+
+                      <a asp-controller="Survey" asp-action="Detail" asp-route-id="@item.Id" asp-route-alias="@API.Models.StringUtilities.ToNameRewrite(item.Title)" class="btn btn-success">Tham gia khảo sát</a>
+                  </div> 
+                  }
+
+              </div>
+          </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @await Html.PartialAsync("_PartialPagination", Model.Pagination)
+        </div>
+
+    </div>
+</div>
+
+

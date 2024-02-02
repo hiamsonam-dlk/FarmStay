@@ -1,0 +1,85 @@
+﻿<div id="ajaxLoader" style="display:none" class="modal fade">
+    <h2>Please wait</h2>
+    <p>I'm getting my AJAX on!</p>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Tra cứu thông tin khách hàng</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 col-md-9">
+                        <div class="input-group flex-nowrap">
+                            <input type="text" class="form-control" placeholder="Mã khách hàng" aria-label="Username" aria-describedby="addon-wrapping" id="txtMaKH">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <button type="button" class="btn btn-primary mx-auto mt-1 mt-md-0" id="traCuuBtn">Tra cứu</button>
+                    </div>
+                </div>
+
+                <div class="row my-2">
+                    <div class="col-12">
+                        <div class="card">
+                            <div id="carouselExampleInterval1" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active" data-bs-interval="4000">
+                                        <img src="\CMS\Content\TaiLieu\laymakh.jpg" class="card-img-top d-block w-100" alt="thu tiền nước">
+                                    </div>
+                                    <div class="carousel-item" data-bs-interval="4000">
+                                        <img src="\CMS\Content\TaiLieu\bienlai.jpg" class="card-img-top d-block w-100" alt="tra cứu hóa đơn tiền nước">
+                                    </div>
+                                    <div class="carousel-item" data-bs-interval="4000">
+                                        <img src="\CMS\Content\TaiLieu\tinnhan.jpg" class="card-img-top d-block w-100" alt="công ty nước Đắk Lắk">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval1" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval1" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Khách hàng tìm mục mã khách hàng có in trên hóa đơn, biên lai, tin nhắn thông báo thu tiền nước hàng tháng.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="txtErr" class="mt-3"> </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Tên</span>
+                            <input type="text" class="form-control" aria-describedby="basic-addon1" disabled id="tenKHTraCuu">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Số điện thoại</span>
+                            <input type="text" class="form-control" aria-describedby="basic-addon1" disabled id="sdtKHTraCuu">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Địa chỉ</span>
+                            <input type="text" class="form-control" aria-describedby="basic-addon1" disabled id="diaChiKHTraCuu">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeTraCuu">Đóng</button>
+                <button type="button" class="btn btn-primary" id="layTTNayBtn" data-bs-dismiss="modal">Tiếp theo</button>
+                <input type="hidden" class="form-control" aria-describedby="basic-addon1" disabled id="chiSoCu">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/ttudkhcn/js/tra_cuu_hoa_don.js?ver=@(DateTime.Now.ToString())"></script>

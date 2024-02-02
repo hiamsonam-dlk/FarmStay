@@ -1,0 +1,69 @@
+﻿@model API.Areas.Admin.Models.Videos.VideosModel
+@{
+    ViewData["Title"] = "Thư viện Video";
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="hero-wrap">
+    <div class="container">
+    <div class="row no-gutters slider-text justify-content-center align-items-center">
+    <div class="col-12 d-flex align-items-end justify-content-center">
+    <div class="text">
+    <h1 class="mb-4">Thư viện video</h1>
+    </div>
+    </div>
+    </div>
+    </div>
+</div>
+
+<div class="navigation nlist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline  ">
+                    <li>
+                        <a href="/">Trang chủ</a>
+                        <i class="fa fa-angle-right"></i>
+
+                        <a asp-controller="Videos" asp-action="Index">Videos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-md p-5">
+    <div class="row">
+        @for (int i = 0; i < Model.ListItems.Count(); i++)
+        {
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="VideoItem videolink card" val="@Model.ListItems[i].Link" data-aos="zoom-out-left">
+                    <div>
+                        <a class="khungAnh" title="@Model.ListItems[i].Title" asp-controller="@ControllerName" asp-action="Detail" asp-route-id="@Model.ListItems[i].Id">
+                            <img src="@Model.ListItems[i].Image" alt="@Model.ListItems[i].Title" class="card-img-top khungAnhCrop">
+                        </a>
+                    </div>
+
+                    <h6 class="card-body">
+                        <a title="@Model.ListItems[i].Title" asp-controller="@ControllerName" asp-action="Detail" asp-route-id="@Model.ListItems[i].Id">
+                            @API.Models.StringUtilities.Truncate(Model.ListItems[i].Title, 100)
+                        </a>
+                    </h6>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog" style="z-index:9999">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="VideoWrapper modal-video">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

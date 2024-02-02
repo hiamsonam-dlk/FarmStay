@@ -1,0 +1,94 @@
+﻿@model API.Areas.Admin.Models.Booking.BookingModel;
+@using Microsoft.AspNetCore.Http
+@using Microsoft.Extensions.Options;
+@using reCAPTCHA.AspNetCore;
+@inject IOptions<RecaptchaSettings> RecaptchaSettings
+@{
+    string[] title;
+    var img = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(16);
+}
+
+<div class="hero-wrap-thought d-flex justify-content-center align-items-center">
+    <div class="container full-height-thought">
+        @*<div class="row no-gutters slider-text justify-content-center align-items-center">
+            <div class="col-12 d-flex justify-content-center" data-aos="fade-up">
+                <div class="text navigation nlist icon-wrap">
+                    <div class="d-flex justify-content-center">
+                        <img src="~/TMDT/images/wrench.png" class="is-developing icon" />
+                    </div>
+                    <ul class="list-inline heading-title">
+                        <li class="text-white">
+                            Chức năng đang được cập nhật, vui lòng quay lại sau!
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>*@
+
+        <div class="row no-gutters justify-content-center align-items-center">
+            @*<div class="col-lg-3 col-md-6 d-md-flex d-none align-items-end order-1 order-md-2" data-aos="fade-up">
+                <div class="text">
+                    <h1 class="mb-1 ftco-animate"><span>@img[i].Title</span></h1>
+                </div>
+            </div>*@
+            <div class="col-12 col-md-6 mt-0 d-flex justify-md-content-end justify-content-center order-2 order-md-1">
+                <form class="request-form" asp-controller="SoLuuNiemEN" asp-action="SaveItem" method="post" data-aos="fade-up" enctype="multipart/form-data">
+                    <h2>Leave your thought about this place!</h2>
+                    <div class="form-group">
+                        <label for="from-place" class="label">Full name</label>
+                        <input type="text" class="form-control" placeholder="Type your fullname" id="cus-name" name="TenKhachHang" asp-for="@Model.Item.TenKhachHang">
+                    </div>
+                    <div class="form-group">
+                        <label for="from-place" class="label">Role</label>
+                        <input type="text" class="form-control" placeholder="Type your role" id="from-place" name="DonViCongTac" asp-for="@Model.Item.DonViCongTac">
+                    </div>
+                    <div class="form-group">
+                        <label for="IListImage" class="label">Image(s)</label>
+
+                        <label class="custom-file-upload">
+                            <input onchange="see()" type="file" id="files" name="IListImage" multiple asp-for="@Model.Item.IListImage" accept="image/png, image/gif, image/jpeg">
+                            Chose images
+                        </label>
+
+                        @*<input onchange="see()" type="file" id="files" name="IListImage" multiple asp-for="@booking.Item.IListImage">*@
+                    </div>
+
+                    <div class="col-12">
+                        <div class="row" id="List_Images">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="to-place" class="label">Thought</label>
+                        <textarea rows="4" class="form-control" placeholder="Type your thought" id="to-place" name="CamNghi" asp-for="@Model.Item.CamNghi"></textarea>
+                        <input type="hidden" class="form-control" id="token_recaptcha" name="TokenRecaptcha">
+                    </div>
+                    @Html.ValidationSummary()
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary p5 btn-lg" name="SaveItem" value="Submit" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function see() {
+        var inp = document.getElementById('files');
+        console.log(inp.files);
+        var str = "";
+        for (var i = 0; i < inp.files.length; i++) {
+            const file = inp.files[i];
+            console.log(file);
+            if (file) {
+                var src = URL.createObjectURL(file);
+                str += '<div class="form-group images-main col-12 col-md-6"><div class="borderStroke" >' +
+                    '<img src="' + src + '" style="height: 100%; width: 100%; object-fit: contain; z-index:-1" />' +
+                    '</div></div>'
+            }
+        }
+        console.log(str);
+        $("#List_Images").html(str)
+    }
+</script>

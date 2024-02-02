@@ -1,0 +1,83 @@
+﻿@model API.Areas.Admin.Models.DMTinhThanh.DMTinhThanhModel
+@{
+    ViewData["Title"] = "Thư Viện ảnh";
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+
+<section class="page-section danh-sach-liet-sy">
+
+    <div class="container p-0 blur full-height">
+
+        <div class="row no-gutters align-items-center">
+            <div>DÁNH SÁCH LIỆT SỸ NGÀNH GIAO BƯU, THÔNG TIN LIÊN LẠC TÂY NGUYÊN</div>
+        </div>
+
+        <div class="row no-gutters align-items-center">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                @for (int i = 0; i < Model.ListItems.Count(); i++)
+                {
+                    @if (Model.ListItems != null && Model.ListItems.Count() > 0)
+                    {
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link @(i==0?"active":"")" id="pills-@i-tab" data-bs-toggle="pill" data-bs-target="#pills-@i" type="button" role="tab" aria-controls="pills-@i" aria-selected="@(i==0?"true":"")">@Model.ListItems[i].Ten</button>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+
+
+        <div class="row no-gutters align-items-end align-items-center position-absolute gioi-thieu-home">
+            <div class="tab-content" id="pills-tabContent">
+                @for (int i = 0; i < Model.ListItems.Count(); i++)
+                {
+                    @if (Model.ListItems[i].ListLietSy.Count() > 1)
+                    {
+
+                        <div class="tab-pane fade @(i==0?"show active":"")" id="pills-@i" role="tabpanel" aria-labelledby="pills-@i-tab" tabindex="0">
+                            @for (int j = 1; j < Model.ListItems[i].ListLietSy.Count(); j++)
+                            {
+                                <p>@Model.ListItems[i].ListLietSy[j].Name</p>
+                            }
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@*<div class="container ContentDiv danh-sach-liet-sy">
+    <div class="row mt-2">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        @for (int i = 0; i < Model.ListItems.Count(); i++)
+        {
+            @if (Model.ListItems != null && Model.ListItems.Count() > 0)
+            {
+                <li class="nav-item" role="presentation">
+                        <button class="nav-link @(i==0?"active":"")" id="pills-@i-tab" data-bs-toggle="pill" data-bs-target="#pills-@i" type="button" role="tab" aria-controls="pills-@i" aria-selected="@(i==0?"true":"")">@Model.ListItems[i].Ten</button>
+                </li>
+            }
+        }
+        </ul>
+
+        <div class="tab-content" id="pills-tabContent">
+        @for (int i = 0; i < Model.ListItems.Count(); i++)
+        {
+            @if (Model.ListItems[i].ListLietSy.Count() > 1)
+            {
+
+                <div class="tab-pane fade @(i==0?"show active":"")" id="pills-@i" role="tabpanel" aria-labelledby="pills-@i-tab" tabindex="0">
+                    @for (int j = 1; j < Model.ListItems[i].ListLietSy.Count(); j++)
+                    {
+                        <p>@Model.ListItems[i].ListLietSy[j].Name</p>
+                    }
+                </div>
+            }        
+        }
+        </div>
+
+    </div>
+</div>*@

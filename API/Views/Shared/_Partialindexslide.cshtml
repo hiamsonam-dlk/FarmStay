@@ -1,0 +1,38 @@
+﻿
+@{
+    var img = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(16);
+}
+
+
+<div class="box">
+    <div class="body white">
+        <div class="carousel slide" data-ride="carousel">
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+                @for (int i = 0; i < img.Count(); i++)
+                {
+                    <div class="carousel-item @(i==0?"active":"")">
+                        <div class="VideoItem videolink" val="@img[i].Link">
+                            <div class="khungAnh">
+                                <a class="khungAnhCrop" title="@img[i].Title">
+                                    <img src="/Home/ResizeImage?url=@img[i].Image&width=500" alt="@img[i].Title">
+                                </a>
+                            </div>
+
+                            <p class="title">
+                                <a title="@img[i].Title">
+                                    @API.Models.StringUtilities.Truncate(@img[i].Title, 100)
+                                </a>
+                            </p>
+                        </div>
+
+                    </div>
+
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

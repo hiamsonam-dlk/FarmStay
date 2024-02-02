@@ -1,0 +1,66 @@
+﻿@{
+    var listBannerPo13 = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(13);
+    var data = API.Areas.Admin.Models.BannersCategories.BannersCategoriesService.GetItem(13);
+    var ten = data.Title;
+}
+
+<section class="ftco-section testimony-section">
+    <div class="container">
+        <div class="row justify-content-center mb-1 mt-4">
+            <div class="col-md-12 heading-section text-center ftco-animate mb-1">
+                <span class="subheading">Dịch vụ của chúng tôi</span>
+                <h2 class="mb-3">@ten</h2>
+            </div>
+        </div>
+        <hr class="my-3" />
+        <div class="row">
+            @for (int m = 0; m < listBannerPo13.Count(); m++)
+            {
+                <div class="col-12 col-md-4 mt-3 ftco-animate">
+                    <a href="@listBannerPo13[m].Link">
+                        <div class="card shadow bg-body rounded card-dichvu ">
+                            <img src="@listBannerPo13[m].Image" class="card-img-top " alt="@listBannerPo13[m].Title">
+                            <div class="p-5">
+                                <div class="heading-section mb-5 service">
+                                    <span class="subheading">Dịch vụ</span>
+                                    <h2 class="mb-4 truncate-header">@listBannerPo13[m].Title</h2>
+                                    <hr class="my-3" />
+                                    @*<p class="truncate-content">@listBannerPo13[m].Description</p>*@
+                                    @Html.Raw(listBannerPo13[m].Description)
+                                    <p class="btn btn-outline-primary">Khám phá thêm</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@*<div class="col-12">
+    <div class="cat-item">
+        <div class="header">
+            <h4>@ten</h4>
+        </div>
+        <div class="body">
+            <div class="row">
+                @for (int m = 0; m < listBannerPo13.Count(); m++)
+                {
+                    <div class="col-12 col-md-6 col-lg-4 mt-3">
+                        <a href="@listBannerPo13[m].Link">
+                            <div class="card shadow bg-body rounded card-dichvu">
+                                <img src="@listBannerPo13[m].Image" class="card-img-top" alt="@listBannerPo13[m].Title">
+                                <div class="card-body">
+                                    <h3 class="card-title text-center">@listBannerPo13[m].Title</h3>
+                                </div>
+                            </div>
+                        </a>
+                        
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>*@

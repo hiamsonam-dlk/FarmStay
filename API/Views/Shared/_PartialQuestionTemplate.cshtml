@@ -1,0 +1,209 @@
+﻿@{
+    var listBannerPo13 = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(13);
+}
+
+<!-- Button trigger modal -->
+<button type="button" data-bs-toggle="offcanvas" data-bs-target="#QuestionTemPlate" id="BtnOpenQuestionTemPlate" aria-controls="offcanvasRight">
+    @*<i class="fa fa-question-circle fa-2x" data-bs-toggle="tooltip" data-bs-placement="left" title="Chat cùng Dakwaco."></i>*@
+    <img src="/ttudkhcn/images/icon.png"/>
+</button>
+
+<!-- Modal -->
+<div class="offcanvas offcanvas-end" id="QuestionTemPlate" aria-labelledby="QuestionTemPlateLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable m-0">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-2 pr-0 my-auto">
+                        <img src="./ttudkhcn/images/Customer-Support-Icon.jpg" class="avatar_supporter" alt="...">
+                    </div>
+                    <div class="col-10">
+                        <h1 class="m-0">Dakwaco</h1>
+                        <p class="m-0">Đang trực tuyến <i class="fa fa-circle" aria-hidden="true" style="color:#56F000"></i></p>
+                        <p class="m-0">Hệ thống giải đáp thắc mắc</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid p-0" id="conversation">
+
+                    <div class="col-8 p-0">
+                        <h6 class="message btn-secondary">Xin chào mừng quý vị đến với hệ thống tư vấn dịch vụ của Dakwaco.</h6>
+                    </div>
+
+                    <div class="col-8 p-0">
+                        <h6 class="message btn-secondary">Vui lòng nhấn vào những dịch vụ mà quý vị quan tâm để được tư vấn. Xin cảm ơn!</h6>
+                    </div>
+
+                    <div class="position-relative">
+                        <hr />
+                        <p class="position-absolute top-0 start-50 translate-middle bg-white px-2">Danh sách dịch vụ</p>
+                    </div>
+                    
+
+                    <div class="card-body-message-from-admin">
+                        <div class="row">
+                            @for (int m = 0; m < listBannerPo13.Count(); m++)
+                            {
+                                <div class="col-8 col-md-6">
+                                    <button type="button" class="btn btn-secondary m-1 message" onclick="GetListQuestion(@listBannerPo13[m].Id, '@listBannerPo13[m].Title')">
+                                        <h6>@listBannerPo13[m].Title</h6>
+                                    </button><br />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    
+                    <hr />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-12 mx-auto">
+                    <p class="lead">Hãy để lại câu hỏi nếu quý vị còn thắc mắc.</p>
+                </div>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="offcanvas">Đóng</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#surveypopup" data-bs-dismiss="offcanvas">Đặt câu hỏi.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="surveypopup" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog mr-0 modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Đặt câu hỏi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-12">
+                            <label for="hotencauhoi">Họ và tên</label>
+                            <input type="text" class="form-control" id="hotencauhoi">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-12">
+                            <label for="sodtcauhoi">Số điện thoại</label>
+                            <input type="text" class="form-control" id="sodtcauhoi">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-12">
+                            <label for="cauhoi">Câu hỏi</label>
+                            <input type="text" class="form-control" id="cauhoi">
+                        </div>
+                    </div>
+                </div>
+                <div id="txtErr" class="mt-3"> </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="guiCauHoi">Gửi đi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/ttudkhcn/js/question_template.js?ver=@(DateTime.Now.ToString())"></script>
+
+@*
+<script>
+    function GetListQuestion(MaDV, TenDV) {
+        var userMessage = "<div class='card-body-message-from-admin'>" +
+            "<div class='row'>" +
+            "<div class='col-12'>" +
+            "<span class='btn btn-primary m-1 message float-end'>" +
+            "<h6>" + TenDV + "</h6>" +
+            "</span></div></div></div>";
+        $("#conversation").append(userMessage); //doan nay chay ok r
+
+        var adminMessage = "";
+
+        return $.ajax({
+            type: "POST",
+            url: "/QuestionTemplate/GetListQuestionByService?MaDV=" + MaDV,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                if (data.listItems.length > 0) {
+                    for (var i = 0; i < data.listItems.length; i++) {
+                        adminMessage += "<div class='card-body-message-from-admin'>" +
+                            "<div class='row'>" +
+                            "<div class='col-12'>" +
+                            `<button class='btn btn-secondary m-1 message' onclick='GetTheAnswer("` + data.listItems[i].question + `", "` + data.listItems[i].answer + `")'>` +
+                            "<h6>" + data.listItems[i].question + "</h6>" +
+                            "</button>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>";
+                    }
+                }else {
+                    adminMessage = "<div class='card-body-message-from-admin'>" +
+                        "<div class='row'>" +
+                        "<div class='col-12'>" +
+                        `<button class='btn btn-secondary m-1 message'>` +
+                        "<h6>Opps! Không có kết quả!</h6>" +
+                        "</button>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>";
+                }
+                console.log(adminMessage);
+                $("#conversation").append(adminMessage);
+            },
+            error: function () {
+                console.log("err");
+            }
+        });
+    };
+
+    function GetTheAnswer(TenCauHoi, CauTraLoi) {
+        var userMessage = "<div class='card-body-message-from-admin'>" +
+            "<div class='row'>" +
+            "<div class='col-12'>" +
+            "<span class='btn btn-primary m-1 message float-end'>" +
+            "<h6>" + TenCauHoi + "</h6>" +
+            "</span></div></div></div>";
+
+        $("#conversation").append(userMessage);
+
+        var adminMessage = "<div class='card-body-message-from-admin'>" +
+            "<div class='row'>" +
+            "<div class='col-12'>" +
+            "<span class='btn btn-secondary m-1 message'>" +
+            "<h6>" + CauTraLoi + "</h6>" +
+            "</span>" +
+            "</div>" +
+            "</div>" +
+            "</div>";
+        $("#conversation").append(adminMessage);
+    };
+
+    $(document).ready(function () {
+        $("#guiCauHoi").click(function () {
+            var SoDT = $("#sodtcauhoi").val();
+            var CauHoi = $("#cauhoi").val();
+            var HoTen = $("#hotencauhoi").val();
+
+            return $.ajax({
+                type: "POST",
+                url: "/QuestionTemplate/SendMessage?HoTen=" + HoTen + "&SoDT=" + SoDT + "&CauHoi=" + CauHoi,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $("#txtErr").html("<div class='alert alert-danger'>" + data.msg + "</div>");
+                },
+                error: function () {
+                    console.log("err");
+                }
+            });
+        });
+    });
+</script>
+
+*@

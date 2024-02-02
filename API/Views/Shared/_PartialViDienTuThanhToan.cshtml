@@ -1,0 +1,74 @@
+﻿@{
+    var listBannerPo11 = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(11);
+    var data = API.Areas.Admin.Models.BannersCategories.BannersCategoriesService.GetItem(11);
+    var ten = data.Title;
+}
+
+<div class="col-12">
+    <div class="category-list">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="cat-item lyo1">
+                    <div class="header">
+                        <h4>@ten</h4>
+                    </div>
+                    <div class="body">
+
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <ul id="Features-Slide-VDTTT" class="gallery">
+                                    @foreach (var item in listBannerPo11)
+                                    {
+                                        <li class="px-5">
+                                            <a href="@item.Link">
+                                                <img src="@item.Image" alt="@item.Title">
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#Features-Slide-VDTTT').lightSlider({
+        gallery: true,
+        item: 3,
+        slideMargin: 0,
+        speed: 800,
+        pause: 4000,
+        auto: true,
+        pager: false,
+        controls: true,
+        loop: true,
+        responsive: [
+            {
+                breakpoint: 1170,
+                settings: {
+                    item: 3,
+                    slideMove: 1,
+                    slideMargin: 6,
+                }
+            },
+            {
+                breakpoint: 980,
+                settings: {
+                    item: 2,
+                    slideMove: 1
+                }
+            },
+            {
+                breakpoint: 460,
+                settings: {
+                    item: 1,
+                    slideMove: 1
+                }
+            }
+        ]
+    });
+</script>

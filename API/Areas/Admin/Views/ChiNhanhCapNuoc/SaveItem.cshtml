@@ -1,0 +1,50 @@
+﻿@model API.Areas.Admin.Models.ChiNhanhCapNuoc.ChiNhanhCapNuocModel
+@{
+    if (Model.Item.Id == 0)
+    {
+        ViewData["Title"] = "Thêm mới Banner/Liên Kết";
+    }
+    else
+    {
+        ViewData["Title"] = "Cập nhật Banner/Liên Kết";
+    }
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>@ViewData["Title"]</h4>
+    </div>
+    <div class="card-body">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <form asp-controller="@ControllerName" asp-action="SaveItem" method="post">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="Item.TenChiNhanh">Tên <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" class="form-control" asp-for="Item.TenChiNhanh" name="TenChiNhanh">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="Item.SoDT">Số điện thoại <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" class="form-control" asp-for="Item.SoDT" name="SoDT">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="Item.DiaChi">Địa chỉ <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" class="form-control" asp-for="Item.DiaChi" name="DiaChi">
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-primary" name="SaveItem" value="Lưu" />
+            <input type="hidden" class="form-control" asp-for="Item.Id" name="Id">
+            <input type="hidden" class="form-control" asp-for="Item.Ids" name="Ids">
+
+        </form>
+    </div>
+</div>

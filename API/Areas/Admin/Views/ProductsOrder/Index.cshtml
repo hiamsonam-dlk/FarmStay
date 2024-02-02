@@ -1,0 +1,183 @@
+﻿@model API.Areas.Admin.Models.ProductsOrder.ProductsOrderModel
+@using API.Areas.Admin.Models.ProductsOrder
+@{
+    Layout = "_layoutAdmin";
+    ViewData["Title"] = "Quản lý đơn hàng";
+
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    var ListItemsStatus = ProductsOrderService.GetListItemsStatus();
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4><i class="fas fa-table"></i> Quản lý đơn hàng</h4>
+    </div>
+    <div class="card-body">
+        <partial name="_PartialMsgInfoAdmin" />
+        <form asp-controller="@ControllerName" asp-action="Index" method="get" id="MySearchForm">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <input asp-for="SearchData.Keyword" name="Keyword" placeholder="Tìm kiếm" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <select asp-for="SearchData.Status" name="Status" class="form-control" asp-items="ListItemsStatus"></select>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-row align-items-center">
+
+                        <div class="col-auto">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Tìm Kiếm</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </form>
+        <div class="row">
+
+            <div class="col-lg-12">
+
+                <table class="table table-bordered table-striped table-hover ">
+                    <thead>
+                        <tr>
+                            <th width="50px" class="text-center">#</th>
+                            <th>Tên</th>
+                            <th>Điện thoại</th>
+                            <th>Địa chỉ</th>
+                            <th width="150px" class="text-center">Ngày đặt hàng</th>
+                            <th>Trạng Thái</th>
+                            @*<th width="130px" class="btn-contain">
+                                <a asp-controller="@ControllerName" asp-action="SaveItem" class="btn btn-primary">THÊM MỚI</a>
+                            </th>*@
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model.ListItems == null || Model.ListItems.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    <label>Không có dữ liệu!</label>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            for (int i = 0; i < Model.ListItems.Count(); i++)
+                            {
+                            <tr>
+                                <td width="50px" class="text-center">@(i + 1)</td>
+                                <td>@Model.ListItems[i].Name</td>
+                                <td>@Model.ListItems[i].Phone</td>
+                                <td>@Model.ListItems[i].Address</td>
+                                <td>
+                                    @DateTime.Parse(Model.ListItems[i].CreatedDate.ToString()).ToString("dd/MM/yyyy HH:mm:ss")
+                                </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <select asp-for="SearchData.Status" onchange="UpdateStatus('@Model.ListItems[i].Id',this.value)" name="Status" class="form-control" asp-items="Model.ListItemsStatus"></select>
+                                        </div>
+                                    </td>
+                               
+                                <td>
+                                    <ul class="list-inline action">
+                                        <li class="list-inline-item"><a asp-controller="@ControllerName" asp-action="SaveItem" asp-route-id="@Model.ListItems[i].Ids"><i class="fa fa-edit"></i>Sửa</a></li>
+                                        <li class="list-inline-item"><a data-toggle="modal" data-target="#DeleteModal" data-whatever="@Model.ListItems[i].Name" data-ids="@Model.ListItems[i].Ids"><i class="fa fa-trash"></i>Xóa</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            }
+                        }
+
+                    </tbody>
+
+                </table>
+                <form asp-controller="@ControllerName" asp-action="DeleteItem" id="AjaxDeleteForm"></form>
+            </div>
+            <div class="col-lg-12">
+                @await Html.PartialAsync("_PartialPagination", Model.Pagination)
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="DetailPO" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="article-title">Chi Tiết Bài Viết</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="CloseModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="article-content"><div class="text-center" id="msgResult"></div></div>
+            </div>
+            <div class="modal-footer " id="footer-detail-article">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="CloseModal()">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/moment.js"></script>
+    <script src="~/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.base64.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.binarytransport.js"></script>
+    <script type="text/javascript">
+
+        function CloseModal(){
+            $("#msgResult").text();
+            $("#DetailPO").modal('hide');
+        }
+
+
+        function UpdateStatus(Id, Status) {
+            $.ajax({
+                url: "/Admin/ProductsOrder/UpdateStatus?Id=" + Id + "&Status=" + Status,
+                method: 'GET',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    $("#msgResult").text(result.msg);
+                    $("#DetailPO").modal('show');
+                }
+            });
+        };
+        $(function () {
+            $('#ShowStartDate').datetimepicker({
+                format: 'DD/MM/YYYY',
+
+            });
+            $('#ShowEndDate').datetimepicker({
+                format: 'DD/MM/YYYY',
+            });
+
+
+            $('#myTable').basictable({
+                breakpoint: 980
+            });
+
+        });
+
+        $('document').ready(function () {
+            $('#DetailArticle').on('hidden.bs.modal', function (e) {
+                $("#article-title").html("Chi Tiết Bài Viết");
+                $("#article-content").html('<div class="text-center"><div class="lds-dual-ring"></div></div>');
+                var str = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>';
+                $("#footer-detail-article").html(str);
+            });
+
+
+        });
+
+    </script>
+
+}

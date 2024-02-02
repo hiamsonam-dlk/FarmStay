@@ -1,0 +1,78 @@
+﻿@model API.Areas.Admin.Models.QuyenGopTaiLieu.QuyenGopTaiLieuModel;
+@using Microsoft.AspNetCore.Http
+@using Microsoft.Extensions.Options;
+@using reCAPTCHA.AspNetCore;
+@inject IOptions<RecaptchaSettings> RecaptchaSettings
+@{
+    string[] title;
+    var img = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(16);
+    //QuyenGopTaiLieuModel QuyenGopTaiLieu = new QuyenGopTaiLieuModel();
+    //QuyenGopTaiLieu.Item = new QuyenGopTaiLieu();
+}
+
+<div class="hero-wrap-thought d-flex justify-content-center align-items-center">
+    <div class="container full-height-thought">
+
+        <div class="row no-gutters justify-content-center align-items-center">
+            <div class="col-12 col-md-6 mt-0 d-flex justify-md-content-end justify-content-center order-2 order-md-1">
+                <form class="request-form" asp-controller="QuyenGopTaiLieuEN" asp-action="SaveItem" method="post" data-aos="fade-up" enctype="multipart/form-data">
+                    <h2>Contribute documents about the memorial</h2>
+                    <div class="form-group">
+                        <label for="from-place" class="label">Name</label>
+                        <input type="text" class="form-control" placeholder="Type your name" id="cus-name" name="TenKhachHang" asp-for="@Model.Item.TenKhachHang">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="from-place" class="label">Phone number</label>
+                        <input type="text" class="form-control" placeholder="Type your phone number" id="from-place" name="SoDT" asp-for="@Model.Item.SoDT">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="to-place" class="label">Document's content</label>
+                        <textarea rows="4" class="form-control" placeholder="Type the document's content" id="to-place" name="CamNghi" asp-for="@Model.Item.CamNghi"></textarea>
+                        <input type="hidden" class="form-control" id="token_recaptcha" name="TokenRecaptcha">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="IListImage" class="label">Image(s)</label>
+
+                        <label class="custom-file-upload">
+                            <input onchange="see()" type="file" id="files" name="IListImage" multiple asp-for="@Model.Item.IListImage" accept="image/png, image/gif, image/jpeg">
+                            Select image(s)
+                        </label>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="row" id="List_Images">
+                        </div>
+                    </div>
+
+                    @Html.ValidationSummary()
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary p5 btn-lg" name="SaveItem" value="Submit" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function see(){
+        var inp = document.getElementById('files');
+        console.log(inp.files);
+        var str = "";
+        for (var i = 0; i < inp.files.length; i++) {
+            const file = inp.files[i];
+            console.log(file);
+            if (file) {
+                var src = URL.createObjectURL(file);
+                str += '<div class="form-group images-main col-12 col-md-6"><div class="borderStroke" >' +
+                '<img src="' + src + '" style="height: 100%; width: 100%; object-fit: contain; z-index:-1" />' +
+                '</div></div>'
+            }
+        }
+        console.log(str);
+        $("#List_Images").html(str)
+    }
+</script>

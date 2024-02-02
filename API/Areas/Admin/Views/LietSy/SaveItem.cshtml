@@ -1,0 +1,81 @@
+﻿@model API.Areas.Admin.Models.LietSy.LietSyModel
+@using Microsoft.AspNetCore.Http;
+@{
+    if (Model.Item.Id == 0)
+    {
+        ViewData["Title"] = "Thêm mới Liệt Sỹ";
+    }
+    else
+    {
+        ViewData["Title"] = "Chỉnh sửa thông tin Liệt Sỹ";
+    }
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    string Str_Url = "/Admin/" + ControllerName + "/Index" + Context.Session.GetString("STR_Action_Link_" + ControllerName + "_" + Context.Request.Headers["UserName"]);
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-12 col-md-9">
+                <h4>@ViewData["Title"]</h4>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form asp-controller="@ControllerName" enctype="multipart/form-data" asp-action="SaveItem" method="post">
+            @Html.ValidationSummary()
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="Item.Name">Tên liệt sỹ <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" name="Name" class="form-control Changetitle namepr" asp-for="Item.Name">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Item.QueQuan">Quê quán <sup class="text-danger"> (*)</sup></label>
+                        <select asp-for="Item.QueQuan" name="QueQuan" class="form-control"></select> @*asp-items="Model.ListItemsStatus"*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Item.NamSinh">Năm sinh <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" name="NamSinh" class="form-control Changetitle namepr" asp-for="Item.NamSinh">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Item.NamMat">Năm mất <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" name="NamMat" class="form-control Changetitle namepr" asp-for="Item.NamMat">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Item.ChucVu">Chức vụ <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" name="ChucVu" class="form-control Changetitle namepr" asp-for="Item.ChucVu">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Item.TinhThanh">Tỉnh thành <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" name="TinhThanh" class="form-control Changetitle namepr" asp-for="Item.TinhThanh">
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-primary" name="SaveItem" value="Gửi yêu cầu" />
+            <a class="btn btn-danger" href="@Str_Url">Thoát</a>
+            <input type="hidden" name="Id" class="form-control" asp-for="Item.Id">
+            <input type="hidden" name="Ids" class="form-control" asp-for="Item.Ids">
+        </form>
+    </div>
+</div>
+
+<partial name="_PartialSearchForm" />

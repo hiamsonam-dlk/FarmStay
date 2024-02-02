@@ -1,0 +1,77 @@
+﻿@using API.Areas.Admin.Models.Articles
+@using API.Areas.Admin.Models.CategoriesArticles
+@{
+    var listhot = API.Areas.Admin.Models.Articles.ArticlesService.GetListHot(1, 8);
+    List<SelectListItem> listLink = API.Areas.Admin.Models.Banners.BannersService.GetListItemsByCat(2,1,"EN");
+    var listBannerPo4 = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(4,1,"EN");
+    var listBannerPo5 = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(5,1,"EN");
+}
+
+<!--Thông báo-->
+<div class="mdNotification">
+    <div class="headTop">
+        <h2>NOTICES</h2>
+        @*<div class="bar"> <a href="/#">Xem tất cả</a></div>*@
+        <div class="clearfix"></div>
+    </div>
+    <partial name="_PartialNotification" />
+</div>
+
+<!--End Thông báo-->
+<!--Banner-->
+@*@foreach (var item in listBannerPo4)
+{
+    <div class="BannerItem">
+        <a href="@item.Link" target="@item.Target">
+            <img src="@item.Image" alt="@item.Title" />
+        </a>
+    </div>
+}*@
+
+<!--Video-->
+<partial name="_PartialVideo" />
+
+
+
+
+<!--Banner-->
+@*@foreach (var item in listBannerPo5)
+{
+    <div class="BannerItem">
+        <a href="@item.Link" target="@item.Target">
+            <img src="@item.Image" alt="@item.Title" />
+        </a>
+    </div>
+}*@
+
+
+
+<div class="xsCloneTo">
+
+</div>
+
+<!--Liên kết  website-->
+<div class="box">
+    <div class="header dark">
+        <i class="fas fa-link- mr-1 blueicon"></i> Website linked
+    </div>
+    <div class="body">
+        <select name="BannerId" id="BannerId" class="form-control" asp-items="listLink"></select>
+    </div>
+</div>
+
+
+<!--Thống kê truy cập-->
+<div class="box">
+    <div class="header dark">
+        <i class="fas fa-users mr-1 blueicon"></i> Statistical
+    </div>
+    <div class="body">
+        <div class="tktc">
+            <p>Today: <span id="SiteVisit_DateNow">0</span></p>
+            <p>Yesterday: <span id="SiteVisit_Yesterday">0</span></p>
+            <p>In Week: <span id="SiteVisit_DateOfWeek">0</span></p>
+            <p>Total: <span id="SiteVisit_Total">0</span></p>
+        </div>
+    </div>
+</div>

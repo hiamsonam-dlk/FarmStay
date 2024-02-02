@@ -1,0 +1,118 @@
+﻿@model API.Areas.Admin.Models.Phieu_CapNhatThongTin.Phieu_CapNhatThongTinModel
+@using Microsoft.AspNetCore.Http;
+@{
+    if (Model.Item.Id == 0)
+    {
+        ViewData["Title"] = "Thêm mới yêu cầu chỉnh sửa thông tin khách hàng.";
+    }
+    else
+    {
+        ViewData["Title"] = "Cập nhật yêu cầu chỉnh sửa thông tin khách hàng.";
+    }
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    string Str_Url = "/Admin/" + ControllerName + "/Index" + Context.Session.GetString("STR_Action_Link_" + ControllerName + "_" + Context.Request.Headers["UserName"]);
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-12 col-md-9">
+                <h4>@ViewData["Title"]</h4>
+            </div>
+
+            <div class="col-12 col-md-3">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Mở hộp thoại tra cứu
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        @*<div asp-validation-summary="All" class="text-danger"></div>*@
+        <form asp-controller="@ControllerName" enctype="multipart/form-data" asp-action="SaveItem" method="post">
+            @Html.ValidationSummary()
+            <div class="row">
+                <div class="col-12">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Thông tin cũ</legend>
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Item.MaKH">Mã khách hàng <sup class="text-danger"> (*)</sup></label>
+                                    <input type="text" name="MaKH" class="form-control Changetitle namepr" asp-for="Item.MaKH" id="maKHADTT" readonly="readonly">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label asp-for="Item.TenKHCu">Tên <sup class="text-danger"> (*)</sup></label>
+                                    <input type="text" name="TenKHCu" class="form-control Changetitle namepr" asp-for="Item.TenKHCu" id="tenKHCuADTT" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label asp-for="Item.SoDTCu">Số điện thoại <sup class="text-danger"> (*)</sup></label>
+                                    <input type="text" name="SoDTCu" class="form-control Changetitle namepr" asp-for="Item.SoDTCu" id="sdtKHCuADTT" readonly="readonly">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.DiaChiCu">Địa chỉ <sup class="text-danger"> (*)</sup></label>
+                                    <input type="text" name="DiaChiCu" class="form-control Changetitle namepr" asp-for="Item.DiaChiCu" id="diaChiKHCuADTT" readonly="readonly">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Thông tin mới</legend>
+                        <div class="row">
+                            <div class="col-lg-8 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label asp-for="Item.TenKHMoi">Tên <sup class="text-danger"> (*)</sup></label>
+                                    <input type="text" name="TenKHMoi" class="form-control Changetitle namepr" asp-for="Item.TenKHMoi" id="tenKHMoi">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label asp-for="Item.SoDTMoi">Số điện thoại <sup class="text-danger"> (*)</sup></label>
+                                    <input type="text" name="SoDTMoi" class="form-control Changetitle namepr" asp-for="Item.SoDTMoi" id="sdtKHMoi">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="Item.DiaChiMoi">Địa chỉ <sup class="text-danger"> (*)</sup></label>
+                                    <input type="text" name="DiaChiMoi" class="form-control Changetitle namepr" asp-for="Item.DiaChiMoi" id="diaChiKHMoi">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label asp-for="Item.MucDichSuDungMoi">Mục đích sử dụng<sup class="text-danger"> (*)</sup></label>
+                                    <select asp-for="Item.MucDichSuDungMoi" name="MucDichSuDung" class="form-control" asp-items="Model.ListItemsMucDichSuDung"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            @*<input type="submit" class="btn btn-primary" name="SaveItem" value="Gửi yêu cầu" />*@
+            <a class="btn btn-danger" href="@Str_Url">Thoát</a>
+            <input type="hidden" name="Id" class="form-control" asp-for="Item.Id">
+            <input type="hidden" name="Ids" class="form-control" asp-for="Item.Ids">
+        </form>
+    </div>
+</div>
+
+<partial name="_PartialSearchForm" />

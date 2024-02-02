@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Contact";
+    var ItemConfig = API.Areas.Admin.Models.SYSParams.SYSParamsService.GetItemConfigEN();
+}
+<div class="navigation nlist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline  ">
+                    <li>
+                        <a href="/EN">Home</a>
+                        <i class="fa fa-angle-right"></i>
+                        Contact
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 ContentDiv">
+            @Html.Raw(ItemConfig.Contact)
+        </div>
+        
+    </div>
+</div>
+

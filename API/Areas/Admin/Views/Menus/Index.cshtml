@@ -1,0 +1,127 @@
+﻿@model API.Areas.Admin.Models.Menus.MenusModel
+@using API.Areas.Admin.Models.Menus
+@{
+    Layout = "_layoutAdmin";
+    ViewData["Title"] = "Menu";
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+
+}
+
+<div class="card">
+    <div class="card-header">
+
+        <h4><i class="fas fa-table"></i> Quản lý Menu</h4>
+    </div>
+    <div class="card-body">
+        <partial name="_PartialMsgInfoAdmin" />
+        <form asp-controller="@ControllerName" asp-action="Index" method="get" id="MySearchForm">
+            <div class="row">
+                
+                <div class="col-lg-8">
+                    <div class="form-row align-items-center">
+
+                        <div class="col-3">
+                            <div class="form-group">
+                                <select asp-for="SearchData.IdCoQuan" name="IdCoQuan" class="form-control" asp-items="Model.ListDMCoQuan"></select>
+                            </div>
+
+                        </div>
+
+                        <div class="col-3">
+                            <div class="form-group">
+                                <select onchange="MySearchForm()" asp-for="SearchData.Position" name="Position" class="form-control" asp-items="Model.ListPosition"></select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group"><button type="submit" class="btn btn-primary">Tìm Kiếm</button>  </div>
+                        </div>
+
+                    </div>
+                </div>
+
+              
+
+            </div>
+        </form>
+        <div class="row">
+
+            <div class="col-lg-12">
+
+                <table class="table table-bordered table-striped table-hover ">
+                    <thead>
+                        <tr>
+                            <th width="50px" class="text-center">#</th>
+                            <th width="80px">Thứ tự</th>
+                            <th width="350px">Tên</th>
+                            <th width="80px">Trạng Thái</th>
+
+                            <th>Link</th>
+                            <th width="130px" class="btn-contain">
+                                <a asp-controller="@ControllerName" asp-action="SaveItem" asp-route-IdCoQuan="@Model.SearchData.IdCoQuan" asp-route-Position="@Model.SearchData.Position" class="btn btn-primary">THÊM MỚI</a>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model.ListItems == null || Model.ListItems.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    <label *ngIf="flagListitems==2">Không có dữ liệu!</label>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            for (int i = 0; i < Model.ListItems.Count(); i++)
+                            {
+                            <tr>
+                                <td width="50px" class="text-center">@(i + 1)</td>
+                                <td class="text-center">@Model.ListItems[i].Ordering</td>
+                                <td>  
+                                    <span class="@(Model.ListItems[i].Level==1?"text-primary small":(Model.ListItems[i].Level==2?"text-danger small":""))">
+
+                                        @Model.ListItems[i].Title
+                                    </span>
+                                    </td>
+
+                                <td class="text-center">
+                                    @if (@Model.ListItems[i].Status == true)
+                                    {
+                                        <span onclick="UpdateStatus('@ControllerName','@Model.ListItems[i].Ids',false)" class="fas fa-check-circle text-success" aria-hidden="true"></span>
+                                    }
+                                    else
+                                    {
+                                        <span onclick="UpdateStatus('@ControllerName','@Model.ListItems[i].Ids',true)" class="far fa-times-circle text-danger" aria-hidden="false"></span>
+                                    }
+                                </td>
+
+                                <td>@Model.ListItems[i].Link</td>
+
+                                <td>
+                                    <ul class="list-inline action">
+                                        <li class="list-inline-item"><a asp-controller="@ControllerName" asp-action="SaveItem" asp-route-id="@Model.ListItems[i].Ids" asp-route-IdCoQuan="@Model.ListItems[i].IdCoQuan" asp-route-Position="@Model.ListItems[i].Position"><i class="fa fa-edit"></i>Sửa</a></li>
+                                        <li class="list-inline-item"><a data-toggle="modal" data-target="#DeleteModal" data-whatever="@Model.ListItems[i].Title" data-ids="@Model.ListItems[i].Ids"><i class="fa fa-trash"></i>Xóa</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            }
+                        }
+
+                    </tbody>
+
+                </table>
+                <form asp-controller="@ControllerName" asp-action="DeleteItem" id="AjaxDeleteForm"></form>
+            </div>
+            <div class="col-lg-12">
+                @await Html.PartialAsync("_PartialPagination", Model.Pagination)
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function MySearchForm() {
+        jQuery("#MySearchForm").submit();
+    }
+</script>

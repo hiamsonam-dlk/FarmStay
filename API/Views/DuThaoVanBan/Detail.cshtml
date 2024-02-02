@@ -1,0 +1,183 @@
+﻿@model API.Areas.Admin.Models.DuThaoVanBan.DuThaoVanBanModel
+@{
+
+    ViewData["Title"] = "Dự thảo Văn bản " + Model.Item.Title;
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+
+}
+
+<div class="navigation nlist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline  ">
+                    <li>
+                        <a href="/">Trang chủ</a> <i class="fa fa-angle-right"></i>
+                        <a asp-controller="DuThaoVanBan" asp-action="Index">Dự thảo Văn bản</a> <i class="fa fa-angle-right"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container ContentDiv">
+    <div class="row">
+        <div class="col-12">
+            <div class="PageDetail">
+                <table class="table table-bordered">
+                    <tr>
+                        <td width="200px"><strong>Tiêu đề</strong></td>
+                        <td>
+                            @Model.Item.Title
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nội dung</strong></td>
+                        <td>
+                            @Html.Raw(Model.Item.Introtext)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lĩnh vực</strong></td>
+                        <td>
+                            @Model.Item.FieldTitle
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Thời hạn lấy ý kiến</strong></td>
+                        <td>
+                            @Model.Item.ExpiresDate.ToString("dd/MM/yyyy")
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>File đính kèm:</strong></td>
+                        <td>
+                            @*<a href="@Model.Item.Link">Download</a>*@
+
+                            @if (Model.Item.ListFile != null && Model.Item.ListFile.Count() > 0)
+                            {
+                                for (int j = 0; j < Model.Item.ListFile.Count(); j++)
+                                {
+                                    string path = Model.Item.ListFile[j].FilePath.ToString();
+                                    int pos = path.LastIndexOf("/") + 1;
+
+                                    <a class="lblFileName badge badge-primary" id="lblFileName_@j" style="padding:7px 25px;color:#fff;font-size:12px;font-weight:normal" href="@Model.Item.ListFile[j].FilePath" target="_blank">
+                                        @path.Substring(pos, path.Length - pos)
+
+                                    </a>
+
+
+
+                                }
+                            }
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tham gia góp ý:</strong></td>
+                        <td>
+                            @if (Model.Item.ExpiresDate > DateTime.Now)
+                            {
+
+                                <a asp-controller="@ControllerName" asp-action="DuThaoVanBanGopY" asp-route-Id="@Model.Item.Id" asp-route-Ids="@Model.Item.Ids" class="btn btn-success"> <i class="fas fa-comment"></i> Góp ý văn bản</a>
+                            }
+                            else
+                            {
+                                <h5><span class="badge badge-secondary">  Đã hết hạn góp ý</span></h5>
+
+                            }
+                        </td>
+                    </tr>
+                    @if (Model.Item.ListGopY != null && Model.Item.ListGopY.Count > 0)
+                    {
+                        <tr>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="col-12"> 
+                                        <div class="headTop" style="padding:0; border:0px; margin:10px 0">
+                                            <h2>
+                                                Ý KIẾN ĐÓNG GÓP
+                                            </h2>
+
+                                        </div>
+                                      
+                                    </div>
+                                    @foreach (var item in Model.Item.ListGopY)
+                                    {
+                                        <div class="col-12">
+                                            <div class="gopyItem">
+                                                <table class="table table-borderless">
+                                                    <tr>
+                                                        <td style="width:150px">
+                                                            <strong>Ý kiến của bạn:</strong>
+                                                        </td>
+                                                        <td>@item.Fullname</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Email:</strong>
+                                                        </td>
+                                                        <td>@item.Email</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Ngày gửi ý kiến:</strong>
+                                                        </td>
+                                                        <td>@item.CreatedDate.ToString("dd/MM/yyyy ")</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Tiêu đề:</strong>
+                                                        </td>
+                                                        <td>@item.Title</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <strong>Nội dung:</strong>
+                                                        </td>
+                                                        <td>@Html.Raw(item.Description)</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    }
+
+                                        <div class="col-md-12">
+                                            @await Html.PartialAsync("_PartialPagination", Model.Pagination)
+                                        </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+
+        <div class="col-12">
+            @if (Model.Item.Link != null)
+            {
+
+
+                string ex = API.Models.ManagerFiles.ManagerFilesService.GetExtension(Model.Item.Link);
+                string url = "";
+
+
+                if (ex == ".pdf")
+                {
+                    <iframe src="@Model.Item.Link" width="100%" height="800px"></iframe>
+                }
+
+
+
+            }
+        </div>
+    </div>
+</div>
+
+

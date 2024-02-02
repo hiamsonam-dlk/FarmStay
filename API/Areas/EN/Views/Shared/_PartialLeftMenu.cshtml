@@ -1,0 +1,52 @@
+﻿@using API.Areas.Admin.Models.Menus;
+@using Microsoft.AspNetCore.Http
+@{
+    int IdCoQuan = 1;
+    if (Context.Session.GetString("IdCoQuan") != null && Context.Session.GetString("IdCoQuan") != "")
+    {
+        IdCoQuan = int.Parse(Context.Session.GetString("IdCoQuan"));
+    }
+    var ListMenu = MenusService.GetListByParrent(0, IdCoQuan, 2,"EN");
+    string css_class = "";
+
+    string currCat = "";
+    if (ViewData["currCat"] == null)
+    {
+        //currCat = ViewData["currCat"].ToString();
+    }
+}
+
+
+<div class="lmenu">
+    <ul class="leftmenu">
+        @foreach (var item in ListMenu)
+        {
+
+            <li class="lli @(item.CatId.ToString()==currCat?"active":"")">
+                <a class="@css_class" href="@(item.Link)">
+                    @(item.Title)
+                    @if (item.ChildCount > 0)
+                    {
+                        <i class="fa fa-caret-right"></i>
+                    }
+
+                </a>
+                @if (item.ChildCount > 0)
+                {
+
+                    <ul class="childmenu">
+                        @foreach (var child in item.ListMenus)
+                        {
+
+                            <li class="@(child.ChildCount>0?"dropdown":"") @(child.CatId.ToString()==currCat?"subactive":"")">
+                                <a href="@(child.Link)">@child.Title</a>
+                            </li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+    </ul>
+</div>
+
+

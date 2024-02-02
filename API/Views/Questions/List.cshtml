@@ -1,0 +1,87 @@
+﻿@model API.Areas.Admin.Models.Questions.QuestionsModel
+
+@{
+    ViewData["Title"] = "Hỏi đáp";
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+
+<div class="navigation nlist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline  ">
+                    <li>
+                        <a href="/">Trang chủ</a>
+                        <i class="fa fa-angle-right"></i>
+                        <a asp-controller="Questions" asp-action="List">Hỏi đáp</a>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-6 mt-4 mb-3" style="border-bottom:1px solid #ddd;">
+            <a asp-controller="Questions" asp-action="Index" class="btn btn-lg btn-danger" style="padding-left:30px; padding-right:30px; margin-bottom:20px;"><i class="fas fa-plus-circle mr-1"></i> Gửi câu hỏi </a>
+        </div>
+        <div class="col-lg-4 col-md-6 mt-4 mb-3" style="border-bottom:1px solid #ddd;">
+            <form id="search-all" method="get" asp-controller="Questions" asp-action="List">
+                <div class="search-form">
+                    <ul class="list-inline">
+                        <li class="list-inline-item" style="width:calc(100% - 30px) !important">
+                            <input type="text" value="@Model.SearchData.Keyword" placeholder="Tìm kiếm" class="txtSearch" id="content-search-all" name="keyword" style="width:100% !important" />
+                        </li>
+                        <li class="list-inline-item">
+                            <a onclick="SubmitSearch()" class="search"><i class="fa fa-search" aria-hidden="true"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        @for (int i = 0; i < Model.ListItems.Count(); i++)
+        {
+            <div class="col-md-12">
+                <div class="hoidap-item">
+                    <p><strong>@Model.ListItems[i].Title</strong></p>
+                    <p class="date">
+                        @Model.ListItems[i].CreatedDateShow  - @Model.ListItems[i].Fullname
+                    </p>
+                    <p class="question">
+                        @Model.ListItems[i].Introtext
+                    </p>
+                    <button class="btn btn-success" data-toggle="collapse" data-target="#demo@(i)">Xem chi tiết </button>
+                    <div id="demo@(i)" class="collapse" style="padding:20px 0; color:#555">
+                        <div>
+                            <p class="badge badge-warning" style="font-size:95%;padding:7px 10px">Trả lời có tính chất tham khảo:</p>
+                        </div>
+                        <div>
+                            @Html.Raw(@Model.ListItems[i].Description)
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+
+
+    </div>
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            @await Html.PartialAsync("_PartialPagination", Model.Pagination)
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+

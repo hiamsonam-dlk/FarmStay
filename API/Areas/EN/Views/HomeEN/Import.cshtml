@@ -1,0 +1,70 @@
+﻿@model API.Areas.Admin.Models.Articles.ArticlesModel
+@{
+    ViewData["Title"] = "Import";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+<div class="container-fluid mt-5 mb-5">
+    <div class="row">
+        <div class="col-12">
+            <h2>Import:@Model.ListItems.Count</h2>
+        </div>
+        <div class="col-lg-12">
+
+            <table class="table table-bordered table-striped table-hover ">
+                <thead>
+                    <tr>
+                        <th width="50px" class="text-center">ID</th>
+                        <th>Tên bài viết</th>
+                        <th width="150px">Category</th>
+                        <th width="90px">Ngày đăng</th>
+                        <th width="150px">Image</th>
+                        @*<th width="350px">Intro</th>
+        <th width="350px">FullText</th>*@
+                        <th width="80px">Link</th>
+                        <th width="80px">CatId</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model.ListItems == null || Model.ListItems.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                <label *ngIf="flagListitems==2">Không có dữ liệu!</label>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        for (int i = 0; i < Model.ListItems.Count(); i++)
+                        {
+                        <tr>
+                            <td width="50px" class="text-center">@Model.ListItems[i].Params</td>
+                            <td>
+                                <a>@Model.ListItems[i].Title</a>
+                            </td>
+                            <td>@Model.ListItems[i].Category</td>
+                            <td>@Model.ListItems[i].PublishUpShow</td>
+                            <td>
+                                <img src="@Model.ListItems[i].Images" />
+                                <br />
+                                @Model.ListItems[i].Images
+                            </td>
+                            @*<td>@Model.ListItems[i].IntroText</td>
+        <td>@Model.ListItems[i].FullText</td>*@
+                            <td class="text-center">@Model.ListItems[i].Metadata</td>
+                            <td class="text-center">@Model.ListItems[i].CatId</td>
+                        </tr>
+                        }
+                    }
+
+                </tbody>
+
+            </table>
+            <form asp-controller="@ControllerName" asp-action="DeleteItem" id="AjaxDeleteForm"></form>
+        </div>
+
+    </div>
+</div>
+

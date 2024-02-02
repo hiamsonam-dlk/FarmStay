@@ -1,0 +1,36 @@
+﻿@using API.Areas.Admin.Models.Articles
+
+@{
+
+    //API.Areas.Admin.Models.Articles.SearchArticles dto = new API.Areas.Admin.Models.Articles.SearchArticles() { CurrentPage = 1, ItemsPerPage = 5 };
+    var listNotification = API.Areas.Admin.Models.Articles.ArticlesService.GetListByCatSimple(1009);
+}
+
+
+<div class="mdNotification">
+    <div class="headTop">
+        <h2>Lịch cúp nước</h2>
+        <div class="clearfix"></div>
+    </div>
+    <div class="marquee" data-direction='up' data-duration='10000' data-startVisible="true" data-gap='10' data-pauseOnHover="true" data-duplicated="false">
+        <ul class="list-unstyled">
+            @for (int i = 0; i < listNotification.Count(); i++)
+            {
+                <li>
+                    <div class="notifi-item">
+
+                        <a class="title" asp-controller="Articles" asp-action="Detail" asp-route-id="@listNotification[i].Id" asp-route-alias="@listNotification[i].Alias" title="@listNotification[i].Title">
+                            @API.Models.StringUtilities.Truncate(listNotification[i].Title, 120)
+
+                        </a>
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                </li>
+
+            }
+        </ul>
+
+    </div>
+</div>

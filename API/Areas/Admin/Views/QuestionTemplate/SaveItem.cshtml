@@ -1,0 +1,88 @@
+﻿@model API.Areas.Admin.Models.QuestionTemplate.QuestionTemplateModel;
+@{
+    if (Model.Item.Id == 0)
+    {
+        ViewData["Title"] = "Thêm mới câu hỏi";
+    }
+    else
+    {
+        ViewData["Title"] = "Cập nhật câu hỏi";
+    }
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>@ViewData["Title"]</h4>
+    </div>
+    <div class="card-body">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <form asp-controller="@ControllerName" asp-action="SaveItem" method="post">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="Item.Question">Tên <sup class="text-danger"> (*)</sup></label>
+                        <input type="text" class="form-control" asp-for="Item.Question" name="Question">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="Item.Answer">Trả lời</label>
+                        <input type="text" class="form-control" asp-for="Item.Answer" name="Answer">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input asp-for="Item.Displayed" name="Displayed" class="custom-control-input" />
+                        <label class="custom-control-label" asp-for="Item.Displayed">Hiển thị</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="Item.IdService">Thuộc dịch vụ</label>
+                        <select asp-for="Item.IdService" name="IdService" class="form-control" asp-items="Model.ListService"></select>
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-primary" name="SaveItem" value="Lưu" />
+            <a class="btn btn-danger" asp-controller="@ControllerName" asp-action="Index">Hủy</a>
+            <input type="hidden" class="form-control" asp-for="Item.Id" name="Id">
+            <input type="hidden" class="form-control" asp-for="Item.Ids" name="Ids">
+
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+    <script src="~/lib/ckeditor/adapters/jquery.js"></script>
+    <script>
+
+        var roxyFileman = '/lib/fileman/index.html';
+        $(function () {
+            CKEDITOR.replace('NoiDung', {
+                filebrowserBrowseUrl: roxyFileman,
+                filebrowserImageBrowseUrl: roxyFileman + '?type=image',
+                removeDialogTabs: 'link:upload;image:upload'
+            });
+        });
+
+        //$("#Item_CatId").change(function () {
+        //    chooseType();
+        //})
+
+        function chooseType() {
+            var type = $("#Item_CatId").val();
+            if (type == 10) {
+                $(".dmbaiviet").show();
+            }
+            else {
+                $(".dmbaiviet").hide();
+            }
+        }
+    </script>
+
+}

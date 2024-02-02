@@ -1,0 +1,38 @@
+﻿@using API.Areas.Admin.Models.CategoriesAblums;
+@using API.Areas.Admin.Models.Ablums;
+@{
+    var listBannerPo4 = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(9);
+
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="cat-item">
+            <div class="header">
+                <h4>
+                    <a href="#">TỜ RƠI TUYÊN TRUYỀN BẦU CỬ </a>
+                </h4>
+            </div>
+            <div class="body" style="padding:0 10px">           
+                <div class="ListBTTP">
+
+                    <ul id="Features-Slidebc" class="gallery list-unstyled">
+
+                        @foreach (var item in listBannerPo4)
+                        {
+                            <li>
+                                <div class="baucu-item">
+                                    <a class="" data-fancybox="gallery_bc" href="@item.Image" data-caption="@item.Title">
+                                        <img src="/Home/ResizeImage?url=@item.Image&width=300">
+                                    </a>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

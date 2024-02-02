@@ -1,0 +1,28 @@
+﻿@{
+    var ItemConfig = API.Areas.Admin.Models.SYSParams.SYSParamsService.GetItemConfigByHome();
+
+}
+<div class="Footer_wr">
+    <footer>
+        <!--copyright -->
+        <div class="copyright">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-sm-12">
+                        @Html.Raw(@ItemConfig.FooterEN)
+                    </div>
+                    <div class="col-md-4 col-sm-12 text-md-right mt-sm-4 mt-md-0 vnpt">
+
+                        <p>
+                            Developed by <a href="http://daklak.vnpt.vn/" target="_blank">VNPT Dak Lak</a>
+                        </p>
+                        <p>
+                            <img src="/images/vnpt-logo.png" style="margin-top:5px">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

@@ -1,0 +1,45 @@
+﻿@using API.Areas.Admin.Models.CategoriesAblums;
+@using API.Areas.Admin.Models.Ablums;
+@{
+    List<Ablums> ListAblums = AblumsService.GetListFeatured();
+}
+
+
+<!--Video-->
+<div class="box">
+    <div class="header">
+        <a asp-controller="Albums" asp-action="Index" title="Tin ảnh" >
+          THƯ VIỆN ẢNH
+        </a>
+    </div>
+    <div class="body white">
+        <div id="AlbumBox" class="carousel slide" data-ride="carousel">
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+                @for (int j = 0; j < ListAblums.Count(); j++)
+                {
+                    <div class="carousel-item @(j==0?"active":"")">
+                        <div class="khungAnh">
+                            <a class="khungAnhCrop" data-fancybox="gallery_1" href="@ListAblums[j].Images" data-caption="@ListAblums[j].Title">
+                                <img src="@ListAblums[j].Images">
+                            </a>
+                        </div>
+
+                    </div>
+
+                }
+
+            </div>
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev control" href="#AlbumBox" data-slide="prev">
+                <i class="far fa-arrow-alt-circle-left"></i>
+            </a>
+            <a class="carousel-control-next control" href="#AlbumBox" data-slide="next">
+                <i class="far fa-arrow-alt-circle-right"></i>
+            </a>
+
+        </div>
+
+    </div>
+</div>
+

@@ -1,0 +1,91 @@
+﻿@using API.Areas.Admin.Models.Booking;
+@using Microsoft.AspNetCore.Http
+@using Microsoft.Extensions.Options;
+@using reCAPTCHA.AspNetCore;
+@inject IOptions<RecaptchaSettings> RecaptchaSettings
+@{
+    string[] title;
+    var img = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(16);
+    BookingModel booking = new BookingModel();
+    booking.Item = new Booking();
+}
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CamNghiModal" id="BtnOpenQuestionTemPlate">
+    <i class="fa fa-plus fa-2x" data-bs-toggle="tooltip" data-bs-placement="left" title="Tạo cảm nghĩ"></i>
+    @* <img src="/ttudkhcn/images/icon.png" /> *@
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="CamNghiModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            @* <div class="close-btn d-flex justify-content-center align-items-center" data-bs-dismiss="modal" aria-label="Close">
+                <i class="fa fa-times"></i>
+            </div> *@
+
+            <div class="col-12 mt-0 d-flex justify-md-content-end justify-content-center order-2 order-md-1 modal-content-2">
+                <div class="close-btn d-flex justify-content-center align-items-center" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times"></i>
+                </div>
+
+                <form class="request-form" asp-controller="SoLuuNiem" asp-action="SaveItem" method="post" data-aos="fade-up" enctype="multipart/form-data">
+                    <h2>Lưu lại cảm nghĩ của bạn</h2>
+                    <div class="form-group">
+                        <label for="from-place" class="label">Họ và tên</label>
+                        <input type="text" class="form-control" placeholder="Nhập họ và tên" id="cus-name" name="TenKhachHang" asp-for="@booking.Item.TenKhachHang">
+                    </div>
+                    <div class="form-group">
+                        <label for="from-place" class="label">Đơn vị công tác</label>
+                        <input type="text" class="form-control" placeholder="Nhập đơn vị công tác" id="from-place" name="DonViCongTac" asp-for="@booking.Item.DonViCongTac">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="IListImage" class="label">Hình ảnh</label>
+
+                        <label class="custom-file-upload">
+                            <input onchange="see()" type="file" id="files" name="IListImage" multiple asp-for="@booking.Item.IListImage" accept="image/png, image/gif, image/jpeg">
+                            Chọn hình
+                        </label>
+
+                        @*<input onchange="see()" type="file" id="files" name="IListImage" multiple asp-for="@booking.Item.IListImage">*@
+                    </div>
+
+                    <div class="col-12">
+                        <div class="row" id="List_Images">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="to-place" class="label">Cảm nghĩ</label>
+                        <textarea rows="4" class="form-control" placeholder="Nhập cảm nghĩ" id="to-place" name="CamNghi" asp-for="@booking.Item.CamNghi"></textarea>
+                        <input type="hidden" class="form-control" id="token_recaptcha" name="TokenRecaptcha">
+                    </div>
+                    @Html.ValidationSummary()
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary p5 btn-lg" name="SaveItem" value="Gửi đi" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function see() {
+        var inp = document.getElementById('files');
+        console.log(inp.files);
+        var str = "";
+        for (var i = 0; i < inp.files.length; i++) {
+            const file = inp.files[i];
+            console.log(file);
+            if (file) {
+                var src = URL.createObjectURL(file);
+                str += '<div class="form-group images-main col-12 col-md-6"><div class="borderStroke" >' +
+                    '<img src="' + src + '" style="height: 100%; width: 100%; object-fit: contain; z-index:-1" />' +
+                    '</div></div>'
+            }
+        }
+        console.log(str);
+        $("#List_Images").html(str)
+    }
+</script>

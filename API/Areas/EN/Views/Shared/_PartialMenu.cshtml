@@ -1,0 +1,222 @@
+﻿@using API.Areas.Admin.Models.Menus;
+@using API.Controllers;
+@using Newtonsoft.Json;
+@using Microsoft.AspNetCore.Http
+@{
+    int IdCoQuan = 1;
+    if (Context.Session.GetString("IdCoQuan") != null && Context.Session.GetString("IdCoQuan") != "")
+    {
+        IdCoQuan = int.Parse(Context.Session.GetString("IdCoQuan"));
+    }
+    var ListMenu = MenusService.GetListByParrent(0, IdCoQuan, 0);
+    string css_class = "";
+    var ItemConfig = API.Areas.Admin.Models.SYSParams.SYSParamsService.GetItemConfigByHome();
+    string tencq = Context.Session.GetString("TenCoQuan");
+}
+
+<style>
+    .nav-link {
+        font-size: 14px!important;
+        padding-left: 5px!important;
+        padding-right: 5px!important;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light fixed-top" id="ftco-navbar">
+
+    <div class="container">
+        <a class="" href="/EN">
+            <img src="/TMDT/images/icon.png" class="d-inline-block align-text-top">
+            <img src="/TMDT/images/cutted-logo-en.png" class="ml-3 d-md-inline-block align-text-top d-none">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/EN"> <i class="fa fa-home"></i></a></li>
+                @for (int i = 0; i < ListMenu.Count(); i++)
+                {
+                    if (i == 0)
+                    {
+                        css_class = "first";
+                    }
+                    else if (i == (ListMenu.Count() - 1))
+                    {
+                        css_class = "last";
+                    }
+                    else
+                    {
+                        css_class = "";
+                    }
+                    if (ListMenu[i].ChildCount > 0)
+                    {
+                        @await Html.PartialAsync("_PartialMenuChild", ListMenu[i]);
+                    }
+                    else
+                    {
+                        if (ListMenu[i].LinkEN != null)
+                        {
+                            <li class="nav-item"><a class="nav-link" href="@(ListMenu[i].LinkEN)"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Ten) </a></li>
+                        }
+                        else if (ListMenu[i].ArticleId != 0)
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Articles" asp-action="Detail" asp-route-id="@ListMenu[i].ArticleId" asp-route-alias="@ListMenu[i].Alias"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Ten) </a></li>
+                        }
+                        else if (ListMenu[i].CatId != 0)
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Articles" asp-action="GetByCat" asp-route-id="@ListMenu[i].CatId" asp-route-alias="@ListMenu[i].Alias"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Ten)</a></li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a class="nav-link" href="#"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Ten)</a></li>
+                        }
+                    }
+                }
+                <li class="nav-item"><a class="nav-link" href="/"><img src="/CMS/Content/vi.png" style="height:25px; width: auto"/></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script>
+    $(document).scroll(function (event) {
+
+        /// If *navbar-collapse* is not among targets of event
+        if (!$(event.target).is('.navbar-collapse *')) {
+
+            /// Collapse every *navbar-collapse*
+            $('.navbar-collapse').collapse('hide');
+        }
+    });
+    /// When you click everywhere in the document
+    $(document).click(function (event) {
+
+        /// If *navbar-collapse* is not among targets of event
+        if (!$(event.target).is('.navbar-collapse *')) {
+
+            /// Collapse every *navbar-collapse*
+            $('.navbar-collapse').collapse('hide');
+        }
+    });
+</script>
+
+@*<div class="stellarnav">
+
+    <ul class="nav justify-content-center">
+
+        @for (int i = 0; i < ListMenu.Count(); i++)
+        {
+
+            if (i == 0)
+            {
+                css_class = "first";
+            }
+            else if (i == (ListMenu.Count() - 1))
+            {
+                css_class = "last";
+            }
+            else {
+                css_class = "";
+            }
+            if (ListMenu[i].ChildCount > 0)
+            {
+                @await Html.PartialAsync("_PartialMenuChild", ListMenu[i]);
+            }
+            else
+            {
+                if (ListMenu[i].Link != null)
+                {
+                    <li class="nav-item"><a class="nav-link" href="@(ListMenu[i].Link)"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Title) </a></li>
+                }
+                else if (ListMenu[i].ArticleId != 0)
+                {
+                    <li class="nav-item"><a class="nav-link" asp-controller="Articles" asp-action="Detail" asp-route-id="@ListMenu[i].ArticleId"  asp-route-alias="@ListMenu[i].Alias"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Title) </a></li>
+                }
+                else if (ListMenu[i].CatId != 0)
+                {
+                    <li class="nav-item"><a class="nav-link" asp-controller="Articles" asp-action="GetByCat" asp-route-id="@ListMenu[i].CatId"  asp-route-alias="@ListMenu[i].Alias"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Title)</a></li>
+                }
+                else
+                {
+                    <li class="nav-item"><a class="nav-link" href="#"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Title)</a></li>
+                }
+            }
+        }
+    </ul>
+</div>
+
+<script>
+
+    window.onscroll = function () { myFunction() };
+
+    var navbar = document.getElementById("MainMenu");
+    var sticky = navbar.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+</script>*@
+
+
+@*@using API.Areas.Admin.Models.Menus;
+@using Microsoft.AspNetCore.Http
+@{
+    int IdCoQuan = 1;
+    if (Context.Session.GetString("IdCoQuan") != null && Context.Session.GetString("IdCoQuan") != "") {
+        IdCoQuan = int.Parse(Context.Session.GetString("IdCoQuan"));
+    }
+    var ListMenu = MenusService.GetListByParrent(0,IdCoQuan,0,"EN");
+    string css_class = "";
+}
+<div class="stellarnav">
+
+    <ul class="nav">
+       
+        @for (int i = 0; i < ListMenu.Count(); i++)
+        {
+            if (i == 0)
+            {
+                css_class = "first";
+            }
+            else if (i == (ListMenu.Count() - 1))
+            {
+                css_class = "last";
+            }
+            else {
+                css_class = "";
+            }
+            if (ListMenu[i].ChildCount > 0)
+            {
+                @await Html.PartialAsync("_PartialMenuChild", ListMenu[i]);
+            }
+            else
+            {
+                if (ListMenu[i].Link != null)
+                {
+                    <li class="@(ListMenu[i].Position==2?"xsshow":"")"><a class="@css_class" href="@(ListMenu[i].Link)"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Title) </a></li>
+                }
+                else if (ListMenu[i].ArticleId != 0)
+                {
+                    <li class="@(ListMenu[i].Position==2?"xsshow":"")"><a class="@css_class" asp-controller="Articles" asp-action="Detail" asp-route-id="@ListMenu[i].ArticleId"  asp-route-alias="@ListMenu[i].Alias"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Title) </a></li>
+                }
+                else if (ListMenu[i].CatId != 0)
+                {
+                    <li class="@(ListMenu[i].Position==2?"xsshow":"")"><a class="@css_class" asp-controller="Articles" asp-action="GetByCat" asp-route-id="@ListMenu[i].CatId"  asp-route-alias="@ListMenu[i].Alias"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Title)</a></li>
+                }
+                else
+                {
+                    <li class="@(ListMenu[i].Position==2?"xsshow":"")"><a class="@css_class" href="#"> <i class="@(ListMenu[i].Icon)"></i>@(ListMenu[i].Title)</a></li>
+                }
+            }
+        }
+               
+
+    </ul>
+</div><!-- .stellarnav -->
+*@

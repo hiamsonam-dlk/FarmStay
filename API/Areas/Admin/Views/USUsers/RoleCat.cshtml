@@ -1,0 +1,124 @@
+﻿@model API.Areas.Admin.Models.USUsers.USUsersModel
+@using API.Areas.Admin.Models.CategoriesArticles;
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Phân quyền danh mục";
+    string ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    string LangId = "VI";
+    LangId = Context.Session.GetString("LangId");
+    SearchCategoriesArticles dto = new SearchCategoriesArticles() { Level = -1, ItemsPerPage = 9999, CurrentPage = 1 };
+    var ListItems = CategoriesArticlesService.GetListPagination(dto, API.Models.Settings.SecretId + ControllerName, LangId);
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Phân quyền</h4>
+    </div>
+    <div class="card-body">
+        <h5 class="text-primary">Phân quyền danh mục cán bộ: @Model.Item.FullName - @Model.Item.UserName</h5>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <form asp-controller="@ControllerName" asp-action="RoleCat" method="post">
+            <input type="hidden" name="UserId" value="@Model.Item.Id" />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <table id="dsChucNang" class="table table-bordered table-striped table-hover ">
+                <thead>
+                    <tr>
+                        <th width="50px" class="text-center">
+                            <input id="ChooseAll" type="checkbox" name="Id" class="" />
+                        </th>
+                        <th>Tên danh mục</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (ListItems == null || ListItems.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="2" class="text-center">
+                                <div *ngIf="flagListitems==1" class="lds-dual-ring"></div>
+                                <label *ngIf="flagListitems==2">Không có dữ liệu!</label>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        for (int i = 0; i < ListItems.Count(); i++)
+                        {
+                            <tr>
+
+                                <td width="50px" class="text-center">
+                                    <input name="ListCat" type="checkbox" class="MenuId" value="@ListItems[i].Id" IdParent="@ListItems[i].ParentId" @(Model.ListRoleCat.Contains(ListItems[i].Id)?"checked":"")/>
+                                </td>
+                                <td>
+                                    <span class="@(ListItems[i].Level==1?"text-primary":(ListItems[i].Level==2?"text-danger":""))">
+                                        @ListItems[i].Title
+                                    </span>
+                                </td>
+
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+
+            </table>
+            <input type="submit" id="UpdateRole" class="btn btn-warning" value="CẬP NHẬT PHÂN QUYỀN" />
+            </form>
+    </div>
+</div>
+<style>
+
+    input[type='checkbox'] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+
+    #dsChucNang tr:hover {
+        cursor: pointer;
+    }
+</style>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ChooseAll").click(function () {
+            var check = $(this).is(":checked")
+            $("#dsChucNang tbody").find('input[type="checkbox"]').prop('checked', check);
+        })
+        $("#dsChucNang tbody tr td:nth-child(2)").click(function () {
+            $(this).parent().find('input[type="checkbox"]').trigger("click");
+        })
+
+        $("#dsChucNang tbody tr input[type='checkbox']").click(function () {
+            //$(this).find('input[type="checkbox"]').trigger("click");
+            var check = $(this).is(":checked");
+            var myId = $(this).val();
+            var myParent = $(this).attr("IdParent");
+
+            //Check all child
+            $('#dsChucNang tbody  input[type="checkbox"]').each(function () {
+                var IdParent = $(this).attr("IdParent");
+                if (IdParent == myId)
+                    $(this).prop('checked', check);
+
+
+            });
+
+            //Check Parent
+            $('#dsChucNang tbody  input[type="checkbox"]').each(function () {
+                var Id = $(this).val();
+                if (Id == myParent && check == true)
+                    $(this).prop('checked', check);
+            });
+        })
+
+            
+
+
+    })
+
+
+
+
+</script>

@@ -1,0 +1,99 @@
+﻿@using API.Areas.Admin.Models.Menus;
+@{
+    ViewData["Title"] = "SiteMap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var ItemConfig = API.Areas.Admin.Models.SYSParams.SYSParamsService.GetItemConfigByHome();
+    ViewData["Description"] = ItemConfig.SEODescription;
+    ViewData["Keywords"] = ItemConfig.SEOKeyword;
+    ViewData["Images"] = @Startup.Domain + "/ttudkhcn/images/ogImage3.png?ver=" + DateTime.Now.ToString();
+    ViewData["Url"] = @Startup.Domain;
+
+}
+
+<div class="navigation nlist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline  ">
+                    <li>
+                        <a href="/">Trang chủ</a>
+                        <i class="fa fa-angle-right"></i>
+                        Sơ đồ website
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row PageDetail PageDetail">
+
+        <div class="col-12">
+
+            <div class="tree ">
+                <ul>
+                    <li>
+                        <span>
+                            <a style="color:#000; text-decoration:none;" data-toggle="collapse" href="#Web" aria-expanded="true" aria-controls="Web">
+                                <i class="collapsed"><i class="fas fa-folder"></i></i>
+                                <i class="expanded"><i class="far fa-folder-open"></i></i> @ItemConfig.CompanyName
+                            </a>
+                        </span>
+
+                        <div id="Web" class="collapse show">
+                            @{
+                                var listMenu = MenusService.GetListByParrent(0, 1, 1, "VI");
+                                var listLeft = MenusService.GetListByParrent(0, 1, 2, "VI");
+                                listMenu.AddRange(listLeft);
+                            }
+
+                            <ul>
+                                @foreach (var item in listMenu)
+                                {
+
+
+                                    @if (item.ChildCount > 0)
+                                    {
+                                        <li>
+                                            <span>
+                                                <a style="color:#333; text-decoration:none;" data-toggle="collapse show" href="#page@(item.Id)" aria-expanded="false" aria-controls="page1">
+                                                    <i class="collapsed"><i class="fas fa-folder"></i></i>
+                                                    <i class="expanded"><i class="far fa-folder-open"></i></i> @item.Title
+                                                </a>
+                                            </span>
+                                            @{
+                                                var listchild = MenusService.GetListByParrent(item.Id, 1, 0, "VI");
+                                            }
+                                            <ul>
+                                                <div id="page@(item.Id)" class="collapse show">
+                                                    @foreach (var child in listchild)
+                                                    {
+                                                        <li><span><i class="far fa-file"></i><a href="@child.Link"> @child.Title</a></span></li>
+                                                    }
+                                                </div>
+                                            </ul>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li><span><i class="far fa-file"></i><a href="@item.Link"> @item.Title</a></span></li>
+                                    }
+                                }
+
+
+
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>

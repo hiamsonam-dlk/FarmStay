@@ -1,0 +1,99 @@
+﻿@model API.Areas.Admin.Models.Menus.Menus;
+
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="@Model.LinkEN">@(Model.Ten) </a>
+    <ul class="dropdown-menu">
+        @for (int i = 0; i < Model.ListMenus.Count; i++)
+        {
+            @if (Model.ListMenus[i].ChildCount > 0)
+            {
+                @await Html.PartialAsync("_PartialMenuChild", Model.ListMenus[i])
+                ;
+            }
+            else
+            {
+                if (Model.ListMenus[i].LinkEN != null)
+                {
+                                <li><a href="@(Model.ListMenus[i].LinkEN)" class="dropdown-item"><i class="@(Model.ListMenus[i].Icon)"></i>@(Model.ListMenus[i].Ten)</a></li>
+                }
+                else if (Model.ListMenus[i].ArticleId != 0)
+                {
+                                <li><a href="/gioi-thieu.html" class="dropdown-item"> <i class="@(Model.ListMenus[i].Icon)"></i>@(Model.ListMenus[i].Ten)</a></li>
+                }
+                else
+                {
+                                <li><a href="#" class="dropdown-item"><i class="@(Model.ListMenus[i].Icon)"></i>@(Model.ListMenus[i].Ten)</a></li>
+                }
+
+            }
+        }
+    </ul>
+</li>
+
+
+
+
+@*<li class="@(Model.Position==2?"xsshow":"")">
+    <a href="@Model.LinkEN">@(Model.Ten) </a>
+    <ul>
+        @for (int i = 0; i < Model.ListMenus.Count; i++)
+        {
+            @if (Model.ListMenus[i].ChildCount > 0)
+            {
+                @await Html.PartialAsync("_PartialMenuChild", Model.ListMenus[i]);
+            }
+            else
+            {
+                if (Model.ListMenus[i].LinkEN != null)
+                {
+                    <li><a href="@(Model.ListMenus[i].LinkEN)"><i class="@(Model.ListMenus[i].Icon)"></i>@(Model.ListMenus[i].Ten)</a></li>
+                }
+                else if (Model.ListMenus[i].ArticleId != 0)
+                {
+                    <li><a href="/gioi-thieu.html"> <i class="@(Model.ListMenus[i].Icon)"></i>@(Model.ListMenus[i].Ten)</a></li>
+                }
+                else
+                {
+                    <li><a href="#"><i class="@(Model.ListMenus[i].Icon)"></i>@(Model.ListMenus[i].Ten)</a></li>
+                }
+
+            }
+        }
+    </ul>
+</li>*@
+
+
+
+
+@*@model API.Areas.Admin.Models.Menus.Menus;
+<li class="@(Model.Position==2?"xsshow":"")">
+    <a href="@Model.LinkEN">@(Model.Ten)</a>
+    <ul>
+        @for (int i = 0; i < Model.ListMenus.Count; i++)
+        {
+            @if (Model.ListMenus[i].ChildCount > 0)
+            {
+                @await Html.PartialAsync("_PartialMenuChild", Model.ListMenus[i]);
+            }
+            else
+            {
+                if (Model.ListMenus[i].LinkEN != null)
+                {
+                    <li><a href="@(Model.ListMenus[i].LinkEN)"><i class="@(Model.ListMenus[i].Icon)"></i>@(Model.ListMenus[i].Ten)</a></li>
+                }
+                else if (Model.ListMenus[i].ArticleId != 0)
+                {
+                    <li><a href="/gioi-thieu.html"> <i class="@(Model.ListMenus[i].Icon)"></i>@(Model.ListMenus[i].Ten)</a></li>
+                }
+                else
+                {
+                    <li><a href="#"><i class="@(Model.ListMenus[i].Icon)"></i>@(Model.ListMenus[i].Ten)</a></li>
+                }
+
+            }
+        }
+    </ul>
+</li>
+
+*@

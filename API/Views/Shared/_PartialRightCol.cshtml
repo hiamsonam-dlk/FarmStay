@@ -1,0 +1,114 @@
+﻿@using API.Areas.Admin.Models.Articles
+@using API.Areas.Admin.Models.CategoriesArticles
+@{
+    var listhot = API.Areas.Admin.Models.Articles.ArticlesService.GetListHot(1, 8);
+    List<SelectListItem> listLink = API.Areas.Admin.Models.Banners.BannersService.GetListItemsByCat(2);
+    var listBannerPo4 = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(4);
+    var listBannerPo5 = API.Areas.Admin.Models.Banners.BannersService.GetListByCat(5);
+}
+
+<!--Thông báo-->
+<div class="mdNotification">
+    <div class="headTop">
+        <h2>THÔNG BÁO</h2>
+        <div class="clearfix"></div>
+    </div>
+    <partial name="_PartialNotification" />
+</div>
+
+
+<!--End Thông báo-->
+@*<div class="box">
+        <div class="header">
+            <a href="#">
+                VĂN BẢN
+            </a>
+        </div>
+        <div class="body vnnew-box">
+            <ul>
+                <li>
+                    <a href="http://www.congdoan.vn/tra-cuu-van-ban" target="_blank">
+                        <i class="fas fa-file-alt mr-1"></i> Văn bản tổng LĐLĐ VN
+                    </a>
+                </li>
+                <li>
+                    <a href="/van-ban/van-ban-phap-luat-1.html">
+                        <i class="fas fa-file-alt mr-1"></i>Văn bản pháp luật
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/van-ban/van-ban-ldld-tinh-2.html">
+                        <i class="fas fa-file-alt mr-1"></i> Văn bản LĐLĐ tỉnh
+                    </a>
+                </li>
+
+
+
+
+            </ul>
+        </div>
+
+    </div>*@
+
+<!--Banner-->
+@foreach (var item in listBannerPo4)
+{
+    <div class="BannerItem">
+        <a href="@item.Link" target="@item.Target">
+            <img src="@item.Image" alt="@item.Title" />
+        </a>
+    </div>
+}
+
+
+@*<partial name="_PartialAblums" />
+
+<!--Video-->
+<partial name="_PartialVideo" />*@
+
+@*<partial name="_PartialLichCupNuoc" />*@
+
+
+
+
+<!--Banner-->
+@*@foreach (var item in listBannerPo5)
+{
+    <div class="BannerItem">
+        <a href="@item.Link" target="@item.Target">
+            <img src="@item.Image" alt="@item.Title" />
+        </a>
+    </div>
+}*@
+
+<!--Liên kết  website-->
+<div class="box">
+    <div class="header ttcnBox">
+        <i class="fas fa-link- mr-1 blueicon"></i> Liên kết  website
+    </div>
+    <div class="body">
+        <select name="BannerId" id="BannerId" class="form-control" asp-items="listLink"></select>
+    </div>
+</div>
+
+@*<partial name="_PartialChiNhanh" />*@
+
+
+<!--Thống kê truy cập-->
+<div class="box">
+    <div class="header dark">
+        <i class="fas fa-users mr-1 blueicon"></i> Thống kê truy cập
+    </div>
+    <div class="body">
+        <div class="tktc">
+            <p>Hôm nay: <span id="SiteVisit_DateNow">0</span></p>
+            <p>Hôm qua: <span id="SiteVisit_Yesterday">0</span></p>
+            <p>Trong tuần: <span id="SiteVisit_DateOfWeek">0</span></p>
+            <p>Tất cả: <span id="SiteVisit_Total">0</span></p>
+        </div>
+    </div>
+</div>
+
+
+
